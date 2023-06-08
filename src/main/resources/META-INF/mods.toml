@@ -1,0 +1,29 @@
+# This is an example mods.toml file. It contains the data relating to the loading mods.
+
+modLoader="javafml" #mandatory
+
+loaderVersion="[46,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+
+license="All rights reserved"
+
+[[mods]] #mandatory
+
+modId="monsterplus" #mandatory
+
+version="1.0" #mandatory
+
+displayName="Monster Plus" #mandatory
+
+
+logoFile="examplemod.png" #optional
+
+authors="Nitespring" #optional
+
+description='''
+New challenges await you, go explore
+'''
+
+
+    versionRange="[1.20,1.20.1)"
+    ordering="NONE"
+    side="BOTH"

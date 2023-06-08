@@ -1,0 +1,8 @@
+{
+"parent": "item/generated",
+"render_type": "eyes",
+"textures": {
+    "layer0": "monsterplus:item/crystal_clump_base",
+    "layer1": "monsterplus:item/crystal_clump_emissive"
+    }
+}

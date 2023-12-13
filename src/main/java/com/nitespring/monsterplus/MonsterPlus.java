@@ -43,7 +43,7 @@ public class MonsterPlus
     }
 
 	private void commonsetup(final FMLCommonSetupEvent event){
-    	MonsterPlusPacketHandler.registerMessages();
+    	MonsterPlusPacketHandler.register();
     	
     	
     }

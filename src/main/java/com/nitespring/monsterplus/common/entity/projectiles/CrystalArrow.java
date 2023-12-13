@@ -19,16 +19,16 @@ import net.minecraft.world.phys.EntityHitResult;
 public class CrystalArrow extends AbstractArrow{
 	
 	public CrystalArrow(EntityType<? extends AbstractArrow> p_37411_, Level p_37412_) {
-	      super(p_37411_, p_37412_);
+	      super(p_37411_, p_37412_,null);
 	      
 	   }
 
 	   public CrystalArrow(Level p_37419_, LivingEntity p_37420_) {
-	      super(EntityInit.CRYSTAL_ARROW.get(), p_37420_, p_37419_);
+	      super(EntityInit.CRYSTAL_ARROW.get(), p_37420_, p_37419_,null);
 	   }
 
 	   public CrystalArrow(Level p_37414_, double p_37415_, double p_37416_, double p_37417_) {
-	      super(EntityInit.CRYSTAL_ARROW.get(), p_37415_, p_37416_, p_37417_, p_37414_);
+	      super(EntityInit.CRYSTAL_ARROW.get(), p_37415_, p_37416_, p_37417_, p_37414_,null);
 	   }
 
 	@Override

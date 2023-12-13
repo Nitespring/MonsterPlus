@@ -35,11 +35,11 @@ public class CrystalZombie extends Zombie{
 		super(p_34271_, p_34272_);
 	}
 
-	@Override
+	/*@Override
 	public boolean canBreatheUnderwater() {
 		
 		return true;
-	}
+	}*/
 	
 	 public static boolean checkCrystalZombieSpawnRules(EntityType<? extends Monster> p_219014_, ServerLevelAccessor p_219015_, MobSpawnType p_219016_, BlockPos blockPos, RandomSource p_219018_) {
 	      return p_219015_.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(p_219015_, blockPos, p_219018_) && checkMobSpawnRules(p_219014_, p_219015_, p_219016_, blockPos, p_219018_) 

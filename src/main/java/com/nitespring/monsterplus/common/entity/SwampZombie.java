@@ -35,12 +35,12 @@ public class SwampZombie extends Zombie{
 
 	//Drowned
 	
-	@Override
+	/*@Override
 	public boolean canBreatheUnderwater() {
 		
 		return true;
 	}
-	
+	*/
 	@Override
 	protected boolean convertsInWater() {
 		

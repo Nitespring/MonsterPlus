@@ -21,7 +21,6 @@ public class ClientEvents {
 	 Minecraft instance = Minecraft.getInstance();
 	if(instance.options.keyAttack.isDown()) {
 		 if(isAttackKeyDown==false) {
-			 //instance.getConnection().send(new ItemLeftClickAction(1));
 			 MonsterPlusPacketHandler.sendToServer(new ItemLeftClickAction());
 			 isAttackKeyDown=true;
 		 }

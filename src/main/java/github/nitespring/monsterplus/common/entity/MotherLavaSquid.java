@@ -10,11 +10,7 @@ import github.nitespring.monsterplus.core.init.EntityInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
-import net.minecraft.world.entity.EntitySelector;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -50,7 +46,7 @@ public class MotherLavaSquid extends LavaSquid{
 				.add(Attributes.ATTACK_SPEED, 1.2D)
 				.add(Attributes.ATTACK_KNOCKBACK, 2.0D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
-				.add(Attributes.FOLLOW_RANGE, 100);
+				.add(Attributes.FOLLOW_RANGE, 50);
 
 	  }
 	
@@ -86,9 +82,22 @@ public class MotherLavaSquid extends LavaSquid{
 		}
 
 	};
-	
-	
-	
+
+
+	@Override
+	public boolean isAlliedTo(Entity e) {
+		if (e == null) {
+			return false;
+		} else if (e == this) {
+			return true;
+		} else if (super.isAlliedTo(e)) {
+			return true;
+		} else if (e instanceof LavaSquid || e instanceof MotherLavaSquid) {
+			return true;
+		}  else {
+			return false;
+		}
+	}
 	
 	
 	
@@ -167,7 +176,7 @@ public class MotherLavaSquid extends LavaSquid{
 						   fireball.setDeltaMovement(d1/d0, d2/d0, d3/d0);
 	                        
 	                        fireball.setPos(this.mob.getX()+ 3*d1/d0, this.mob.getY(0.5) + 3*d2/d0, this.mob.getZ() + 3*d3/d0);
-	                        
+	                        fireball.setOwner(mob);
 	                        this.mob.level().addFreshEntity(fireball);
 	            		   
 	                        this.attackTime = 60;
@@ -194,21 +203,45 @@ public class MotherLavaSquid extends LavaSquid{
 	                     if (!this.mob.isSilent()) {
 	                        this.mob.level().levelEvent((Player)null, 1018, this.mob.blockPosition(), 0);
 	                     }
-	                     //Vec3 pos = this.mob.position();
-                       //Vec3 aim = this.squid.getLookAngle();
-	                     for(int i = 0; i < 1; ++i) {
-	                    	 double x = this.mob.getX() + 50.0*Math.sqrt(d2*d2 +  d3*d3)/d0*(Math.cos((this.attackStep-1)*Math.PI/6));
+	                     Vec3 pos = mob.position().add(0,0.5f+mob.getBbHeight()/2,0);
+						 Vec3 pos1 = mob.getTarget().position().add(0,mob.getTarget().getBbHeight()/2,0);
+						 Vec3 aim = pos1.add(pos.scale(-1)).normalize();
+						 Vec3 pos2= pos.add(aim.scale(3.5));
+						 Double a = -Math.PI/6;
+	                     for(int i = 0; i <= 1; ++i) {
+							Double b = (this.attackStep-1)*a;
+							Double d = 3.5;
+							Random r = new Random();
+							Vec3 aim1 = new Vec3(aim.z,-aim.y,aim.x);
+							Vec3 aim2 = new Vec3(aim.x*Math.cos(b)-aim.z*Math.sin(b),
+									aim.y,
+									aim.z*Math.cos(b)+aim.x*Math.sin(b));
+							/*Vec3 pos3=new Vec3(pos2.x+d*(aim.x*Math.cos(b)-aim.z*Math.sin(b)),
+									pos2.y+d*aim.y*Math.sin(b),
+									pos2.z+d*(aim.z*Math.cos(b)+aim.x*Math.sin(b)));*/
+							 double e = Math.sqrt(aim.x*aim.x+aim.z*aim.z);
+							 Vec3 pos3=new Vec3(pos2.x+d*(aim1.x*Math.cos(b)-aim.y*Math.sin(b)),
+									 pos2.y+d*(aim.y*Math.cos(b)+e*Math.sin(b)),
+									 pos2.z+d*(aim1.z*Math.cos(b)-aim.y*Math.sin(b)));
+							if(i==1){
+								b = (this.attackStep-1)*a+Math.PI;
+								pos3=new Vec3(pos2.x+d*(aim1.x*Math.cos(b)-aim.y*Math.sin(b)),
+										pos2.y+d*(aim.y*Math.cos(b)+e*Math.sin(b)),
+										pos2.z+d*(aim1.z*Math.cos(b)-aim.y*Math.sin(b)));
+							}
+							 Vec3 pos4 = pos1.add(2.5f*(r.nextFloat()-0.5f),2.5f*(r.nextFloat()-0.5f),2.5f*(r.nextFloat()-0.5f));
+							Vec3 aim3 = pos4.add(pos3.scale(-1)).normalize();
+	                    	/* double x = this.mob.getX() + 50.0*Math.sqrt(d2*d2 +  d3*d3)/d0*(Math.cos((this.attackStep-1)*Math.PI/6));
 	                    	 double y = this.mob.getY(0.5) + 50.0*Math.sqrt(d1*d1 +  d3*d3)/d0*(Math.sin((this.attackStep-1)*Math.PI/6));
 	                    	 double z = this.mob.getZ() + 50.0*Math.sqrt(d2*d2 +  d1*d1)/d0*(Math.cos((this.attackStep-1)*Math.PI/6));
 							Vec3 vec = new Vec3(x,y,z).normalize();
 	                    	 double d = Math.sqrt((target.getX()-x)*(target.getX()-x)+(target.getY(0.5)-y)*(target.getY(0.5)-y)+(target.getZ()-z)*(target.getZ()-z));
-							 //double d = mob.distanceTo(target);
-
-	                        SmallFireball smallfireball = new SmallFireball(this.mob.level(), mob, vec);
+							 //double d = mob.distanceTo(target);*/
+							Vec3 mov = aim3.scale(0.1f);
+	                        SmallFireball smallfireball = new SmallFireball(mob.level(),mob, mov);
 							smallfireball.setOwner(mob);
-	                        //smallfireball.setDeltaMovement(new Vec3((target.getX()-x)/d, (target.getY(0.5)-y)/d, (target.getZ()-z)));
-							 smallfireball.setDeltaMovement(vec);
-							 smallfireball.setPos(x, y, z);
+	                        smallfireball.setDeltaMovement(mov);
+							smallfireball.setPos(pos3);
 	                        
 	                        this.mob.level().addFreshEntity(smallfireball);
 	                     }
@@ -241,7 +274,8 @@ public class MotherLavaSquid extends LavaSquid{
 	      }
 	      
 	      protected void alertOthers() {
-	          double d0 = this.getFollowDistance();
+	          //double d0 = this.getFollowDistance();
+			  double d0 = 100;
 	          AABB aabb = AABB.unitCubeFromLowerCorner(this.mob.position()).inflate(d0, 10.0D, d0);
 	          List<? extends LavaSquid> list = this.mob.level().getEntitiesOfClass(LavaSquid.class, aabb, EntitySelector.NO_SPECTATORS);
 	          Iterator<? extends LavaSquid> iterator = list.iterator();

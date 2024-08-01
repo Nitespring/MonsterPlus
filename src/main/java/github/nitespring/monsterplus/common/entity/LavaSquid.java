@@ -8,6 +8,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
@@ -70,7 +71,7 @@ public class LavaSquid extends Monster{
 				.add(Attributes.ATTACK_SPEED, 1.2D)
 				.add(Attributes.ATTACK_KNOCKBACK, 0.2D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.0D)
-				.add(Attributes.FOLLOW_RANGE, 100);
+				.add(Attributes.FOLLOW_RANGE, 50);
 
 	  }
 	
@@ -225,8 +226,22 @@ public class LavaSquid extends Monster{
 			   public boolean hasMovementVector() {
 			      return this.tx != 0.0F || this.ty != 0.0F || this.tz != 0.0F;
 			   }
-	
-	
+
+	@Override
+	public boolean isAlliedTo(Entity e) {
+		if (e == null) {
+			return false;
+		} else if (e == this) {
+			return true;
+		} else if (super.isAlliedTo(e)) {
+			return true;
+		} else if (e instanceof LavaSquid || e instanceof MotherLavaSquid) {
+			return true;
+		}  else {
+			return false;
+		}
+	}
+
 	class SquidRandomMovementGoal extends Goal {
 	      private final LavaSquid squid;
 
@@ -395,7 +410,8 @@ public class LavaSquid extends Monster{
 	                        SmallFireball smallfireball = new SmallFireball(this.squid.level(), this.squid, new Vec3(this.squid.getRandom().triangle(d1, 2.297D * d4), d2, this.squid.getRandom().triangle(d3, 2.297D * d4)));
 	                        double rn = (this.squid.getRandom().nextInt(10)+1)/6;
 	                        smallfireball.setPos(this.squid.getX()+Math.cos(Math.PI*2*rn), this.squid.getY(0.5D) + 0.5D + 2.5*Math.sin(Math.PI*2*rn), this.squid.getZ()+Math.sin(Math.PI*2*rn));
-	                        this.squid.level().addFreshEntity(smallfireball);
+	                        smallfireball.setOwner(squid);
+							this.squid.level().addFreshEntity(smallfireball);
 	                     }
 	                  }
 	                  

@@ -21,6 +21,7 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.AbstractGolem;
+import net.minecraft.world.entity.monster.Blaze;
 import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
@@ -126,16 +127,16 @@ public class MotherLavaSquid extends LavaSquid{
 	      public void tick() {
 	    	  
 	         --this.attackTime;
-	         LivingEntity livingentity = this.mob.getTarget();
-	         if (livingentity != null) {
-	            boolean flag = this.mob.getSensing().hasLineOfSight(livingentity);
+	         LivingEntity target = this.mob.getTarget();
+	         if (target != null) {
+	            boolean flag = this.mob.getSensing().hasLineOfSight(target);
 	            if (flag) {
 	               this.lastSeen = 0;
 	            } else {
 	               ++this.lastSeen;
 	            }
 
-	            double d0 = this.mob.distanceToSqr(livingentity);
+	            double d0 = this.mob.distanceToSqr(target);
 	            if (d0 < 4.0D) {
 	               if (!flag) {
 	                  return;
@@ -143,14 +144,14 @@ public class MotherLavaSquid extends LavaSquid{
 
 	               if (this.attackTime <= 0) {
 	                  this.attackTime = 20;
-	                  this.mob.doHurtTarget(livingentity);
+	                  this.mob.doHurtTarget(target);
 	               }
 
-	               this.mob.getMoveControl().setWantedPosition(livingentity.getX(), livingentity.getY(), livingentity.getZ(), 1.0D);
+	               this.mob.getMoveControl().setWantedPosition(target.getX(), target.getY(), target.getZ(), 1.0D);
 	            } else if (d0 < this.getFollowDistance() * this.getFollowDistance() && flag) {
-	               double d1 = livingentity.getX() - this.mob.getX();
-	               double d2 = livingentity.getY(0.5D) - this.mob.getY(0.5D);
-	               double d3 = livingentity.getZ() - this.mob.getZ();
+	               double d1 = target.getX() - this.mob.getX();
+	               double d2 = target.getY(0.5D) - this.mob.getY(0.5D);
+	               double d3 = target.getZ() - this.mob.getZ();
 	               
 	               //
 	               
@@ -162,12 +163,12 @@ public class MotherLavaSquid extends LavaSquid{
 	            	   if(rng >=8 && this.attackStep==1) {
 	            		   //Vec3 aim = this.mob.getLookAngle();
 	            		   
-	            		   LargeFireball smallfireball = new LargeFireball(this.mob.level(), this.mob,new Vec3(d1/d0, d2/d0, d3/d0), 2);
-						   smallfireball.setDeltaMovement(d1/d0, d2/d0, d3/d0);
+	            		   LargeFireball fireball = new LargeFireball(this.mob.level(), this.mob,new Vec3(d1/d0, d2/d0, d3/d0), 2);
+						   fireball.setDeltaMovement(d1/d0, d2/d0, d3/d0);
 	                        
-	                        smallfireball.setPos(this.mob.getX()+ 3*d1/d0, this.mob.getY(0.5) + 3*d2/d0, this.mob.getZ() + 3*d3/d0);
+	                        fireball.setPos(this.mob.getX()+ 3*d1/d0, this.mob.getY(0.5) + 3*d2/d0, this.mob.getZ() + 3*d3/d0);
 	                        
-	                        this.mob.level().addFreshEntity(smallfireball);
+	                        this.mob.level().addFreshEntity(fireball);
 	            		   
 	                        this.attackTime = 60;
 	            		   
@@ -199,12 +200,15 @@ public class MotherLavaSquid extends LavaSquid{
 	                    	 double x = this.mob.getX() + 50.0*Math.sqrt(d2*d2 +  d3*d3)/d0*(Math.cos((this.attackStep-1)*Math.PI/6));
 	                    	 double y = this.mob.getY(0.5) + 50.0*Math.sqrt(d1*d1 +  d3*d3)/d0*(Math.sin((this.attackStep-1)*Math.PI/6));
 	                    	 double z = this.mob.getZ() + 50.0*Math.sqrt(d2*d2 +  d1*d1)/d0*(Math.cos((this.attackStep-1)*Math.PI/6));
-	                    	 
-	                    	 double d = Math.sqrt((livingentity.getX()-x)*(livingentity.getX()-x)+(livingentity.getY(0.5)-y)*(livingentity.getY(0.5)-y)+(livingentity.getZ()-z)*(livingentity.getZ()-z));
-	                    	 
-	                        SmallFireball smallfireball = new SmallFireball(this.mob.level(), this.mob,new Vec3((livingentity.getX()-x)/d, (livingentity.getY(0.5)-y)/d, (livingentity.getZ()-z)));
-	                        smallfireball.setDeltaMovement(new Vec3((livingentity.getX()-x)/d, (livingentity.getY(0.5)-y)/d, (livingentity.getZ()-z)));
-	                        smallfireball.setPos(x, y, z);
+							Vec3 vec = new Vec3(x,y,z).normalize();
+	                    	 double d = Math.sqrt((target.getX()-x)*(target.getX()-x)+(target.getY(0.5)-y)*(target.getY(0.5)-y)+(target.getZ()-z)*(target.getZ()-z));
+							 //double d = mob.distanceTo(target);
+
+	                        SmallFireball smallfireball = new SmallFireball(this.mob.level(), mob, vec);
+							smallfireball.setOwner(mob);
+	                        //smallfireball.setDeltaMovement(new Vec3((target.getX()-x)/d, (target.getY(0.5)-y)/d, (target.getZ()-z)));
+							 smallfireball.setDeltaMovement(vec);
+							 smallfireball.setPos(x, y, z);
 	                        
 	                        this.mob.level().addFreshEntity(smallfireball);
 	                     }
@@ -221,9 +225,9 @@ public class MotherLavaSquid extends LavaSquid{
 	               
 	               
 
-	               this.mob.getLookControl().setLookAt(livingentity, 10.0F, 10.0F);
+	               this.mob.getLookControl().setLookAt(target, 10.0F, 10.0F);
 	            } else if (this.lastSeen < 5) {
-	               this.mob.getMoveControl().setWantedPosition(livingentity.getX(), livingentity.getY(), livingentity.getZ(), 1.0D);
+	               this.mob.getMoveControl().setWantedPosition(target.getX(), target.getY(), target.getZ(), 1.0D);
 	            }
 
 	            super.tick();

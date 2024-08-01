@@ -11,7 +11,7 @@ version="1.0" #mandatory
 
 displayName="Monster Plus" #mandatory
 
-#logoFile="examplemod.png" #optional
+logoFile="logo.png" #optional
 
 authors="Nitespring"
 

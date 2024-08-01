@@ -29,8 +29,8 @@ public class CrystalArmourModelNew extends Model implements HeadedModel {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		this.head.render(matrixStack, buffer, 150, packedOverlay, red, green, blue, alpha);
+	public void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, int i) {
+		this.head.render(matrixStack, buffer, 150, packedOverlay, i);
 	}
 
 	@Override

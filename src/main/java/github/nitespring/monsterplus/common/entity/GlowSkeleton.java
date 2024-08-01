@@ -3,6 +3,7 @@ package github.nitespring.monsterplus.common.entity;
 import github.nitespring.monsterplus.config.CommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -39,7 +40,7 @@ public class GlowSkeleton extends AbstractSkeleton{
 	//WitherSkeleton
 	//Stray
 
-	private static final EntityDataAccessor<Integer> DATA_BRIGHT_TICKS_REMAINING = SynchedEntityData.defineId(GlowSquid.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Integer> DATA_BRIGHT_TICKS_REMAINING = SynchedEntityData.defineId(GlowSkeleton.class, EntityDataSerializers.INT);
 	
 	
 	
@@ -51,7 +52,7 @@ public class GlowSkeleton extends AbstractSkeleton{
 	@Override
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
 	      super.defineSynchedData(builder);
-	      this.entityData.set(DATA_BRIGHT_TICKS_REMAINING, 0);
+	      builder.define(DATA_BRIGHT_TICKS_REMAINING, 0);
 	   }
 
 	

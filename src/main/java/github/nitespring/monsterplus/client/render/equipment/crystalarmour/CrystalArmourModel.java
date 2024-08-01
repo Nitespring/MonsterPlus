@@ -445,11 +445,11 @@ public class CrystalArmourModel extends HumanoidModel<LivingEntity>{
 	
 	@Override
 	public void renderToBuffer(PoseStack stack, VertexConsumer vertexconsumer, int p_102036_, int p_102037_,
-			float p_102038_, float p_102039_, float p_102040_, float p_102041_) {
+			int i) {
 		
 	
 		
-		super.renderToBuffer(stack, vertexconsumer, 200, p_102037_, p_102038_, p_102039_, p_102040_, p_102041_);
+		super.renderToBuffer(stack, vertexconsumer, 200, p_102037_, i);
 		
 	}
    

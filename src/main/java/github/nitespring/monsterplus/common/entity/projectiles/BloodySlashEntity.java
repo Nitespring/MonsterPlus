@@ -61,7 +61,7 @@ public class BloodySlashEntity extends Entity{
 	
 	@Override
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
-		this.entityData.set(ANIMATIONSTATE, 0);
+		builder.define(ANIMATIONSTATE, 0);
 		
 	}
 

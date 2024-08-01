@@ -10,7 +10,6 @@ import net.minecraftforge.event.TickEvent.ClientTickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = MonsterPlus.MODID, value = Dist.CLIENT)
 public class ClientEvents {
 	

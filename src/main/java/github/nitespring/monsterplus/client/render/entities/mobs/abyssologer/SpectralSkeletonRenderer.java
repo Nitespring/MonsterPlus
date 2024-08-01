@@ -1,13 +1,17 @@
 package github.nitespring.monsterplus.client.render.entities.mobs.abyssologer;
 
 
+import github.nitespring.monsterplus.common.entity.SpectralSkeleton;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
 import github.nitespring.monsterplus.MonsterPlus;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
+import org.jetbrains.annotations.Nullable;
 
 public class SpectralSkeletonRenderer extends SkeletonRenderer{
 
@@ -19,32 +23,24 @@ public class SpectralSkeletonRenderer extends SkeletonRenderer{
 		//this.addLayer(new SpectralSkeletonOuterLayer<>(this, p_174380_.getModelSet()));
 	}
 
-	
-	
-	//WitherSkeletonRenderer
-	
-	
-	
+
+
 	@Override
 	public ResourceLocation getTextureLocation(AbstractSkeleton p_115941_) {
-		
 		return TEXTURE_LOCATION;
 	}
-	
+
 	@Override
-	protected int getBlockLightLevel(AbstractSkeleton p_114496_, BlockPos p_114497_) {
-		
+	protected int getBlockLightLevel(Entity e, BlockPos pos) {
 		return 15;
 	}
-	
-	
-	@Override
-	protected RenderType getRenderType(AbstractSkeleton p_115322_, boolean p_115323_, boolean p_115324_,
-			boolean p_115325_) {
-		
-		return RenderType.entityTranslucent(this.getTextureLocation(p_115322_));
-	}
-	//SlimeRenderer
-	
 
+	//SlimeRenderer
+
+
+	@Nullable
+	@Override
+	protected RenderType getRenderType(LivingEntity e, boolean p_115323_, boolean p_115324_, boolean p_115325_) {
+		return RenderType.entityTranslucent(this.getTextureLocation((AbstractSkeleton) e));
+	}
 }

@@ -34,12 +34,14 @@ import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.TippableArrowRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
 
-@Mod.EventBusSubscriber(modid = MonsterPlus.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+
+
+@EventBusSubscriber(modid = MonsterPlus.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientListener {
 
 	public static final ModelLayerLocation GLOW_SKELETON_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "glow_skeleton"), "main");
@@ -69,9 +71,6 @@ public class ClientListener {
 		
 		event.registerLayerDefinition(CRYSTAL_ARMOUR_MAIN_LAYER, 
 				() -> LayerDefinition.create(CrystalArmourModel.createBodyLayer(LayerDefinitions.OUTER_ARMOR_DEFORMATION), 64, 64));
-		//event.registerLayerDefinition(CRYSTAL_ARMOUR_MAIN_LAYER, 
-		//		() -> LayerDefinition.create(CrystalArmourModelNew.createBodyLayer(LayerDefinitions.OUTER_ARMOR_DEFORMATION), 64, 64));
-		
     }
 	
 	@SubscribeEvent

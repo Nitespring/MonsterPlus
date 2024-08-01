@@ -1,12 +1,12 @@
 {
-  "type": "forge:add_spawns",
+  "type": "neoforge:add_spawns",
   "biomes": {
-    "type": "forge:and",
+    "type": "neoforge:and",
     "values":
     [
       "#minecraft:is_nether",
       {
-        "type": "forge:not",
+        "type": "neoforge:not",
         "value":
         [
           "minecraft:soul_sand_valley"
@@ -15,9 +15,9 @@
     ]
   },
   "spawners": {
-    "type": "monsterplus:lava_squid",
+    "type": "monsterplus:mother_lava_squid",
     "weight": 5,
-    "minCount": 3,
-    "maxCount": 9
+    "minCount": 1,
+    "maxCount": 2
   }
 }

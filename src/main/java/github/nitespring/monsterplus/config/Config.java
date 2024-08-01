@@ -2,25 +2,25 @@ package github.nitespring.monsterplus.config;
 
 import java.io.File;
 
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
 
 import github.nitespring.monsterplus.MonsterPlus;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber
+
 public class Config {
 
-	private static final ForgeConfigSpec.Builder common_builder = new ForgeConfigSpec.Builder();
-	private static final ForgeConfigSpec.Builder server_builder = new ForgeConfigSpec.Builder();
-	private static final ForgeConfigSpec.Builder client_builder = new ForgeConfigSpec.Builder();
+	private static final ModConfigSpec.Builder common_builder = new  ModConfigSpec.Builder();
+	private static final  ModConfigSpec.Builder server_builder = new  ModConfigSpec.Builder();
+	private static final  ModConfigSpec.Builder client_builder = new  ModConfigSpec.Builder();
 	
-	public static final ForgeConfigSpec common_config;
-	public static final ForgeConfigSpec server_config;
-	public static final ForgeConfigSpec client_config;
+	public static final  ModConfigSpec common_config;
+	public static final  ModConfigSpec server_config;
+	public static final  ModConfigSpec client_config;
 	
 	public static final CommonConfig common;
 	
@@ -29,7 +29,7 @@ public class Config {
 		
 		
 		
-		final Pair<CommonConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(CommonConfig::new);
+		final Pair<CommonConfig,  ModConfigSpec> specPair = new  ModConfigSpec.Builder().configure(CommonConfig::new);
         common = specPair.getLeft();
         common_config = specPair.getRight();
 		
@@ -44,14 +44,14 @@ public class Config {
 	
 	
 	
-	public static void loadConfig(ForgeConfigSpec config, String path) {
+	public static void loadConfig( ModConfigSpec config, String path) {
 		
 		MonsterPlus.LOGGER.info("Loading config" + path);
 		final CommentedFileConfig file = CommentedFileConfig.builder(new File(path)).sync().autosave().writingMode(WritingMode.REPLACE).build();
 		MonsterPlus.LOGGER.info("Built config" + path);
 		file.load();
 		MonsterPlus.LOGGER.info("Loaded config" + path);
-		config.setConfig(file);
+		config.correct(file);
 		
 	}
 	

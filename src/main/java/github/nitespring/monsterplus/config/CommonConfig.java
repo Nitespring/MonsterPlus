@@ -1,24 +1,25 @@
 package github.nitespring.monsterplus.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class CommonConfig {
 
 	
 
 		
-		public static ForgeConfigSpec.BooleanValue spawn_abyssologer;
-		public static ForgeConfigSpec.BooleanValue spawn_crystal_zombie;
-		public static ForgeConfigSpec.BooleanValue spawn_swamp_zombie;
-		public static ForgeConfigSpec.BooleanValue spawn_glow_skeleton;
-		public static ForgeConfigSpec.BooleanValue spawn_lava_squid;
-		public static ForgeConfigSpec.BooleanValue spawn_mother_lava_squid;
-		public static ForgeConfigSpec.BooleanValue spawn_overgrown_skeleton;
-		public static ForgeConfigSpec.BooleanValue do_abyssologer_darkness;
+		public static  ModConfigSpec.BooleanValue spawn_abyssologer;
+		public static  ModConfigSpec.BooleanValue spawn_crystal_zombie;
+		public static  ModConfigSpec.BooleanValue spawn_swamp_zombie;
+		public static  ModConfigSpec.BooleanValue spawn_glow_skeleton;
+		public static  ModConfigSpec.BooleanValue spawn_lava_squid;
+		public static  ModConfigSpec.BooleanValue spawn_mother_lava_squid;
+		public static  ModConfigSpec.BooleanValue spawn_overgrown_skeleton;
+		public static  ModConfigSpec.BooleanValue do_abyssologer_darkness;
 		
 		
 		
-	public CommonConfig(final ForgeConfigSpec.Builder server) {
+	public CommonConfig(final  ModConfigSpec.Builder server) {
 			
 		server.comment("Spawn configs:");
 			

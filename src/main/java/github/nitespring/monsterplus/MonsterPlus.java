@@ -7,16 +7,15 @@ import github.nitespring.monsterplus.core.init.EntityInit;
 import github.nitespring.monsterplus.core.init.ItemInit;
 import github.nitespring.monsterplus.networking.MonsterPlusPacketHandler;
 import net.minecraft.client.Minecraft;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 
 @Mod(MonsterPlus.MODID)
@@ -28,42 +27,15 @@ public class MonsterPlus
     public static final Logger LOGGER = LogUtils.getLogger();
     
    
-    public MonsterPlus()
+    public MonsterPlus(IEventBus modEventBus, ModContainer modContainer)
     {
-    	ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.common_config);
-    	
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
-        modEventBus.addListener(this::commonsetup);
+        modContainer.registerConfig(ModConfig.Type.COMMON, Config.common_config);
+        modEventBus.addListener(MonsterPlusPacketHandler::onRegisterPayloadHandler);
         EntityInit.ENTITIES.register(modEventBus);
         ItemInit.ITEMS.register(modEventBus);
         
 
-        MinecraftForge.EVENT_BUS.register(this);
+        //NeoForge.EVENT_BUS.register(this);
     }
 
-	private void commonsetup(final FMLCommonSetupEvent event){
-    	MonsterPlusPacketHandler.register();
-    	
-    	
-    }
-
-    
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event)
-    {
-        LOGGER.info("HELLO from server starting");
-    }
-
-    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class ClientModEvents
-    {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
-       
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
-        }
-    }
 }

@@ -13,11 +13,12 @@ import github.nitespring.monsterplus.common.entity.OvergrownSkeleton;
 import github.nitespring.monsterplus.common.entity.SpectralSkeleton;
 import github.nitespring.monsterplus.common.entity.SwampZombie;
 import github.nitespring.monsterplus.core.init.EntityInit;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 
-@Mod.EventBusSubscriber(modid = MonsterPlus.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+
+@EventBusSubscriber(modid = MonsterPlus.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class EntityAttributesRegistration {
 
 	@SubscribeEvent

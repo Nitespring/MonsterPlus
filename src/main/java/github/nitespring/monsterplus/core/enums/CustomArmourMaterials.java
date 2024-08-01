@@ -23,8 +23,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.LazyLoadedValue;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+
 
 public class CustomArmourMaterials extends ArmorMaterials {
 	   public static final Holder<ArmorMaterial> CRYSTAL;

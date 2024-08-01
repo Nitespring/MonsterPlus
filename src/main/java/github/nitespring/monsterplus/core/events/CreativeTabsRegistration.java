@@ -9,12 +9,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.neoforged.bus.api.SubscribeEvent;
 
-@Mod.EventBusSubscriber(modid = MonsterPlus.MODID, bus = EventBusSubscriber.Bus.MOD)
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+
+@EventBusSubscriber(modid = MonsterPlus.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class CreativeTabsRegistration {
 	
 	
@@ -26,33 +26,33 @@ public class CreativeTabsRegistration {
 	    {
 	        if (event.getTabKey() == CreativeModeTabs.COMBAT)
 	        {
-	            event.accept(ItemInit.CRYSTAL_SWORD);
-	            event.accept(ItemInit.CRYSTAL_ARROW);
-	            event.accept(ItemInit.CRYSTAL_CLUMP);
-	            event.accept(ItemInit.CRYSTAL_HELMET);
-	            event.accept(ItemInit.CRYSTAL_CHESTPLATE);
-	            event.accept(ItemInit.CRYSTAL_LEGGINGS);
-	            event.accept(ItemInit.CRYSTAL_BOOTS);
-	            event.accept(ItemInit.GNAWING_JAW);
-	            event.accept(ItemInit.DARKSTAR);
+	            event.accept(ItemInit.CRYSTAL_SWORD.get());
+	            event.accept(ItemInit.CRYSTAL_ARROW.get());
+	            event.accept(ItemInit.CRYSTAL_CLUMP.get());
+	            event.accept(ItemInit.CRYSTAL_HELMET.get());
+	            event.accept(ItemInit.CRYSTAL_CHESTPLATE.get());
+	            event.accept(ItemInit.CRYSTAL_LEGGINGS.get());
+	            event.accept(ItemInit.CRYSTAL_BOOTS.get());
+	            event.accept(ItemInit.GNAWING_JAW.get());
+	            event.accept(ItemInit.DARKSTAR.get());
 	        }
 	        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS)
 	        {
 
-	            event.accept(ItemInit.ANCIENT_CRYSTAL);
-	            event.accept(ItemInit.CRYSTAL_SHARD);
+	            event.accept(ItemInit.ANCIENT_CRYSTAL.get());
+	            event.accept(ItemInit.CRYSTAL_SHARD.get());
 	        }
 	        if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS)
 	        {
-	            event.accept(ItemInit.ABYSSOLOGER_SPAWN_EGG);
-	            event.accept(ItemInit.SPECTRAL_SKELETON_SPAWN_EGG);
-	            event.accept(ItemInit.EYE_SPAWN_EGG);
-	            event.accept(ItemInit.GLOW_SKELETON_SPAWN_EGG);
-	            event.accept(ItemInit.OVERGROWN_SKELETON_SPAWN_EGG);
-	            event.accept(ItemInit.SWAMP_ZOMBIE_SPAWN_EGG);
-	            event.accept(ItemInit.CRYSTAL_ZOMBIE_SPAWN_EGG);
-	            event.accept(ItemInit.LAVA_SQUID_SPAWN_EGG);
-	            event.accept(ItemInit.MOTHER_LAVA_SQUID_SPAWN_EGG);
+	            event.accept(ItemInit.ABYSSOLOGER_SPAWN_EGG.get());
+	            event.accept(ItemInit.SPECTRAL_SKELETON_SPAWN_EGG.get());
+	            event.accept(ItemInit.EYE_SPAWN_EGG.get());
+	            event.accept(ItemInit.GLOW_SKELETON_SPAWN_EGG.get());
+	            event.accept(ItemInit.OVERGROWN_SKELETON_SPAWN_EGG.get());
+	            event.accept(ItemInit.SWAMP_ZOMBIE_SPAWN_EGG.get());
+	            event.accept(ItemInit.CRYSTAL_ZOMBIE_SPAWN_EGG.get());
+	            event.accept(ItemInit.LAVA_SQUID_SPAWN_EGG.get());
+	            event.accept(ItemInit.MOTHER_LAVA_SQUID_SPAWN_EGG.get());
 	        }
 	    }
 	

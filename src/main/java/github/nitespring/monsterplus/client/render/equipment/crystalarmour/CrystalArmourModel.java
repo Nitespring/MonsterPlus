@@ -1,9 +1,13 @@
 package github.nitespring.monsterplus.client.render.equipment.crystalarmour;
 
 
+import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
+import github.nitespring.monsterplus.MonsterPlus;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidArmorModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -12,25 +16,24 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ColorRGBA;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraftforge.client.model.ForgeItemModelShaper;
-import net.minecraftforge.client.model.ItemLayerModel;
-import net.minecraftforge.client.model.generators.loaders.ItemLayerModelBuilder;
+
 
 import java.awt.*;
+import java.util.function.Function;
 
 public class CrystalArmourModel extends HumanoidModel<LivingEntity>{
 
 	//HumanoidArmorLayer
-	
-	
+
 	public CrystalArmourModel(ModelPart p_170677_) {
 		super(p_170677_, RenderType::entityTranslucent);
 		//this.renderType = RenderType::entityTranslucent;
 	}
-	
 	
 
 	
@@ -243,15 +246,18 @@ public class CrystalArmourModel extends HumanoidModel<LivingEntity>{
 	
 	
 
-	
 	@Override
 	public void renderToBuffer(PoseStack stack, VertexConsumer vertexconsumer, int p_102036_, int p_102037_,
 			int i) {
-		
-	
+		//ResourceLocation resource = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID , "textures/armour/crystal_layer_1.png");
+
+
+
+		//vertexconsumer = Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(RenderType.entityTranslucent(resource));
+
 		
 		super.renderToBuffer(stack, vertexconsumer, 200, p_102037_, FastColor.ARGB32.color(64,255,255,255));
-		
+		//super.renderToBuffer(stack, vertexconsumer, 200, p_102037_, -1);
 	}
 	
 

@@ -8,18 +8,21 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
 
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = MonsterPlus.MODID)
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+
+
+@EventBusSubscriber(modid = MonsterPlus.MODID)
 public class DamageEvents {
 	
 	@SubscribeEvent
-	public static void applyMagicProtection(LivingDamageEvent event) {
+	public static void applyMagicProtection(LivingIncomingDamageEvent event) {
 		
-	DamageSource damageType = event.getSource();	
+	DamageSource damageType = event.getSource();
 		if(damageType.is(DamageTypes.MAGIC)||damageType.is(DamageTypes.INDIRECT_MAGIC)||damageType.is(DamageTypes.LIGHTNING_BOLT)||damageType.is(DamageTypeTags.WITCH_RESISTANT_TO)) {
 	    //if(event.getSource().is(DamageTypeTags.WITCH_RESISTANT_TO)) {
 			float damageIn = event.getAmount();

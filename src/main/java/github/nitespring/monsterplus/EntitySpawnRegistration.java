@@ -13,51 +13,53 @@ import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
-import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
-@Mod.EventBusSubscriber(modid = MonsterPlus.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+import net.neoforged.bus.api.SubscribeEvent;
+
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+
+@EventBusSubscriber(modid = MonsterPlus.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class EntitySpawnRegistration {
 	
 	@SubscribeEvent
-    public static void registerEntitySpawn(SpawnPlacementRegisterEvent event) {
+    public static void registerEntitySpawn(RegisterSpawnPlacementsEvent event) {
 		event.register(EntityInit.SWAMP_ZOMBIE.get(),
 				SpawnPlacementTypes.ON_GROUND,
 				Types.MOTION_BLOCKING_NO_LEAVES,
 				SwampZombie::checkSwampZombieSpawnRules,
-				SpawnPlacementRegisterEvent.Operation.REPLACE);
+				RegisterSpawnPlacementsEvent.Operation.REPLACE);
 		event.register(EntityInit.ABYSSOLOGER.get(),
 				SpawnPlacementTypes.ON_GROUND,
 				Types.MOTION_BLOCKING_NO_LEAVES,
 				Abyssologer::checkAbyssologerSpawnRules,
-				SpawnPlacementRegisterEvent.Operation.REPLACE);
+				RegisterSpawnPlacementsEvent.Operation.REPLACE);
 		event.register(EntityInit.GLOW_SKELETON.get(),
 				SpawnPlacementTypes.ON_GROUND,
 				Types.MOTION_BLOCKING_NO_LEAVES,
 				GlowSkeleton::checkGlowSkeletonSpawnRules,
-				SpawnPlacementRegisterEvent.Operation.REPLACE);
+				RegisterSpawnPlacementsEvent.Operation.REPLACE);
 		event.register(EntityInit.LAVA_SQUID.get(),
 				SpawnPlacementTypes.NO_RESTRICTIONS,
 				Types.MOTION_BLOCKING,
 				LavaSquid::checkLavaSquidSpawnRules,
-				SpawnPlacementRegisterEvent.Operation.REPLACE);
+				RegisterSpawnPlacementsEvent.Operation.REPLACE);
 		event.register(EntityInit.MOTHER_LAVA_SQUID.get(),
 				SpawnPlacementTypes.NO_RESTRICTIONS,
 				Types.MOTION_BLOCKING,
 				MotherLavaSquid::checkMotherLavaSquidSpawnRules,
-				SpawnPlacementRegisterEvent.Operation.REPLACE);
+				RegisterSpawnPlacementsEvent.Operation.REPLACE);
 		event.register(EntityInit.CRYSTAL_ZOMBIE.get(),
 				SpawnPlacementTypes.ON_GROUND,
 				Types.MOTION_BLOCKING_NO_LEAVES,
 				CrystalZombie::checkCrystalZombieSpawnRules,
-				SpawnPlacementRegisterEvent.Operation.REPLACE);
+				RegisterSpawnPlacementsEvent.Operation.REPLACE);
 		event.register(EntityInit.OVERGROWN_SKELETON.get(),
 				SpawnPlacementTypes.ON_GROUND,
 				Types.MOTION_BLOCKING,
 				OvergrownSkeleton::checkOvergrownSkeletonSpawnRules,
-				SpawnPlacementRegisterEvent.Operation.REPLACE);
+				RegisterSpawnPlacementsEvent.Operation.REPLACE);
 
     }
 	

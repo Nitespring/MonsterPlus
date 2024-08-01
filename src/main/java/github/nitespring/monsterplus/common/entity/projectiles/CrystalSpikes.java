@@ -121,8 +121,8 @@ public class CrystalSpikes extends Entity{
 	   }
 	 
 	 @Override
-	public void onAddedToWorld() {
-		super.onAddedToWorld();
+	public void onAddedToLevel() {
+		super.onAddedToLevel();
 		this.xTilt = new Random().nextInt(30)-14;
 		this.zTilt = new Random().nextInt(30)-14;
 		this.setYRot(new Random().nextInt(360)+1);

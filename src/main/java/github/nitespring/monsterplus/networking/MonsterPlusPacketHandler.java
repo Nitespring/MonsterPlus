@@ -7,46 +7,36 @@ package github.nitespring.monsterplus.networking;
 
 
 import github.nitespring.monsterplus.MonsterPlus;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+
 import net.minecraft.server.level.ServerPlayer;
 
-import net.minecraftforge.network.ChannelBuilder;
 
-import net.minecraftforge.network.NetworkDirection;
-
-import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.network.SimpleChannel;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 
 public class MonsterPlusPacketHandler {
 
 
 
-	private static final SimpleChannel INSTANCE = ChannelBuilder.named(
-					ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "main"))
-			.serverAcceptedVersions((status, version) -> true)
-			.clientAcceptedVersions((status, version) -> true)
-			.networkProtocolVersion(1).optional()
-			.simpleChannel();
-
-	public static void register() {
-		INSTANCE.messageBuilder(ItemLeftClickAction.class, NetworkDirection.PLAY_TO_SERVER)
-				.encoder(ItemLeftClickAction::encode)
-				.decoder(ItemLeftClickAction::new)
-				.consumerMainThread(ItemLeftClickAction::handle)
-				.add();
+	public static void onRegisterPayloadHandler(RegisterPayloadHandlersEvent event) {
+		PayloadRegistrar registrar = event.registrar(MonsterPlus.MODID)
+				.versioned("1.0")
+				.optional();
+		registrar.playToServer(
+				ItemLeftClickAction.TYPE,
+				ItemLeftClickAction.STREAM_CODEC,
+				ItemLeftClickAction.ServerPayloadHandler::handleData);
 	}
 
-	public static void sendToServer(Object msg) {
-		INSTANCE.send(msg, PacketDistributor.SERVER.noArg());
+	public static <MSG extends CustomPacketPayload> void sendToServer(MSG message) {
+		PacketDistributor.sendToServer(message);
 	}
 
-	public static void sendToPlayer(Object msg, ServerPlayer player) {
-		INSTANCE.send(msg, PacketDistributor.PLAYER.with(player));
-	}
-
-	public static void sendToAllClients(Object msg) {
-		INSTANCE.send(msg, PacketDistributor.ALL.noArg());
+	public static <MSG extends CustomPacketPayload> void sendToPlayer(MSG message, ServerPlayer player) {
+		PacketDistributor.sendToPlayer(player, message);
 	}
 
 

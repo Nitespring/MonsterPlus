@@ -5,6 +5,6 @@
     "minecraft:bamboo_jungle",
     "minecraft:lush_caves",
     "#minecraft:is_jungle",
-    "#forge:is_lush"
+    "#c:is_lush"
   ]
 }

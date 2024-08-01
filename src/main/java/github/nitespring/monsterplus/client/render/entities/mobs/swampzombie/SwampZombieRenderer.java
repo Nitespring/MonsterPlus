@@ -16,8 +16,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.entity.monster.Zombie;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class SwampZombieRenderer extends AbstractZombieRenderer<SwampZombie, SwampZombieModel<SwampZombie>> {
 	private static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/entities/swamp_zombie.png");

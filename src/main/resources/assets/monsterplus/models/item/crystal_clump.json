@@ -1,8 +1,16 @@
 {
-"parent": "item/generated",
-"render_type": "eyes",
-"textures": {
-    "layer0": "monsterplus:item/crystal_clump_base",
-    "layer1": "monsterplus:item/crystal_clump_emissive"
+    "parent": "forge:item/default",
+    "loader": "forge:item_layers",
+    "textures": {
+        "layer0": "monsterplus:item/crystal_clump_base",
+        "layer1": "monsterplus:item/crystal_clump_emissive"
+    },
+    "forge_data": {
+        "layers": {
+            "1": {
+                "block_light": 15,
+                "sky_light": 15
+            }
+        }
     }
 }

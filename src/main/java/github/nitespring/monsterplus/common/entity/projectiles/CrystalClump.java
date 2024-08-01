@@ -73,42 +73,9 @@ protected ParticleOptions getTrailParticle() {
 	}
 	
 	private void createCrystals(double y, boolean flag){
-		/*
-		for(int k = 0; k<=2; k++) {
-			
-		         BlockPos blockpos = new BlockPos(this.getX(), y, this.getZ());
-		         boolean flag1 = false;
-		         double d0 = 0.0D;
-                 if(!flag) {
-		         do {
-		            BlockPos blockpos1 = blockpos.below();
-		            BlockState blockstate = this.level.getBlockState(blockpos1);
-		            if (blockstate.isFaceSturdy(this.level, blockpos1, Direction.UP)) {
-		               if (!this.level.isEmptyBlock(blockpos)) {
-		                  BlockState blockstate1 = this.level.getBlockState(blockpos);
-		                  VoxelShape voxelshape = blockstate1.getCollisionShape(this.level, blockpos);
-		                  if (!voxelshape.isEmpty()) {
-		                     d0 = voxelshape.max(Direction.Axis.Y);
-		                  }
-		               }
-
-		               flag1 = true;
-		               break;
-		            }
-
-		            blockpos = blockpos.below();
-		         } while(blockpos.getY() >= Mth.floor(d0) - 1);
-		         
-                 }
-
-		         if (flag1 || flag) { */
-		for(int k = 0; k<=2; k++) {
-		   this.level().addFreshEntity(new CrystalSpikes(this.level(), this.damage, this.position().x + new Random().nextFloat() - 0.5, /*blockpos.getY()*/ this.getY() + new Random().nextFloat() - 0.5, this.position().z + new Random().nextFloat() -0.5, this.yRotO, 0, (LivingEntity)this.getOwner()));
+		for(int k = 0; k<=9; k++) {
+			this.level().addFreshEntity(new CrystalSpikes(this.level(), damage, this.position().x + 4.5f*(new Random().nextFloat() - 0.5), /*blockpos.getY()*/ this.getY() -0.5 /*new Random().nextFloat() - 0.5*/, this.position().z + 4.5f*(new Random().nextFloat() - 0.5), this.yRotO+new Random().nextFloat(), new Random().nextInt(8), (LivingEntity)this.getOwner()));
 		}
-		        	 
-		        // }
-			
-		//}
 	}	
 	@Override
 	public void tick() {
@@ -122,7 +89,7 @@ protected ParticleOptions getTrailParticle() {
 	         this.xRotO = this.getXRot();
 	      }
 		livingTicks++;
-		this.setDeltaMovement(vec3.x(), vec3.y() - 0.005*livingTicks, vec3.z());
+		this.setDeltaMovement(vec3.x()*0.94f, Math.max(vec3.y() - 0.02,-2f), vec3.z()*0.94f);
 		super.tick();
 		
 		

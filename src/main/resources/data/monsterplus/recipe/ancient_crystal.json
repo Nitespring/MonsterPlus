@@ -17,7 +17,7 @@
         }
     },
     "result": {
-        "item": "monsterplus:ancient_crystal",
+        "id": "monsterplus:ancient_crystal",
         "count": 1
     }
 }

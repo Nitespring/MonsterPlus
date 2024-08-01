@@ -10,7 +10,7 @@
         }
     },
     "result": {
-        "item": "monsterplus:crystal_helmet",
+        "id": "monsterplus:crystal_helmet",
         "count": 1
     }
 }

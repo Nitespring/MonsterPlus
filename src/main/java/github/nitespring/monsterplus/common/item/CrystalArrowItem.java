@@ -25,7 +25,7 @@ public class CrystalArrowItem extends ArrowItem{
 
 	@Override
 	public AbstractArrow createArrow(Level level, ItemStack stack, LivingEntity e, @Nullable ItemStack stack1) {
-		return new CrystalArrow(level, e);
+		return new CrystalArrow(level, e, stack.copyWithCount(1),stack1);
 	}
 
 

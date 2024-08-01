@@ -17,14 +17,14 @@ import net.minecraft.world.phys.EntityHitResult;
 
 public class CrystalArrow extends AbstractArrow{
 	
-	public CrystalArrow(EntityType<? extends AbstractArrow> p_37411_, Level p_37412_) {
-	      super(p_37411_, p_37412_);
+	public CrystalArrow(EntityType<? extends AbstractArrow> e, Level l) {
+	      super(e, l);
 	      
 	   }
 
-	   public CrystalArrow(Level p_37419_, LivingEntity p_37420_) {
-	      super(EntityInit.CRYSTAL_ARROW.get(), p_37419_);
-		  this.setOwner(p_37420_);
+	   public CrystalArrow(Level level, LivingEntity e, ItemStack stack, ItemStack stack1) {
+	      super(EntityInit.CRYSTAL_ARROW.get(), e,level, stack,stack1);
+
 	   }
 
 
@@ -57,8 +57,8 @@ public class CrystalArrow extends AbstractArrow{
 	
 	private void createCrystals(){
 		
-		for(int k = 0; k<=2; k++) {
-		   this.level().addFreshEntity(new CrystalSpikes(this.level(), 5.0f, this.position().x + new Random().nextFloat() - 0.5, /*blockpos.getY()*/ this.getY() -0.5 /*new Random().nextFloat() - 0.5*/, this.position().z + new Random().nextFloat() -0.5, this.yRotO, 0, (LivingEntity)this.getOwner()));
+		for(int k = 0; k<5; k++) {
+		   this.level().addFreshEntity(new CrystalSpikes(this.level(), 5.0f, this.position().x + 2.5f*(new Random().nextFloat() - 0.5), /*blockpos.getY()*/ this.getY() -0.5 /*new Random().nextFloat() - 0.5*/, this.position().z + 2.5f*(new Random().nextFloat() - 0.5), this.yRotO+new Random().nextFloat(), new Random().nextInt(5), (LivingEntity)this.getOwner()));
 		}
 		
 	}

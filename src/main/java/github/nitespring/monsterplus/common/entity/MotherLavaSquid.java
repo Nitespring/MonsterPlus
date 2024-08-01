@@ -40,7 +40,7 @@ public class MotherLavaSquid extends LavaSquid{
 	
 	public static  AttributeSupplier.Builder setCustomAttributes(){
 		return Monster.createMonsterAttributes()
-				.add(Attributes.MAX_HEALTH, 60.0D)
+				.add(Attributes.MAX_HEALTH, 40.0D)
 				.add(Attributes.MOVEMENT_SPEED, 0.25D)
 				.add(Attributes.ATTACK_DAMAGE, 5)
 				.add(Attributes.ATTACK_SPEED, 1.2D)

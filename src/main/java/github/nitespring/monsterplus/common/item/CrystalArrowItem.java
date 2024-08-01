@@ -13,33 +13,32 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.Nullable;
 
 public class CrystalArrowItem extends ArrowItem{
 
-	public CrystalArrowItem(Properties p_40512_) {
-		super(p_40512_);
+	public CrystalArrowItem(Properties properties) {
+		super(properties.rarity(Rarity.RARE));
 	}
 	
-       @Override
-	   public AbstractArrow createArrow(Level p_43237_, ItemStack p_43238_, LivingEntity p_43239_) {
-	      return new CrystalArrow(p_43237_, p_43239_);
-	   }
-       
-       
-       //BowItem
+
+
+	@Override
+	public AbstractArrow createArrow(Level level, ItemStack stack, LivingEntity e, @Nullable ItemStack stack1) {
+		return new CrystalArrow(level, e);
+	}
+
+
+
+	//BowItem
 
     @OnlyIn(Dist.CLIENT)
    	@Override
-   	public void appendHoverText(ItemStack p_41421_, Level p_41422_, List<Component> tooltip, TooltipFlag p_41424_) {
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
    		
    		String string = "\u00A77\u00A7oSummons Crystal Spikes from the ground in the place where it hits";
    		tooltip.add(Component.literal(string));
    	}
-   	
-   	@Override
-   	public Rarity getRarity(ItemStack p_41461_) {
-   		
-   		return Rarity.RARE;
-   	}
+
        
 }

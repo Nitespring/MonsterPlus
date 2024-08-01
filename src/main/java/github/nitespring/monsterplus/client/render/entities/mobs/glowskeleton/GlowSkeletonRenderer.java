@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
 
 public class GlowSkeletonRenderer<T extends GlowSkeleton> extends HumanoidMobRenderer<T, GlowSkeletonModel<T>> {
-	   private static final ResourceLocation GLOW_SKELETON_LOCATION = new ResourceLocation(MonsterPlus.MODID, "textures/entities/glow_skeleton.png");
+	   private static final ResourceLocation GLOW_SKELETON_LOCATION = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/entities/glow_skeleton.png");
 
 	   //GlowSquidRenderer
 	   

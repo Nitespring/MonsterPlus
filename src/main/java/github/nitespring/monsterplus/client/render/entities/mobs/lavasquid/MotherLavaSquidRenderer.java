@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.core.BlockPos;
 
 public  class MotherLavaSquidRenderer<T extends MotherLavaSquid> extends MobRenderer<T, MotherLavaSquidModel<T>> {
-	   private static final ResourceLocation SQUID_LOCATION = new ResourceLocation(MonsterPlus.MODID, "textures/entities/lava_squid.png");
+	   private static final ResourceLocation SQUID_LOCATION = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/entities/lava_squid.png");
 
 	   //SquidRenderer
 	   

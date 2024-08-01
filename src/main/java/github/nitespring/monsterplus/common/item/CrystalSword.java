@@ -6,11 +6,7 @@ import java.util.Random;
 import github.nitespring.monsterplus.common.entity.projectiles.CrystalSpikes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
@@ -18,10 +14,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class CrystalSword extends SwordItem{
 
-	public CrystalSword(Tier p_43269_, int p_43270_, float p_43271_, Properties p_43272_) {
-		super(p_43269_, p_43270_, p_43271_, p_43272_);
+	public CrystalSword(Tier tier, Properties properties) {
+		super(tier, properties.attributes(SwordItem.createAttributes(Tiers.DIAMOND, 3, -2.4F)).stacksTo(1).rarity(Rarity.RARE));
 	}
-	
+
+
 	
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity user) {
@@ -37,17 +34,13 @@ public class CrystalSword extends SwordItem{
 	
 	@OnlyIn(Dist.CLIENT)
 	@Override
-	public void appendHoverText(ItemStack p_41421_, Level p_41422_, List<Component> tooltip, TooltipFlag p_41424_) {
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
 		
 		String string = "\u00A77\u00A7oSummons Crystal Spikes from the ground when you hit enemies";
 		tooltip.add(Component.literal(string));
 	}
 	
-	@Override
-	public Rarity getRarity(ItemStack p_41461_) {
-		
-		return Rarity.EPIC;
-	}
+
 	
 	
 	

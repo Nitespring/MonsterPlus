@@ -21,7 +21,7 @@ import net.minecraft.world.entity.monster.SpellcasterIllager;
 public class AbyssologerCrystalLayer<T extends SpellcasterIllager> extends RenderLayer<T, AbyssologerModel<T>>{
 
 	
-	public static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation(MonsterPlus.MODID, "textures/entities/abyssologer_crystal.png");
+	public static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/entities/abyssologer_crystal.png");
 	private final AbyssologerModel<T> model;
 	
 	public AbyssologerCrystalLayer(RenderLayerParent<T, AbyssologerModel<T>> p_117346_, EntityModelSet p_174491_) {
@@ -48,7 +48,7 @@ public class AbyssologerCrystalLayer<T extends SpellcasterIllager> extends Rende
 		         this.getParentModel().copyPropertiesTo(this.model);
 		         this.model.prepareMobModel(entity, f1, f2, f3);
 		         this.model.setupAnim(entity, f1, f2, f4, f5, f6);
-		         this.model.renderToBuffer(stack, vertexconsumer, i, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), 1.0F, 1.0F, 1.0F, 1.0F);
+		         this.model.renderToBuffer(stack, vertexconsumer, i, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), -1);
 		      }
 		   
 	}

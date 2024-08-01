@@ -7,27 +7,18 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class Darkstar extends SwordItem implements ILeftClickSpecialActionItem{
 
-	public Darkstar(Tier p_43269_, int p_43270_, float p_43271_, Properties p_43272_) {
-		super(p_43269_, p_43270_, p_43271_, p_43272_);
+	public Darkstar(Tier tier, Properties p) {
+		super(tier, p.attributes(SwordItem.createAttributes(Tiers.DIAMOND, 13, -2.8F)).stacksTo(1).rarity(Rarity.EPIC));
 		
 	}
-	
-	@Override
-	public Rarity getRarity(ItemStack p_41461_) {
-		
-		return Rarity.EPIC;
-		
-	}
+
 
 	@Override
 	public boolean isFoil(ItemStack p_41453_) {

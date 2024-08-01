@@ -22,7 +22,7 @@ import net.minecraft.world.entity.projectile.EvokerFangs;
 
 public class CrystalSpikesRenderer<T extends CrystalSpikes> extends EntityRenderer<T>{
 
-	public static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation(MonsterPlus.MODID, "textures/entities/crystal_spike.png");
+	public static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/entities/crystal_spike.png");
 	 private final CrystalSpikesModel<CrystalSpikes> model;
 	
 	//EvokerFangsRenderer
@@ -56,7 +56,7 @@ public class CrystalSpikesRenderer<T extends CrystalSpikes> extends EntityRender
 	         
 	         this.model.setupAnim(entity, f, 0.0F, 0.0F, entity.getYRot(), entity.getXRot());
 	         VertexConsumer vertexconsumer = p_114532_.getBuffer(RenderType.entityTranslucent(TEXTURE_LOCATION));
-	         this.model.renderToBuffer(stack, vertexconsumer, p_114533_, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+	         this.model.renderToBuffer(stack, vertexconsumer, p_114533_, OverlayTexture.NO_OVERLAY, -1);
 	         stack.popPose();
 	         super.render(entity, p_114529_, p_114530_, stack, p_114532_, p_114533_);
 	      }

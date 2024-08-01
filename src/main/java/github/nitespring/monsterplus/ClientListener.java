@@ -42,16 +42,16 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = MonsterPlus.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientListener {
 
-	public static final ModelLayerLocation GLOW_SKELETON_LAYER = new ModelLayerLocation(new ResourceLocation(MonsterPlus.MODID, "glow_skeleton"), "main");
-	public static final ModelLayerLocation LAVA_SQUID_LAYER = new ModelLayerLocation(new ResourceLocation(MonsterPlus.MODID, "lava_squid"), "main");
-	public static final ModelLayerLocation MOTHER_LAVA_SQUID_LAYER = new ModelLayerLocation(new ResourceLocation(MonsterPlus.MODID, "mother_lava_squid"), "main");
-	public static final ModelLayerLocation EYE_LAYER = new ModelLayerLocation(new ResourceLocation(MonsterPlus.MODID, "opalescent_eye"), "main");
-	public static final ModelLayerLocation EYE_OVERLAY_LAYER = new ModelLayerLocation(new ResourceLocation(MonsterPlus.MODID, "opalescent_eye"), "overlay");
-	public static final ModelLayerLocation SPIKES_LAYER = new ModelLayerLocation(new ResourceLocation(MonsterPlus.MODID, "crystal_spikes"), "main");
-	public static final ModelLayerLocation SQUARE_TEXTURE = new ModelLayerLocation(new ResourceLocation(MonsterPlus.MODID, "square_texture"), "main");
-	public static final ModelLayerLocation CRYSTAL_ZOMBIE_LAYER = new ModelLayerLocation(new ResourceLocation(MonsterPlus.MODID, "crystal_zombie"), "main");
-	public static final ModelLayerLocation CRYSTAL_ARMOUR_MAIN_LAYER = new ModelLayerLocation(new ResourceLocation(MonsterPlus.MODID, "crystal_armour"), "main");
-	public static final ModelLayerLocation OVERGROWN_SKELETON_LAYER = new ModelLayerLocation(new ResourceLocation(MonsterPlus.MODID, "overgrown_skeleton"), "main");
+	public static final ModelLayerLocation GLOW_SKELETON_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "glow_skeleton"), "main");
+	public static final ModelLayerLocation LAVA_SQUID_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "lava_squid"), "main");
+	public static final ModelLayerLocation MOTHER_LAVA_SQUID_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "mother_lava_squid"), "main");
+	public static final ModelLayerLocation EYE_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "opalescent_eye"), "main");
+	public static final ModelLayerLocation EYE_OVERLAY_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "opalescent_eye"), "overlay");
+	public static final ModelLayerLocation SPIKES_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "crystal_spikes"), "main");
+	public static final ModelLayerLocation SQUARE_TEXTURE = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "square_texture"), "main");
+	public static final ModelLayerLocation CRYSTAL_ZOMBIE_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "crystal_zombie"), "main");
+	public static final ModelLayerLocation CRYSTAL_ARMOUR_MAIN_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "crystal_armour"), "main");
+	public static final ModelLayerLocation OVERGROWN_SKELETON_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "overgrown_skeleton"), "main");
 	
 	@SubscribeEvent
     public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event)

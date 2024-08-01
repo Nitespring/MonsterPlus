@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.entity.SkeletonRenderer;
 public class SpectralSkeletonRenderer extends SkeletonRenderer{
 
 	
-	private static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation(MonsterPlus.MODID, "textures/entities/spectre.png");
+	private static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/entities/spectre.png");
 
 	public SpectralSkeletonRenderer(Context p_174380_) {
 		super(p_174380_);

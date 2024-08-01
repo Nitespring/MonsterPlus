@@ -11,7 +11,7 @@ import net.minecraft.world.entity.monster.SpellcasterIllager;
 
 public class AbyssologerRenderer<T extends SpellcasterIllager> extends IllagerRenderer<T>{
 	
-	public static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation(MonsterPlus.MODID, "textures/entities/abyssologer.png");
+	public static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/entities/abyssologer.png");
 	
 	 public AbyssologerRenderer(Context p_174108_) {
 		super(p_174108_, new AbyssologerModel<>(p_174108_.bakeLayer(ModelLayers.EVOKER)), 0.5F);

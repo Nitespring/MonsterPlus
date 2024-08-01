@@ -20,7 +20,7 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 
 
 public class CrystalZombieRenderer extends AbstractZombieRenderer<CrystalZombie, CrystalZombieModel<CrystalZombie>>{
-	 private static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation(MonsterPlus.MODID, "textures/entities/crystal_zombie.png");
+	 private static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/entities/crystal_zombie.png");
 	 
 	 public CrystalZombieRenderer(Context p_173964_) {
 	      super(p_173964_, new CrystalZombieModel<>(p_173964_.bakeLayer(ClientListener.CRYSTAL_ZOMBIE_LAYER)), new CrystalZombieModel<>(p_173964_.bakeLayer(ModelLayers.ZOMBIE_INNER_ARMOR)), new CrystalZombieModel<>(p_173964_.bakeLayer(ModelLayers.ZOMBIE_OUTER_ARMOR)));

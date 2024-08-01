@@ -17,11 +17,11 @@ import net.minecraft.resources.ResourceLocation;
 
 public class BloodySlashRenderer<T extends BloodySlashEntity> extends EntityRenderer<T>{
 
-	public static final ResourceLocation TEXTURE_LOCATION_0 = new ResourceLocation(MonsterPlus.MODID, "textures/particles/bloody_slash_0.png");
-	public static final ResourceLocation TEXTURE_LOCATION_1 = new ResourceLocation(MonsterPlus.MODID, "textures/particles/bloody_slash_1.png");
-	public static final ResourceLocation TEXTURE_LOCATION_2 = new ResourceLocation(MonsterPlus.MODID, "textures/particles/bloody_slash_2.png");
-	public static final ResourceLocation TEXTURE_LOCATION_3 = new ResourceLocation(MonsterPlus.MODID, "textures/particles/bloody_slash_3.png");
-	public static final ResourceLocation TEXTURE_LOCATION_4 = new ResourceLocation(MonsterPlus.MODID, "textures/particles/bloody_slash.png");
+	public static final ResourceLocation TEXTURE_LOCATION_0 = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/particles/bloody_slash_0.png");
+	public static final ResourceLocation TEXTURE_LOCATION_1 = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/particles/bloody_slash_1.png");
+	public static final ResourceLocation TEXTURE_LOCATION_2 = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/particles/bloody_slash_2.png");
+	public static final ResourceLocation TEXTURE_LOCATION_3 = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/particles/bloody_slash_3.png");
+	public static final ResourceLocation TEXTURE_LOCATION_4 = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/particles/bloody_slash.png");
 	 private final SquareTextureEntityModel<T> model;
 	
 	//EvokerFangsRenderer
@@ -70,7 +70,7 @@ public class BloodySlashRenderer<T extends BloodySlashEntity> extends EntityRend
 	      vertexconsumer = p_114532_.getBuffer(RenderType.eyes(getTextureLocation(entity)));
 	      }
 	         
-	         this.model.renderToBuffer(stack, vertexconsumer, p_114533_, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+	         this.model.renderToBuffer(stack, vertexconsumer, p_114533_, OverlayTexture.NO_OVERLAY, -1);
 	      stack.popPose();
 	         super.render(entity, p_114529_, p_114530_, stack, p_114532_, 255);
 	      

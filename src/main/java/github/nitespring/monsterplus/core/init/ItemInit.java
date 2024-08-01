@@ -86,14 +86,14 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
 
 	public static final RegistryObject<Item> CRYSTAL_SWORD = ITEMS.register("crystal_sword", 
-			() -> new CrystalSword(CustomItemTiers.CRYSTAL, 5, -2.4f, new Item.Properties()
+			() -> new CrystalSword(CustomItemTiers.CRYSTAL, new Item.Properties()
 					));
 	
 	public static final RegistryObject<Item> DARKSTAR = ITEMS.register("darkstar", 
-			() -> new Darkstar(CustomItemTiers.CRYSTAL, 13, -2.8f, new Item.Properties()
+			() -> new Darkstar(CustomItemTiers.CRYSTAL, new Item.Properties()
 					));
 	public static final RegistryObject<Item> GNAWING_JAW = ITEMS.register("gnawing_jaw", 
-			() -> new GnawingJaw(CustomItemTiers.CRYSTAL, 11, -2.5f, new Item.Properties()
+			() -> new GnawingJaw(CustomItemTiers.CRYSTAL, new Item.Properties()
 					));
 	
 	

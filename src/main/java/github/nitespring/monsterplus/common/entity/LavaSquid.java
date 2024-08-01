@@ -76,13 +76,13 @@ public class LavaSquid extends Monster{
 	
 	 @Override
 	    public SpawnGroupData finalizeSpawn(ServerLevelAccessor server, DifficultyInstance difficulty,
-	    		MobSpawnType type, SpawnGroupData group, CompoundTag nbt) {
+	    		MobSpawnType type, SpawnGroupData group) {
 	    	
 	    	   Vec3 pos = this.position();
 	    	   Vec3 deltaPos = new Vec3(0, 5, 0);
 	    	   this.setPos(pos.add(deltaPos));
 	    	   
-	    	return super.finalizeSpawn(server, difficulty, type, group, nbt);
+	    	return super.finalizeSpawn(server, difficulty, type, group);
 	    }
 	 
 	 
@@ -100,11 +100,8 @@ public class LavaSquid extends Monster{
 	      this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers());
 	      //this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
 	   }
-	@Override	
-	protected float getStandingEyeHeight(Pose p_29975_, EntityDimensions p_29976_) {
-	      return p_29976_.height * 0.5F;
-	   }
-	
+
+
 	public static boolean checkLavaSquidSpawnRules(EntityType<LavaSquid> p_218985_, ServerLevelAccessor p_218986_, MobSpawnType p_218987_, BlockPos p_218988_, RandomSource p_218989_) {
 	      return checkMobSpawnRules(p_218985_, p_218986_, p_218987_, p_218988_, p_218989_) 
 	    		  && CommonConfig.spawn_lava_squid.get();
@@ -395,7 +392,7 @@ public class LavaSquid extends Monster{
                          //Vec3 aim = this.squid.getLookAngle();
 	                     for(int i = 0; i < 1; ++i) {
 	                    	 
-	                        SmallFireball smallfireball = new SmallFireball(this.squid.level(), this.squid, this.squid.getRandom().triangle(d1, 2.297D * d4), d2, this.squid.getRandom().triangle(d3, 2.297D * d4));
+	                        SmallFireball smallfireball = new SmallFireball(this.squid.level(), this.squid, new Vec3(this.squid.getRandom().triangle(d1, 2.297D * d4), d2, this.squid.getRandom().triangle(d3, 2.297D * d4)));
 	                        double rn = (this.squid.getRandom().nextInt(10)+1)/6;
 	                        smallfireball.setPos(this.squid.getX()+Math.cos(Math.PI*2*rn), this.squid.getY(0.5D) + 0.5D + 2.5*Math.sin(Math.PI*2*rn), this.squid.getZ()+Math.sin(Math.PI*2*rn));
 	                        this.squid.level().addFreshEntity(smallfireball);

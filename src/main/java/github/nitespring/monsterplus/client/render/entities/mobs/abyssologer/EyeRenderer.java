@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 public class EyeRenderer<T extends Eye> extends MobRenderer<T, EyeModel<T>>{
 	
 	
-	public static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation(MonsterPlus.MODID, "textures/entities/opalescent_eye.png");
+	public static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/entities/opalescent_eye.png");
 
 	 public  EyeRenderer(EntityRendererProvider.Context context) {
 	     super(context, new EyeModel<T>(context.bakeLayer(ClientListener.EYE_LAYER)), 0.7f);  

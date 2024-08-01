@@ -26,6 +26,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.dimension.DimensionType;
+import org.jetbrains.annotations.Nullable;
 
 public class OvergrownSkeleton extends AbstractSkeleton{
 
@@ -73,16 +74,18 @@ public class OvergrownSkeleton extends AbstractSkeleton{
 	 
 	 
 	 @Override
-		protected AbstractArrow getArrow(ItemStack p_33846_, float p_33847_) {
-		      AbstractArrow abstractarrow = super.getArrow(p_33846_, p_33847_);
+		protected AbstractArrow getArrow(ItemStack p_33846_, float p_33847_,@Nullable ItemStack p_343583_) {
+		      AbstractArrow abstractarrow = super.getArrow(p_33846_, p_33847_,p_343583_);
 		      if (abstractarrow instanceof Arrow) {
 		         ((Arrow)abstractarrow).addEffect(new MobEffectInstance(MobEffects.POISON, 200));
 		      }
 
 		      return abstractarrow;
 		   }
-		
-		@Override
+
+
+
+	@Override
 		public boolean doHurtTarget(Entity p_34169_) {
 		      if (!super.doHurtTarget(p_34169_)) {
 		         return false;

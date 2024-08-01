@@ -21,16 +21,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class CrystalClumpItem extends Item{
 
-	public CrystalClumpItem(Properties p_41383_) {
-		super(p_41383_);
+	public CrystalClumpItem(Properties properties) {
+		super(properties.stacksTo(16).rarity(Rarity.RARE));
 	}
 	
-	
-	@Override
-	public int getMaxStackSize(ItemStack stack) {
-		
-		return 16;
-	}
+
 	
 	
 	@Override
@@ -64,17 +59,13 @@ public class CrystalClumpItem extends Item{
    
 	@OnlyIn(Dist.CLIENT)
 	@Override
-	public void appendHoverText(ItemStack p_41421_, Level p_41422_, List<Component> tooltip, TooltipFlag p_41424_) {
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
 		
 		String string = "\u00A77\u00A7oSummons Crystal Spikes from the ground when thrown";
 		tooltip.add(Component.literal(string));
 	}
 	
-	@Override
-	public Rarity getRarity(ItemStack p_41461_) {
-		
-		return Rarity.RARE;
-	}
+
 
 	
 	

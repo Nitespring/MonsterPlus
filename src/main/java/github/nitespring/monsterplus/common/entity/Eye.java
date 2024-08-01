@@ -19,7 +19,6 @@ import net.minecraft.world.entity.FlyingMob;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -135,10 +134,10 @@ public class Eye extends FlyingMob implements Enemy{
 	      super.customServerAiStep();
 	   }
 	@Override
-	   public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_33126_, DifficultyInstance p_33127_, MobSpawnType p_33128_, @Nullable SpawnGroupData p_33129_, @Nullable CompoundTag p_33130_) {
+	   public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_33126_, DifficultyInstance p_33127_, MobSpawnType p_33128_, @Nullable SpawnGroupData p_33129_) {
 	      this.anchorPoint = this.blockPosition().above(5);
 	     
-	      return super.finalizeSpawn(p_33126_, p_33127_, p_33128_, p_33129_, p_33130_);
+	      return super.finalizeSpawn(p_33126_, p_33127_, p_33128_, p_33129_);
 	   }
 	@Override
 	   public void readAdditionalSaveData(CompoundTag p_33132_) {
@@ -161,10 +160,7 @@ public class Eye extends FlyingMob implements Enemy{
 	   public SoundSource getSoundSource() {
 		      return SoundSource.HOSTILE;
 		   }
-	@Override	   
-	   public MobType getMobType() {
-		      return MobType.UNDEAD;
-		   }
+
 
 	   static enum AttackPhase {
 		      CIRCLE,

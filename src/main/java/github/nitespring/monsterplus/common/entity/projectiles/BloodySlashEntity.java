@@ -14,6 +14,7 @@ import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerEntity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
@@ -59,8 +60,8 @@ public class BloodySlashEntity extends Entity{
 	
 	
 	@Override
-	protected void defineSynchedData() {
-		this.entityData.define(ANIMATIONSTATE, 0);
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		this.entityData.set(ANIMATIONSTATE, 0);
 		
 	}
 
@@ -98,8 +99,8 @@ public class BloodySlashEntity extends Entity{
 	}
 
 	@Override
-	public Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return new ClientboundAddEntityPacket(this);
+	public Packet<ClientGamePacketListener> getAddEntityPacket(ServerEntity e) {
+		return new ClientboundAddEntityPacket(this,e);
 	}
 	
 	

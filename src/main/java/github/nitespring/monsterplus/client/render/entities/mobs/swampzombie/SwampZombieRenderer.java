@@ -20,7 +20,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class SwampZombieRenderer extends AbstractZombieRenderer<SwampZombie, SwampZombieModel<SwampZombie>> {
-	private static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation(MonsterPlus.MODID, "textures/entities/swamp_zombie.png");
+	private static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/entities/swamp_zombie.png");
 
 	   public SwampZombieRenderer(Context p_173964_) {
 	      super(p_173964_, new SwampZombieModel<>(p_173964_.bakeLayer(ModelLayers.PLAYER)), new SwampZombieModel<>(p_173964_.bakeLayer(ModelLayers.PLAYER_INNER_ARMOR)), new SwampZombieModel<>(p_173964_.bakeLayer(ModelLayers.PLAYER_OUTER_ARMOR)));

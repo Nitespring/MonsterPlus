@@ -20,7 +20,7 @@ import net.minecraft.world.entity.monster.Drowned;
 
 
 public class SwampZombieOuterLayer<T extends SwampZombie> extends RenderLayer<T, SwampZombieModel<T>> {
-	private static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation(MonsterPlus.MODID, "textures/entities/swamp_zombie_outer.png");
+	private static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/entities/swamp_zombie_outer.png");
 
    private final DrownedModel<T> model;
 
@@ -44,7 +44,7 @@ public class SwampZombieOuterLayer<T extends SwampZombie> extends RenderLayer<T,
 	         this.getParentModel().copyPropertiesTo(this.model);
 	         this.model.prepareMobModel(entity, f1, f2, f3);
 	         this.model.setupAnim(entity, f1, f2, f4, f5, f6);
-	         this.model.renderToBuffer(stack, vertexconsumer, i, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), 1.0F, 1.0F, 1.0F, 1.0F);
+	         this.model.renderToBuffer(stack, vertexconsumer, i, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), -1);
 	      }
 	   
       //coloredCutoutModelCopyLayerRender(this.getParentModel(), this.model, TEXTURE_LOCATION, p_116924_, p_116925_, p_116926_, p_116927_, p_116928_, p_116929_, p_116931_, p_116932_, p_116933_, p_116930_, 1.0F, 1.0F, 1.0F);

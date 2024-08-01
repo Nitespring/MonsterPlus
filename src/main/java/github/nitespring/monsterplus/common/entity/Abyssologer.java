@@ -13,9 +13,11 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -24,7 +26,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.MobType;
+
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -46,25 +48,30 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
 public class Abyssologer extends SpellcasterIllager{
 
 	public Abyssologer(EntityType<? extends SpellcasterIllager> p_33724_, Level p_33725_) {
 		super(p_33724_, p_33725_);
 		this.xpReward = 10;
-		
+	}
+
+	@Nullable
+	@Override
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficultyInstance, MobSpawnType spawnType, @Nullable SpawnGroupData groupData) {
+		return super.finalizeSpawn(level, difficultyInstance, spawnType, groupData);
+	}
+
+	@Override
+	public boolean canJoinRaid() {
+		return super.canJoinRaid();
 	}
 
 	@Override
 	protected SoundEvent getCastingSoundEvent() {
 		
 		return SoundEvents.EVOKER_CAST_SPELL;
-	}
-
-	@Override
-	public void applyRaidBuffs(int p_37844_, boolean p_37845_) {
-		
-		
 	}
 
 	@Override
@@ -93,8 +100,13 @@ public class Abyssologer extends SpellcasterIllager{
 	      this.targetSelector.addGoal(3, (new NearestAttackableTargetGoal<>(this, AbstractVillager.class, false)).setUnseenMemoryTicks(300));
 	      this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, false));
 	   }
-	
-	 public static AttributeSupplier.Builder createAttributes() {
+
+	@Override
+	public void applyRaidBuffs(ServerLevel serverLevel, int i, boolean b) {
+
+	}
+
+	public static AttributeSupplier.Builder createAttributes() {
 	      return Monster.createMonsterAttributes()
 	    		  .add(Attributes.MOVEMENT_SPEED, 0.5D)
 	    		  .add(Attributes.MAX_HEALTH, 30.0D)
@@ -112,7 +124,7 @@ public class Abyssologer extends SpellcasterIllager{
 	         return this.isAlliedTo(((Eye)p_32665_).getOwner());
 	      }  else if (p_32665_ instanceof SpectralSkeleton) {
 		         return this.isAlliedTo(((SpectralSkeleton)p_32665_).getOwner());
-	      } else if (p_32665_ instanceof LivingEntity && ((LivingEntity)p_32665_).getMobType() == MobType.ILLAGER) {
+	      } else if (p_32665_ instanceof LivingEntity && ((LivingEntity)p_32665_).getType().is(EntityTypeTags.ILLAGER)) {
 	         return this.getTeam() == null && p_32665_.getTeam() == null;
 	      } else {
 	         return false;
@@ -173,7 +185,7 @@ public class Abyssologer extends SpellcasterIllager{
 	            BlockPos blockpos = Abyssologer.this.blockPosition().offset(-2 + Abyssologer.this.random.nextInt(5), 1, -2 + Abyssologer.this.random.nextInt(5));
 	            Eye eye = EntityInit.EYE.get().create(Abyssologer.this.level());
 	            eye.moveTo(blockpos, 0.0F, 0.0F);
-	            eye.finalizeSpawn(serverlevel, Abyssologer.this.level().getCurrentDifficultyAt(blockpos), MobSpawnType.MOB_SUMMONED, (SpawnGroupData)null, (CompoundTag)null);
+	            eye.finalizeSpawn(serverlevel, Abyssologer.this.level().getCurrentDifficultyAt(blockpos), MobSpawnType.MOB_SUMMONED, (SpawnGroupData)null);
 	            eye.setOwner(Abyssologer.this);
 	            //eye.setBoundOrigin(blockpos);
 	            eye.setLimitedLife(20 * (30 + Abyssologer.this.random.nextInt(90)));
@@ -220,7 +232,7 @@ public class Abyssologer extends SpellcasterIllager{
 	            BlockPos blockpos = Abyssologer.this.blockPosition().offset(-2 + Abyssologer.this.random.nextInt(5), 1, -2 + Abyssologer.this.random.nextInt(5));
 	            SpectralSkeleton skeleton = EntityInit.SPECTRAL_SKELETON.get().create(Abyssologer.this.level());
 	            skeleton.moveTo(blockpos, 0.0F, 0.0F);
-	            skeleton.finalizeSpawn(serverlevel, Abyssologer.this.level().getCurrentDifficultyAt(blockpos), MobSpawnType.MOB_SUMMONED, (SpawnGroupData)null, (CompoundTag)null);
+	            skeleton.finalizeSpawn(serverlevel, Abyssologer.this.level().getCurrentDifficultyAt(blockpos), MobSpawnType.MOB_SUMMONED, (SpawnGroupData)null);
 	            skeleton.setOwner(Abyssologer.this);
 	            //eye.setBoundOrigin(blockpos);
 	            skeleton.setLimitedLife(20 * (30 + Abyssologer.this.random.nextInt(90)));

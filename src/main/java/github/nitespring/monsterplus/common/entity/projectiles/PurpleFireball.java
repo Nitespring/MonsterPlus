@@ -32,7 +32,8 @@ public class PurpleFireball extends AbstractHurtingProjectile implements ItemSup
 
 	public PurpleFireball(EntityType<? extends AbstractHurtingProjectile> p_36817_, double p_36818_, double p_36819_,
 			double p_36820_, double p_36821_, double p_36822_, double p_36823_, Level p_36824_, @Nullable LivingEntity ownerIn, float damageIn) {
-		super(p_36817_, p_36818_, p_36819_, p_36820_, p_36821_, p_36822_, p_36823_, p_36824_);
+		super(p_36817_, p_36818_, p_36819_, p_36820_ , p_36824_);
+		this.setDeltaMovement(p_36821_, p_36822_, p_36823_);
 		this.BaseDamage = damageIn;
 		this.setOwner(ownerIn);
 	}

@@ -20,7 +20,7 @@ import net.minecraft.resources.ResourceLocation;
 public class OvergrownSkeletonEmissiveLayer<T extends OvergrownSkeleton> extends RenderLayer<T, OvergrownSkeletonModel<T>> {
 	
 
-	private static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation(MonsterPlus.MODID, "textures/entities/overgrown_skeleton_emissive.png");
+	private static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/entities/overgrown_skeleton_emissive.png");
 
 	   private final OvergrownSkeletonModel<T> model;
 	   
@@ -45,7 +45,7 @@ public class OvergrownSkeletonEmissiveLayer<T extends OvergrownSkeleton> extends
 		         this.getParentModel().copyPropertiesTo(this.model);
 		         this.model.prepareMobModel(entity, f1, f2, f3);
 		         this.model.setupAnim(entity, f1, f2, f4, f5, f6);
-		         this.model.renderToBuffer(stack, vertexconsumer, 200, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), 1.0F, 1.0F, 1.0F, 1.0F);
+		         this.model.renderToBuffer(stack, vertexconsumer, 200, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), -1);
 		       
 		      }
 		   

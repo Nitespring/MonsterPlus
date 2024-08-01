@@ -29,6 +29,7 @@ import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
 public class MotherLavaSquid extends LavaSquid{
 
@@ -161,7 +162,8 @@ public class MotherLavaSquid extends LavaSquid{
 	            	   if(rng >=8 && this.attackStep==1) {
 	            		   //Vec3 aim = this.mob.getLookAngle();
 	            		   
-	            		   LargeFireball smallfireball = new LargeFireball(this.mob.level(), this.mob, d1/d0, d2/d0, d3/d0, 2);
+	            		   LargeFireball smallfireball = new LargeFireball(this.mob.level(), this.mob,new Vec3(d1/d0, d2/d0, d3/d0), 2);
+						   smallfireball.setDeltaMovement(d1/d0, d2/d0, d3/d0);
 	                        
 	                        smallfireball.setPos(this.mob.getX()+ 3*d1/d0, this.mob.getY(0.5) + 3*d2/d0, this.mob.getZ() + 3*d3/d0);
 	                        
@@ -200,8 +202,8 @@ public class MotherLavaSquid extends LavaSquid{
 	                    	 
 	                    	 double d = Math.sqrt((livingentity.getX()-x)*(livingentity.getX()-x)+(livingentity.getY(0.5)-y)*(livingentity.getY(0.5)-y)+(livingentity.getZ()-z)*(livingentity.getZ()-z));
 	                    	 
-	                        SmallFireball smallfireball = new SmallFireball(this.mob.level(), this.mob, (livingentity.getX()-x)/d, (livingentity.getY(0.5)-y)/d, (livingentity.getZ()-z)/d);
-	                        
+	                        SmallFireball smallfireball = new SmallFireball(this.mob.level(), this.mob,new Vec3((livingentity.getX()-x)/d, (livingentity.getY(0.5)-y)/d, (livingentity.getZ()-z)));
+	                        smallfireball.setDeltaMovement(new Vec3((livingentity.getX()-x)/d, (livingentity.getY(0.5)-y)/d, (livingentity.getZ()-z)));
 	                        smallfireball.setPos(x, y, z);
 	                        
 	                        this.mob.level().addFreshEntity(smallfireball);

@@ -19,7 +19,7 @@ import net.minecraft.world.entity.Entity;
 
 public class SpikeCountdownRenderer<T extends Entity> extends EntityRenderer<T>{
 
-	public static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation(MonsterPlus.MODID, "textures/entities/fireball_purple.png");
+	public static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/entities/fireball_purple.png");
 	 private final SquareTextureEntityModel<T> model;
 	
 	
@@ -37,7 +37,7 @@ public class SpikeCountdownRenderer<T extends Entity> extends EntityRenderer<T>{
 	         p_114531_.mulPose(Axis.XP.rotationDegrees(90));
 	        
 	         VertexConsumer vertexconsumer = p_114532_.getBuffer(RenderType.entityTranslucent(TEXTURE_LOCATION));
-	         this.model.renderToBuffer(p_114531_, vertexconsumer, p_114533_, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+	         this.model.renderToBuffer(p_114531_, vertexconsumer, p_114533_, OverlayTexture.NO_OVERLAY, -1);
 	         p_114531_.popPose();
 	         super.render(p_114528_, p_114529_, p_114530_, p_114531_, p_114532_, p_114533_);
 	      

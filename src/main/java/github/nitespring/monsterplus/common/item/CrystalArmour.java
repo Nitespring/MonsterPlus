@@ -10,7 +10,8 @@ import java.util.function.Consumer;
 
 import javax.swing.text.JTextComponent;
 
-import org.antlr.v4.runtime.misc.NotNull;
+import net.minecraft.core.Holder;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -46,10 +47,10 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 
 public class CrystalArmour extends ArmorItem{
 
-	public static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation(MonsterPlus.MODID, "textures/armour/crystal_layer_1.png");
+	public static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/armour/crystal_layer_1.png");
 	
-	public CrystalArmour(ArmorMaterial p_40386_, Type p_40387_, Properties p_40388_) {
-		super(p_40386_, p_40387_, p_40388_);
+	public CrystalArmour(Holder<ArmorMaterial> material, Type type, Properties properties) {
+		super(material, type, properties.stacksTo(1).rarity(Rarity.EPIC));
 	}
 	
 	
@@ -59,9 +60,8 @@ public class CrystalArmour extends ArmorItem{
 	
 	
 	@Override
-	public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-		return slot == EquipmentSlot.LEGS ? new String(MonsterPlus.MODID + ":textures/armour/crystal_layer_2.png") : new String(MonsterPlus.MODID + ":textures/armour/crystal_layer_1.png");
-		//return new String(MonsterPlus.MODID + ":textures/armour/crystal_armour_layer_1.png");
+	public @Nullable ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
+		return slot == EquipmentSlot.LEGS ? ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID,"textures/armour/crystal_layer_2.png") : ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID , "textures/armour/crystal_layer_1.png");
 	}
 	
 	
@@ -72,17 +72,13 @@ public class CrystalArmour extends ArmorItem{
 	
 	@OnlyIn(Dist.CLIENT)
 	@Override
-	public void appendHoverText(ItemStack p_41421_, Level p_41422_, List<Component> tooltip, TooltipFlag p_41424_) {
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
 		
 		String string = "\u00A77\u00A7o+15% Protection from Magic Damage";
 		tooltip.add(Component.literal(string));
 	}
 	
-	@Override
-	public Rarity getRarity(ItemStack p_41461_) {
-		
-		return Rarity.EPIC;
-	}
+
 	
 	
 	
@@ -111,17 +107,6 @@ public class CrystalArmour extends ArmorItem{
 		
 		
 		
-		
-		
-		/*
-		@Override
-		public @org.jetbrains.annotations.NotNull Model getGenericArmorModel(LivingEntity livingEntity,
-				ItemStack itemStack, EquipmentSlot slot, HumanoidModel<?> original) {
-			EntityModelSet models = Minecraft.getInstance().getEntityModels();
-			ModelPart root = models.bakeLayer(slot == EquipmentSlot.LEGS ? ModelLayers.PLAYER_INNER_ARMOR : ClientListener.CRYSTAL_ARMOUR_MAIN_LAYER);
-			return new CrystalArmourModelNew(root);
-		}
-		*/
 		
 	}
 	

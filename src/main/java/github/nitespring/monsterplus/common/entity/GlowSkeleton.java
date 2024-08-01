@@ -30,6 +30,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import org.jetbrains.annotations.Nullable;
 
 public class GlowSkeleton extends AbstractSkeleton{
 
@@ -37,7 +38,7 @@ public class GlowSkeleton extends AbstractSkeleton{
 	//Skeleton
 	//WitherSkeleton
 	//Stray
-	
+
 	private static final EntityDataAccessor<Integer> DATA_BRIGHT_TICKS_REMAINING = SynchedEntityData.defineId(GlowSquid.class, EntityDataSerializers.INT);
 	
 	
@@ -45,12 +46,17 @@ public class GlowSkeleton extends AbstractSkeleton{
 	public GlowSkeleton(EntityType<? extends GlowSkeleton> p_33570_, Level p_33571_) {
 		super(p_33570_, p_33571_);
 	}
-	
-	protected void defineSynchedData() {
-	      super.defineSynchedData();
-	      this.entityData.define(DATA_BRIGHT_TICKS_REMAINING, 0);
+
+
+	@Override
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+	      super.defineSynchedData(builder);
+	      this.entityData.set(DATA_BRIGHT_TICKS_REMAINING, 0);
 	   }
+
 	
+	
+
 	public void aiStep() {
 	      super.aiStep();
 	      int i = this.getBrightTicksRemaining();
@@ -104,15 +110,17 @@ public class GlowSkeleton extends AbstractSkeleton{
 	
 	
 	@Override
-	protected AbstractArrow getArrow(ItemStack p_33846_, float p_33847_) {
-	      AbstractArrow abstractarrow = super.getArrow(p_33846_, p_33847_);
+	protected AbstractArrow getArrow(ItemStack p_33846_, float p_33847_,@Nullable ItemStack p_343583_) {
+	      AbstractArrow abstractarrow = super.getArrow(p_33846_, p_33847_,p_343583_);
 	      if (abstractarrow instanceof Arrow) {
 	         ((Arrow)abstractarrow).addEffect(new MobEffectInstance(MobEffects.GLOWING, 600));
 	      }
 
 	      return abstractarrow;
 	   }
-	
+
+
+
 	@Override
 	public boolean doHurtTarget(Entity p_34169_) {
 	      if (!super.doHurtTarget(p_34169_)) {

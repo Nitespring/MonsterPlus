@@ -16,7 +16,7 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
 
 public class CrystalZombieCrystalLayer<T extends CrystalZombie> extends RenderLayer<T, CrystalZombieModel<T>> {
-	private static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation(MonsterPlus.MODID, "textures/entities/crystal_zombie_crystals.png");
+	private static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/entities/crystal_zombie_crystals.png");
 
 	   private final CrystalZombieModel<T> model;
 
@@ -40,7 +40,7 @@ public class CrystalZombieCrystalLayer<T extends CrystalZombie> extends RenderLa
 		         this.getParentModel().copyPropertiesTo(this.model);
 		         this.model.prepareMobModel(entity, f1, f2, f3);
 		         this.model.setupAnim(entity, f1, f2, f4, f5, f6);
-		         this.model.renderToBuffer(stack, vertexconsumer, 255, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), 1.0F, 1.0F, 1.0F, 1.0F);
+		         this.model.renderToBuffer(stack, vertexconsumer, 255, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), -1);
 		       
 		      }
 		   

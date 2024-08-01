@@ -11,7 +11,7 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 public class CrystalArrowRenderer extends ArrowRenderer<CrystalArrow>{
 
 	
-	private static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation(MonsterPlus.MODID, "textures/entities/crystal_arrow.png");
+	private static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/entities/crystal_arrow.png");
 
 	
 	public CrystalArrowRenderer(Context p_173917_) {

@@ -26,7 +26,7 @@ public class GlowSkeletonModel<T extends GlowSkeleton> extends SkeletonModel<T> 
 	//WitherSkeletonRenderer
 	//GlowSquid
 	
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(MonsterPlus.MODID, "glow_skeleton"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "glow_skeleton"), "main");
 	
 	   //public final ModelPart inside;
 	   //public final ModelPart brain;

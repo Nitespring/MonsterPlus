@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
 
 public class OvergrownSkeletonRenderer<T extends OvergrownSkeleton> extends HumanoidMobRenderer<T, OvergrownSkeletonModel<T>> {
 
-	private static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation(MonsterPlus.MODID, "textures/entities/overgrown_skeleton_new.png");
+	private static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/entities/overgrown_skeleton_new.png");
 	
 	
 	public OvergrownSkeletonRenderer(EntityRendererProvider.Context p_174169_) {

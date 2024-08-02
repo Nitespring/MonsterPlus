@@ -42,7 +42,8 @@ public class CrystalClumpItem extends Item{
 		clump.setPos(new Vec3(pos.x + aim.x*0.5f,pos.y + 1.75 + aim.y*0.5f,pos.z + aim.z*0.5f));
 		
 		//clump.shootFromRotation(playerIn, playerIn.getXRot(), playerIn.getYRot(), 0, 0.8f, 1.0f);
-		clump.setDeltaMovement(aim.normalize().scale(2.5f));
+		clump.setDeltaMovement(aim.add(0,0.25f*aim.horizontalDistance(),0).normalize().scale(0.5f));
+		clump.accelerationPower=0.5f;
 		worldIn.addFreshEntity(clump);
 		
 		if(!playerIn.isCreative()) {

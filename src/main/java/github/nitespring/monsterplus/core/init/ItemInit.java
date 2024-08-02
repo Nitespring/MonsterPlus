@@ -77,29 +77,22 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
 
 	public static final DeferredHolder<Item,Item> CRYSTAL_SWORD = ITEMS.register("crystal_sword", 
-			() -> new CrystalSword(CustomItemTiers.CRYSTAL, new Item.Properties()
-					));
+			() -> new CrystalSword(CustomItemTiers.CRYSTAL, new Item.Properties()));
 	
 	public static final DeferredHolder<Item,Item> DARKSTAR = ITEMS.register("darkstar", 
-			() -> new Darkstar(CustomItemTiers.CRYSTAL, new Item.Properties()
-					));
+			() -> new Darkstar(CustomItemTiers.CRYSTAL, new Item.Properties()));
 	public static final DeferredHolder<Item,Item> GNAWING_JAW = ITEMS.register("gnawing_jaw", 
-			() -> new GnawingJaw(CustomItemTiers.CRYSTAL, new Item.Properties()
-					));
+			() -> new GnawingJaw(CustomItemTiers.CRYSTAL, new Item.Properties()));
 	
 	
 	public static final DeferredHolder<Item,Item> CRYSTAL_HELMET = ITEMS.register("crystal_helmet", 
-			() -> new CrystalArmour(CustomArmourMaterials.CRYSTAL, ArmorItem.Type.HELMET, new Item.Properties()
-					));
+			() -> new CrystalArmour(CustomArmourMaterials.CRYSTAL, ArmorItem.Type.HELMET, new Item.Properties()));
 	public static final DeferredHolder<Item,Item> CRYSTAL_CHESTPLATE = ITEMS.register("crystal_chestplate", 
-			() -> new CrystalArmour(CustomArmourMaterials.CRYSTAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()
-					));
+			() -> new CrystalArmour(CustomArmourMaterials.CRYSTAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
 	public static final DeferredHolder<Item,Item> CRYSTAL_LEGGINGS = ITEMS.register("crystal_leggings", 
-			() -> new CrystalArmour(CustomArmourMaterials.CRYSTAL, ArmorItem.Type.LEGGINGS, new Item.Properties()
-					));
+			() -> new CrystalArmour(CustomArmourMaterials.CRYSTAL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
 	public static final DeferredHolder<Item,Item> CRYSTAL_BOOTS = ITEMS.register("crystal_boots", 
-			() -> new CrystalArmour(CustomArmourMaterials.CRYSTAL, ArmorItem.Type.BOOTS, new Item.Properties()
-					));
+			() -> new CrystalArmour(CustomArmourMaterials.CRYSTAL, ArmorItem.Type.BOOTS, new Item.Properties()));
 	
 	
 	

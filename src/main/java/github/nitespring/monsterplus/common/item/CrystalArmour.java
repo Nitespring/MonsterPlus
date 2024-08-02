@@ -51,15 +51,15 @@ public class CrystalArmour extends ArmorItem{
 	public static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/armour/crystal_layer_1.png");
 	
 	public CrystalArmour(Holder<ArmorMaterial> material, Type type, Properties properties) {
-		super(material, type, properties.stacksTo(1).rarity(Rarity.EPIC));
+		super(material, type, properties.stacksTo(1).rarity(Rarity.EPIC).durability(512));
 	}
-	
-	
-	
-	
-	
-	
-	
+
+
+	@Override
+	public boolean isDamageable(ItemStack stack) {
+		return true;
+	}
+
 	@Override
 	public @Nullable ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
 		return slot == EquipmentSlot.LEGS ? ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID,"textures/armour/crystal_layer_2.png") : ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID , "textures/armour/crystal_layer_1.png");

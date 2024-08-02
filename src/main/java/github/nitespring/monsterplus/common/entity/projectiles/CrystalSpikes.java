@@ -19,7 +19,9 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public class CrystalSpikes extends Entity{
 	
@@ -177,20 +179,30 @@ public class CrystalSpikes extends Entity{
 
 	   }
 	 
-	  private void dealDamageTo(LivingEntity p_36945_) {
+	  private void dealDamageTo(LivingEntity e) {
 	      LivingEntity livingentity = this.getOwner();
-	      if (p_36945_.isAlive() && !p_36945_.isInvulnerable() && p_36945_ != livingentity) {
+
+	      if (e.isAlive() && !e.isInvulnerable() && e != livingentity) {
 	         if (livingentity == null) {
-	            p_36945_.hurt(this.level().damageSources().magic(), 6.0F);
+	            e.hurt(this.level().damageSources().magic(), 6.0F);
+				e.knockback(0.1f,0.01,0.01);
+				 Vec3 mov =e.getDeltaMovement();
+				 e.setDeltaMovement(mov.x,Math.max(mov.y+0.5,-Math.min(mov.y,0)+0.5),mov.z);
 	         } else {
-	            if (livingentity.isAlliedTo(p_36945_)) {
+				if (livingentity.isAlliedTo(e)) {
 	               return;
 	            }
-
-	            p_36945_.hurt(this.level().damageSources().indirectMagic(this, livingentity), damage);
+				e.knockback(0.1f,0.01,0.01);
+				 Vec3 mov =e.getDeltaMovement();
+				 e.setDeltaMovement(mov.x,Math.max(mov.y+0.5,-Math.min(mov.y,0)+0.5),mov.z);
+	            e.hurt(this.level().damageSources().indirectMagic(this, livingentity), damage);
 	         }
 
-	      }
+	      }else if(livingentity==e&&e instanceof Player){
+			  e.knockback(0.1f,0,0);
+			  Vec3 mov =e.getDeltaMovement();
+			  e.setDeltaMovement(mov.x,Math.max(mov.y+0.5,-Math.min(mov.y,0)+0.5),mov.z);
+		  }
 	   }
        @Override
 	   public void handleEntityEvent(byte p_36935_) {

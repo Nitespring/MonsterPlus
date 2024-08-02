@@ -49,11 +49,11 @@ public class CrystalClump extends AbstractHurtingProjectile implements ItemSuppl
 	}
 	
 	
-@Override
-protected ParticleOptions getTrailParticle() {
-	
-	return ParticleTypes.PORTAL;
-}
+	@Override
+	protected ParticleOptions getTrailParticle() {
+
+		return ParticleTypes.PORTAL;
+	}
 	
 	
 	
@@ -69,10 +69,11 @@ protected ParticleOptions getTrailParticle() {
 	protected void onHitBlock(BlockHitResult p_37258_) {
 		super.onHitBlock(p_37258_);
 		this.createCrystals(this.getY()-0.5, true);
-		this.remove(RemovalReason.DISCARDED); 
+		this.remove(RemovalReason.DISCARDED);
 	}
 	
 	private void createCrystals(double y, boolean flag){
+		this.level().addFreshEntity(new CrystalSpikes(this.level(), damage, this.position().x ,  this.getY() -0.5 , this.position().z , this.yRotO, 0, (LivingEntity)this.getOwner()));
 		for(int k = 0; k<=9; k++) {
 			this.level().addFreshEntity(new CrystalSpikes(this.level(), damage, this.position().x + 4.5f*(new Random().nextFloat() - 0.5), /*blockpos.getY()*/ this.getY() -0.5 /*new Random().nextFloat() - 0.5*/, this.position().z + 4.5f*(new Random().nextFloat() - 0.5), this.yRotO+new Random().nextFloat(), new Random().nextInt(8), (LivingEntity)this.getOwner()));
 		}
@@ -89,7 +90,10 @@ protected ParticleOptions getTrailParticle() {
 	         this.xRotO = this.getXRot();
 	      }
 		livingTicks++;
-		this.setDeltaMovement(vec3.x()*0.94f, Math.max(vec3.y() - 0.02,-2f), vec3.z()*0.94f);
+		  if(livingTicks>=3) {
+			  this.setDeltaMovement(vec3.x(), Math.max(vec3.y() - 0.1, -2f), vec3.z());
+		  }
+		this.accelerationPower = accelerationPower*0.9f;
 		super.tick();
 		
 		

@@ -17,6 +17,7 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ColorRGBA;
 import net.minecraft.util.FastColor;
@@ -29,12 +30,15 @@ import java.util.function.Function;
 public class CrystalArmourModel extends HumanoidModel<LivingEntity>{
 
 	//HumanoidArmorLayer
-
+	private final ResourceLocation resource;
 	public CrystalArmourModel(ModelPart p_170677_) {
 		super(p_170677_, RenderType::entityTranslucent);
-		//this.renderType = RenderType::entityTranslucent;
+		this.resource = null;
 	}
-	
+	public CrystalArmourModel(ResourceLocation resource,ModelPart p_170677_) {
+		super(p_170677_, RenderType::entityTranslucent);
+		this.resource = resource;
+	}
 
 	
 	
@@ -244,19 +248,18 @@ public class CrystalArmourModel extends HumanoidModel<LivingEntity>{
 	      return meshdefinition; //LayerDefinition.create(meshdefinition, 64, 64);
 	}
 	
-	
+
 
 	@Override
 	public void renderToBuffer(PoseStack stack, VertexConsumer vertexconsumer, int p_102036_, int p_102037_,
 			int i) {
 		//ResourceLocation resource = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID , "textures/armour/crystal_layer_1.png");
-
-
-
-		//vertexconsumer = Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(RenderType.entityTranslucent(resource));
-
-		
-		super.renderToBuffer(stack, vertexconsumer, 200, p_102037_, FastColor.ARGB32.color(64,255,255,255));
+		if(resource != null) {
+			vertexconsumer = Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(RenderType.entityTranslucent(resource,false));
+			super.renderToBuffer(stack, vertexconsumer, 255, p_102037_, -1);
+		}else {
+			super.renderToBuffer(stack, vertexconsumer, 200, p_102037_, FastColor.ARGB32.color(64, 255, 255, 255));
+		}
 		//super.renderToBuffer(stack, vertexconsumer, 200, p_102037_, -1);
 	}
 	

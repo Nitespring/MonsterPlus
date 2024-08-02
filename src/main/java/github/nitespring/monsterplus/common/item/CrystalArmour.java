@@ -11,6 +11,7 @@ import java.util.function.Consumer;
 import javax.swing.text.JTextComponent;
 
 import net.minecraft.core.Holder;
+import net.minecraft.server.packs.resources.Resource;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -102,7 +103,8 @@ public class CrystalArmour extends ArmorItem{
 		public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel<?> model) {
 			EntityModelSet models = Minecraft.getInstance().getEntityModels();
 			ModelPart root = models.bakeLayer(slot == EquipmentSlot.LEGS ? ModelLayers.PLAYER_INNER_ARMOR : ClientListener.CRYSTAL_ARMOUR_MAIN_LAYER);
-			CrystalArmourModel aModel = new CrystalArmourModel(root);
+			ResourceLocation resource = slot == EquipmentSlot.LEGS ? ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID,"textures/armour/crystal_layer_2.png") : ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID , "textures/armour/crystal_layer_1.png");
+			CrystalArmourModel aModel = new CrystalArmourModel(resource, root);
 			return aModel;
 		}
 		

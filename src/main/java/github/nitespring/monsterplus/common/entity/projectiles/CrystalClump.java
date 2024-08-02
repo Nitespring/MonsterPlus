@@ -79,7 +79,7 @@ protected ParticleOptions getTrailParticle() {
 	}	
 	@Override
 	public void tick() {
-		
+		super.tick();
 		Vec3 vec3 = this.getDeltaMovement();
 	      if (this.xRotO == 0.0F && this.yRotO == 0.0F) {
 	         double d0 = vec3.horizontalDistance();
@@ -89,8 +89,9 @@ protected ParticleOptions getTrailParticle() {
 	         this.xRotO = this.getXRot();
 	      }
 		livingTicks++;
-		this.setDeltaMovement(vec3.x()*0.94f, Math.max(vec3.y() - 0.02,-2f), vec3.z()*0.94f);
-		super.tick();
+		  if(livingTicks>=3) {
+			  this.setDeltaMovement(vec3.x() * 0.9f, Math.max(Math.min(vec3.y() * 0.9f - 0.025, vec3.y() * 1.15f) - Math.max(vec3.y, 0.1) * 0.00005 * (livingTicks-3) * (livingTicks-3) * Math.sqrt(vec3.x * vec3.x + vec3.z * vec3.z) - 0.01, -1.25f * (1f + 0.5f * Math.sqrt(vec3.x * vec3.x + vec3.z * vec3.z))), vec3.z() * 0.9f);
+		  }
 		
 		
 	}

@@ -92,16 +92,17 @@ public class CrystalArmour extends ArmorItem{
 	private static final class ArmorRender implements IClientItemExtensions {
 		private static final ArmorRender INSTANCE = new ArmorRender();
 
-		
-		
-		
-		
-		
+
+
+
+
+
 		@Override
 		public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel<?> model) {
 			EntityModelSet models = Minecraft.getInstance().getEntityModels();
 			ModelPart root = models.bakeLayer(slot == EquipmentSlot.LEGS ? ModelLayers.PLAYER_INNER_ARMOR : ClientListener.CRYSTAL_ARMOUR_MAIN_LAYER);
-			CrystalArmourModel aModel = new CrystalArmourModel(root);
+			ResourceLocation resource = slot == EquipmentSlot.LEGS ? ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID,"textures/armour/crystal_layer_2.png") : ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID , "textures/armour/crystal_layer_1.png");
+			CrystalArmourModel aModel = new CrystalArmourModel(resource, root);
 			return aModel;
 		}
 		

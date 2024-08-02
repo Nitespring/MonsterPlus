@@ -42,11 +42,12 @@ public class CrystalClumpItem extends Item{
 		clump.setPos(new Vec3(pos.x + aim.x*0.5f,pos.y + 1.75 + aim.y*0.5f,pos.z + aim.z*0.5f));
 		
 		//clump.shootFromRotation(playerIn, playerIn.getXRot(), playerIn.getYRot(), 0, 0.8f, 1.0f);
-		clump.setDeltaMovement(aim.normalize().scale(2.5f));
+		clump.setDeltaMovement(new Vec3(aim.x*(1-Math.max(-0.15,Math.min(aim.y,0))),Math.max(aim.y,aim.y*0.5),aim.z*(1-Math.max(-0.15,Math.min(aim.y,0)))).normalize().scale(0.15f).add(0,0.025f*Math.sqrt(aim.x*aim.x+aim.z*aim.z),0).normalize().scale(0.1f));
+		clump.accelerationPower=0.25f;
 		worldIn.addFreshEntity(clump);
 		
 		if(!playerIn.isCreative()) {
-		playerIn.getItemInHand(handIn).shrink(1);
+			playerIn.getItemInHand(handIn).shrink(1);
 		}
 		playerIn.awardStat(Stats.ITEM_USED.get(this));
 		playerIn.getCooldowns().addCooldown(ItemInit.CRYSTAL_CLUMP.get(), 12);;

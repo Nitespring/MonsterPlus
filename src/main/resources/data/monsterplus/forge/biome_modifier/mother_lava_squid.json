@@ -9,14 +9,15 @@
         "type": "forge:not",
         "value":
         [
-          "minecraft:soul_sand_valley"
+          "minecraft:soul_sand_valley",
+          "minecraft:warped_forest"
         ]
       }
     ]
   },
   "spawners": {
     "type": "monsterplus:mother_lava_squid",
-    "weight": 5,
+    "weight": 15,
     "minCount": 1,
     "maxCount": 2
   }

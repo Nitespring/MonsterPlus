@@ -63,7 +63,10 @@ public class ItemInit {
 			() -> new SpawnEggItem(EntityInit.OVERGROWN_SKELETON.get(), 6895154, 3130417, new Item.Properties()
 					));
 	public static final DeferredHolder<Item,Item> DEMON_EYE_SPAWN_EGG = ITEMS.register("demon_eye_spawn_egg",
-			() -> new SpawnEggItem(EntityInit.DEMON_EYE.get(), 14540500, 9647674, new Item.Properties()
+			() -> new SpawnEggItem(EntityInit.DEMON_EYE.get(), 12700073, 9647674, new Item.Properties()
+			));
+	public static final DeferredHolder<Item,Item> ENDER_EYE_SPAWN_EGG = ITEMS.register("ender_eye_spawn_egg",
+			() -> new SpawnEggItem(EntityInit.ENDER_EYE.get(), 1717060, 6989398, new Item.Properties()
 			));
 	
 	

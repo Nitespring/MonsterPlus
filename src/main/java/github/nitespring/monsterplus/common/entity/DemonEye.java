@@ -30,6 +30,7 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -96,7 +97,7 @@ public class DemonEye extends FlyingMob implements Enemy{
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.0D)
 				.add(Attributes.FOLLOW_RANGE, 30);
 
-	  }
+	}
 
 
 	@Override
@@ -134,7 +135,7 @@ public class DemonEye extends FlyingMob implements Enemy{
 
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_33126_, DifficultyInstance p_33127_, MobSpawnType p_33128_, @Nullable SpawnGroupData p_33129_) {
-		this.anchorPoint = this.blockPosition().above(5);
+		this.anchorPoint = this.blockPosition().above(10);
 		randomizeEyeColour();
 		randomizeEyeBallSize();
 		randomizeSize();
@@ -249,10 +250,15 @@ public class DemonEye extends FlyingMob implements Enemy{
 		this.goalSelector.addGoal(1, new DemonEye.EyeAttackStrategyGoal());
 		this.goalSelector.addGoal(2, new DemonEye.EyeSweepAttackGoal());
 		this.goalSelector.addGoal(3, new DemonEye.EyeCircleAroundAnchorGoal());
-		this.targetSelector.addGoal(1, new DemonEye.EyeAttackPlayerTargetGoal());
+
 		//this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
 		//this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
 		this.targetSelector.addGoal(2, new DemonEye.CopyOwnerTargetGoal(this));
+		registerTargets();
+	}
+	public void registerTargets(){
+		this.targetSelector.addGoal(1, new DemonEye.EyeAttackPlayerTargetGoal());
+		this.targetSelector.addGoal(2, new DemonEye.HurtByTargetGoal(this));
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
 	}
@@ -385,6 +391,38 @@ public class DemonEye extends FlyingMob implements Enemy{
 
 					for(Player player : list) {
 						if (DemonEye.this.canAttack(player, TargetingConditions.DEFAULT)) {
+							DemonEye.this.setTarget(player);
+							return true;
+						}
+					}
+				}
+
+				return false;
+			}
+		}
+
+		public boolean canContinueToUse() {
+			LivingEntity livingentity = DemonEye.this.getTarget();
+			return livingentity != null ? DemonEye.this.canAttack(livingentity, TargetingConditions.DEFAULT) : false;
+		}
+	}
+
+	class EyeAttackLastHurtByPlayerTargetGoal extends Goal {
+		private final TargetingConditions attackTargeting = TargetingConditions.forCombat().range(64.0D);
+		private int nextScanTick = reducedTickDelay(20);
+
+		public boolean canUse() {
+			if (this.nextScanTick > 0) {
+				--this.nextScanTick;
+				return false;
+			} else {
+				this.nextScanTick = reducedTickDelay(60);
+				List<Player> list = DemonEye.this.level().getNearbyPlayers(this.attackTargeting, DemonEye.this, DemonEye.this.getBoundingBox().inflate(16.0D, 64.0D, 16.0D));
+				if (!list.isEmpty()) {
+					list.sort(Comparator.<Entity, Double>comparing(Entity::getY).reversed());
+
+					for(Player player : list) {
+						if (DemonEye.this.getLastAttacker()==player&&DemonEye.this.canAttack(player, TargetingConditions.DEFAULT)) {
 							DemonEye.this.setTarget(player);
 							return true;
 						}
@@ -602,5 +640,50 @@ public class DemonEye extends FlyingMob implements Enemy{
 			DemonEye.this.setTarget(DemonEye.this.owner.getTarget());
 			super.start();
 		}
+	}
+	public class HurtByTargetGoal extends TargetGoal {
+		private static final TargetingConditions HURT_BY_TARGETING = TargetingConditions.forCombat().ignoreLineOfSight().ignoreInvisibilityTesting();
+
+		private int timestamp;
+		private final Class<?>[] toIgnoreDamage;
+
+		public HurtByTargetGoal(DemonEye pMob, Class<?>... pToIgnoreDamage) {
+			super(pMob, true);
+			this.toIgnoreDamage = pToIgnoreDamage;
+			this.setFlags(EnumSet.of(Goal.Flag.TARGET));
+		}
+
+		@Override
+		public boolean canUse() {
+			int i = this.mob.getLastHurtByMobTimestamp();
+			LivingEntity livingentity = this.mob.getLastHurtByMob();
+			if (i != this.timestamp && livingentity != null) {
+				if (livingentity.getType() == EntityType.PLAYER && this.mob.level().getGameRules().getBoolean(GameRules.RULE_UNIVERSAL_ANGER)) {
+					return false;
+				} else {
+					for (Class<?> oclass : this.toIgnoreDamage) {
+						if (oclass.isAssignableFrom(livingentity.getClass())) {
+							return false;
+						}
+					}
+
+					return this.canAttack(livingentity, HURT_BY_TARGETING);
+				}
+			} else {
+				return false;
+			}
+		}
+
+
+		@Override
+		public void start() {
+			this.mob.setTarget(this.mob.getLastHurtByMob());
+			this.targetMob = this.mob.getTarget();
+			this.timestamp = this.mob.getLastHurtByMobTimestamp();
+			this.unseenMemoryTicks = 300;
+
+			super.start();
+		}
+
 	}
 }

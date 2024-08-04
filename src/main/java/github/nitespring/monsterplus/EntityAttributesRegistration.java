@@ -29,6 +29,7 @@ public class EntityAttributesRegistration {
 		event.put(EntityInit.CRYSTAL_ZOMBIE.get(), CrystalZombie.createAttributes().build());
 		event.put(EntityInit.OVERGROWN_SKELETON.get(), OvergrownSkeleton.setCustomAttributes().build());
 		event.put(EntityInit.DEMON_EYE.get(), DemonEye.setCustomAttributes().build());
+		event.put(EntityInit.ENDER_EYE.get(), EnderEye.setCustomAttributes().build());
 		
 	
 	}

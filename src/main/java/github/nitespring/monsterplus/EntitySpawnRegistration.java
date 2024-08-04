@@ -60,6 +60,11 @@ public class EntitySpawnRegistration {
 				Types.MOTION_BLOCKING,
 				DemonEye::checkDemonEyeSpawnRules,
 				RegisterSpawnPlacementsEvent.Operation.REPLACE);
+		event.register(EntityInit.ENDER_EYE.get(),
+				SpawnPlacementTypes.NO_RESTRICTIONS,
+				Types.MOTION_BLOCKING,
+				EnderEye::checkEnderEyeSpawnRules,
+				RegisterSpawnPlacementsEvent.Operation.REPLACE);
     }
 	
 	

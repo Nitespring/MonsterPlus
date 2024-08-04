@@ -15,6 +15,7 @@ import github.nitespring.monsterplus.client.render.entities.mobs.crystalzombie.C
 import github.nitespring.monsterplus.client.render.entities.mobs.crystalzombie.CrystalZombieRenderer;
 import github.nitespring.monsterplus.client.render.entities.mobs.eyeball.DemonEyeModel;
 import github.nitespring.monsterplus.client.render.entities.mobs.eyeball.DemonEyeRenderer;
+import github.nitespring.monsterplus.client.render.entities.mobs.eyeball.EnderEyeRenderer;
 import github.nitespring.monsterplus.client.render.entities.mobs.glowskeleton.GlowSkeletonModel;
 import github.nitespring.monsterplus.client.render.entities.mobs.glowskeleton.GlowSkeletonRenderer;
 import github.nitespring.monsterplus.client.render.entities.mobs.lavasquid.LavaSquidRenderer;
@@ -92,6 +93,7 @@ public class ClientListener {
 		event.registerEntityRenderer(EntityInit.OVERGROWN_SKELETON.get(), OvergrownSkeletonRenderer::new);
 		event.registerEntityRenderer(EntityInit.BLOODY_SLASH.get(), BloodySlashRenderer::new);
 		event.registerEntityRenderer(EntityInit.DEMON_EYE.get(), DemonEyeRenderer::new);
+		event.registerEntityRenderer(EntityInit.ENDER_EYE.get(), EnderEyeRenderer::new);
 
 	}
 	

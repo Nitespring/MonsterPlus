@@ -8,6 +8,7 @@
 "entity.monsterplus.mother_lava_squid" : "Mother Lava Squid",
 "entity.monsterplus.crystal_zombie" : "Crystalian",
 "entity.monsterplus.overgrown_skeleton" : "Overgrown Skeleton",
+  "entity.monsterplus.demon_eye" : "Demon Eye",
 
 "entity.monsterplus.crystal_spikes" : "Crystal Spikes",
 "entity.monsterplus.purple_fireball" : "Abyssal Fireball",
@@ -34,6 +35,7 @@
 "item.monsterplus.lava_squid_spawn_egg" : "Lava Squid Spawn Egg",
 "item.monsterplus.mother_lava_squid_spawn_egg" : "Mother Lava Squid Spawn Egg",
 "item.monsterplus.crystal_zombie_spawn_egg" : "Crystalian Spawn Egg",
-"item.monsterplus.overgrown_skeleton_spawn_egg" : "Overgrown Skeleton Spawn Egg"
+"item.monsterplus.overgrown_skeleton_spawn_egg" : "Overgrown Skeleton Spawn Egg",
+  "item.monsterplus.demon_eye_spawn_egg" : "Demon Eye Spawn Egg"
 
 }

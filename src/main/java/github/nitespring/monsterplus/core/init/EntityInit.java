@@ -2,15 +2,7 @@ package github.nitespring.monsterplus.core.init;
 
 
 import github.nitespring.monsterplus.MonsterPlus;
-import github.nitespring.monsterplus.common.entity.Abyssologer;
-import github.nitespring.monsterplus.common.entity.CrystalZombie;
-import github.nitespring.monsterplus.common.entity.Eye;
-import github.nitespring.monsterplus.common.entity.GlowSkeleton;
-import github.nitespring.monsterplus.common.entity.LavaSquid;
-import github.nitespring.monsterplus.common.entity.MotherLavaSquid;
-import github.nitespring.monsterplus.common.entity.OvergrownSkeleton;
-import github.nitespring.monsterplus.common.entity.SpectralSkeleton;
-import github.nitespring.monsterplus.common.entity.SwampZombie;
+import github.nitespring.monsterplus.common.entity.*;
 import github.nitespring.monsterplus.common.entity.projectiles.BloodySlashEntity;
 import github.nitespring.monsterplus.common.entity.projectiles.CrystalArrow;
 import github.nitespring.monsterplus.common.entity.projectiles.CrystalClump;
@@ -57,7 +49,7 @@ public class EntityInit {
 	public static final DeferredHolder<EntityType<?>,EntityType<Eye>> EYE = ENTITIES.register("opalescent_eye",
 			() -> EntityType.Builder.<Eye>of(Eye::new, MobCategory.MONSTER)
 			.sized(0.5F, 0.5F)
-			.build("lava_squid"));
+			.build("opalescent_eye"));
 	
 	public static final DeferredHolder<EntityType<?>,EntityType<Abyssologer>> ABYSSOLOGER = ENTITIES.register("abyssologer", 
             ()-> EntityType.Builder.<Abyssologer>of(Abyssologer::new,MobCategory.MONSTER)
@@ -78,7 +70,10 @@ public class EntityInit {
             ()-> EntityType.Builder.<OvergrownSkeleton>of(OvergrownSkeleton::new,MobCategory.MONSTER)
             .sized(0.6F, 1.99F)
 			.build("overgrown_skeleton"));
-	
+	public static final DeferredHolder<EntityType<?>,EntityType<DemonEye>> DEMON_EYE = ENTITIES.register("demon_eye",
+			() -> EntityType.Builder.<DemonEye>of(DemonEye::new, MobCategory.MONSTER)
+					.sized(0.75F, 0.75F)
+					.build("demon_eye"));
 	
 	
 	public static final DeferredHolder<EntityType<?>,EntityType<CrystalSpikes>> CRYSTAL_SPIKES = ENTITIES.register("crystal_spikes", 

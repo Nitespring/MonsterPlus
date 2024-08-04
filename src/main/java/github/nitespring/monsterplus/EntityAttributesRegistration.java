@@ -5,9 +5,11 @@ package github.nitespring.monsterplus;
 
 import github.nitespring.monsterplus.common.entity.*;
 import github.nitespring.monsterplus.core.init.EntityInit;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 
 
 @EventBusSubscriber(modid = MonsterPlus.MODID, bus = EventBusSubscriber.Bus.MOD)
@@ -30,4 +32,6 @@ public class EntityAttributesRegistration {
 		
 	
 	}
+
+
 }

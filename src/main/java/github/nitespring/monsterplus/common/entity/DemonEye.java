@@ -1,17 +1,20 @@
 package github.nitespring.monsterplus.common.entity;
 
+import github.nitespring.monsterplus.MonsterPlus;
 import github.nitespring.monsterplus.config.CommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.BodyRotationControl;
@@ -49,7 +52,13 @@ public class DemonEye extends FlyingMob implements Enemy{
    Mob owner;
 
 	private static final EntityDataAccessor<Integer> EYE_TYPE = SynchedEntityData.defineId(DemonEye.class, EntityDataSerializers.INT);
-
+	private static final EntityDataAccessor<Integer> ANIMATIONSTATE = SynchedEntityData.defineId(DemonEye.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Float> EYE_SCALE = SynchedEntityData.defineId(DemonEye.class, EntityDataSerializers.FLOAT);
+	private static final EntityDataAccessor<Float> SCALE = SynchedEntityData.defineId(DemonEye.class, EntityDataSerializers.FLOAT);
+	int animationTick;
+	public static final ResourceLocation ATTACK_DAMAGE_MODIFIER_TEETH = ResourceLocation.withDefaultNamespace("fanged_demon_eye_attack_damage_modifier");
+	public static final ResourceLocation HEALTH_MODIFIER_SIZE = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID,"large_demon_eye_max_health_modifier");
+	public static final ResourceLocation SPEED_MODIFIER_SIZE = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID,"small_demon_eye_movement_speed_modifier");
 	public DemonEye(EntityType<? extends DemonEye> p_21368_, Level p_21369_) {
 		super(p_21368_, p_21369_);
 		this.xpReward = 7;
@@ -59,6 +68,14 @@ public class DemonEye extends FlyingMob implements Enemy{
 
 	public int getEyeType(){return this.getEntityData().get(EYE_TYPE);}
 	public void setEyeType(int i){this.getEntityData().set(EYE_TYPE, i);}
+
+	public int getAnimationState(){return this.getEntityData().get(ANIMATIONSTATE);}
+	public void setAnimationState(int i){this.getEntityData().set(ANIMATIONSTATE, i);}
+	public float getEyeScale(){return this.getEntityData().get(EYE_SCALE);}
+	public void setEyeScale(float f){this.getEntityData().set(EYE_SCALE, f);}
+	public float getDimensionScale(){return this.getEntityData().get(SCALE);}
+	public void setDimensionScale(float f){this.getEntityData().set(SCALE, f);}
+
 
 	@Nullable
 	public Mob getOwner() {
@@ -81,10 +98,14 @@ public class DemonEye extends FlyingMob implements Enemy{
 
 	  }
 
+
 	@Override
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(EYE_TYPE, 0);
+		builder.define(ANIMATIONSTATE, 0);
+		builder.define(EYE_SCALE, 1.0f);
+		builder.define(SCALE, 1.0f);
 	}
 
 	@Override
@@ -94,6 +115,8 @@ public class DemonEye extends FlyingMob implements Enemy{
 			this.anchorPoint = new BlockPos(tag.getInt("AX"), tag.getInt("AY"), tag.getInt("AZ"));
 		}
 		this.setEyeType(tag.getInt("EyeType"));
+		this.setEyeScale(tag.getFloat("EyeScale"));
+		this.setDimensionScale(tag.getFloat("Scale"));
 
 	}
 
@@ -104,12 +127,22 @@ public class DemonEye extends FlyingMob implements Enemy{
 		tag.putInt("AY", this.anchorPoint.getY());
 		tag.putInt("AZ", this.anchorPoint.getZ());
 		tag.putInt("EyeType", this.getEyeType());
+		tag.putFloat("EyeScale", this.getEyeScale());
+		tag.putFloat("Scale", this.getDimensionScale());
 
 	}
 
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_33126_, DifficultyInstance p_33127_, MobSpawnType p_33128_, @Nullable SpawnGroupData p_33129_) {
 		this.anchorPoint = this.blockPosition().above(5);
+		randomizeEyeColour();
+		randomizeEyeBallSize();
+		randomizeSize();
+		//System.out.println(this.getAttributeValue(Attributes.MAX_HEALTH));
+		//System.out.println(this.getAttributeValue(Attributes.ATTACK_DAMAGE));
+		return super.finalizeSpawn(p_33126_, p_33127_, p_33128_, p_33129_);
+	}
+	public void randomizeEyeColour(){
 		Random rn = new Random();
 		int r = rn.nextInt(24) + 1;
 		switch(r){
@@ -127,27 +160,87 @@ public class DemonEye extends FlyingMob implements Enemy{
 				break;
 			case 14,15,16:
 				this.setEyeType(5);
+				this.getAttributes().getInstance(Attributes.ATTACK_DAMAGE).addPermanentModifier(
+						new AttributeModifier(ATTACK_DAMAGE_MODIFIER_TEETH,2.0f, AttributeModifier.Operation.ADD_VALUE)
+				);
 				break;
 			default:
 				this.setEyeType(0);
 				break;
 		}
-		return super.finalizeSpawn(p_33126_, p_33127_, p_33128_, p_33129_);
 	}
-	 @Override
+	public void randomizeEyeBallSize(){
+		Random rn = new Random();
+		setEyeScale(0.9f+0.35f*rn.nextFloat());
+	}
+	public void randomizeSize(){
+		Random rn = new Random();
+		int r = rn.nextInt(13);
+		switch(r){
+			case 1,2:
+				this.setDimensionScale(0.5f+0.25f*rn.nextFloat());
+				this.getAttributes().getInstance(Attributes.MOVEMENT_SPEED).addPermanentModifier(
+						new AttributeModifier(SPEED_MODIFIER_SIZE,0.02f, AttributeModifier.Operation.ADD_VALUE)
+				);
+				break;
+			case 3,4,5,6,7:
+				this.setDimensionScale(1.0f+0.25f*(2*rn.nextFloat()-1));
+				break;
+			case 8,9:
+				this.setDimensionScale(1.25f+0.25f*rn.nextFloat());
+				this.getAttributes().getInstance(Attributes.MAX_HEALTH).addPermanentModifier(
+						new AttributeModifier(HEALTH_MODIFIER_SIZE,4.0f, AttributeModifier.Operation.ADD_VALUE)
+				);
+				break;
+			case 10:
+				this.setDimensionScale(1.5f+0.5f*rn.nextFloat());
+				this.getAttributes().getInstance(Attributes.MAX_HEALTH).addPermanentModifier(
+						new AttributeModifier(HEALTH_MODIFIER_SIZE,8.0f, AttributeModifier.Operation.ADD_VALUE)
+				);
+				break;
+			default:
+				this.setDimensionScale(1.0f);
+				break;
+		}
+	}
+	@Override
 	public void tick() {
-		
 		super.tick();
+		Vec3 vec3 = this.getDeltaMovement();
+		if (this.xRotO == 0.0F && this.yRotO == 0.0F) {
+			double d0 = vec3.horizontalDistance();
+			this.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * (double)(180F / (float)Math.PI)));
+			this.setXRot((float)(Mth.atan2(vec3.y, d0) * (double)(180F / (float)Math.PI)));
+			this.yRotO = this.getYRot();
+			this.xRotO = this.getXRot();
+		}
+
 
 	}
+
 
 	@Override
 	public void aiStep() {
 		super.aiStep();
+		animationTick++;
 		boolean flag = this.isSunSensitive() && this.isSunBurnTick();
 		if (flag) {
 			this.igniteForSeconds(8.0F);
 		}
+		if(getEyeType()==5){
+			if(getAnimationState()==1){
+				if(animationTick>=4){
+					setAnimationState(0);
+					animationTick=0;
+				}
+			}else{
+				if(animationTick>=8){
+					setAnimationState(1);
+					animationTick=0;
+				}
+			}
+		}
+
 	}
 
 	@Override

@@ -19,6 +19,6 @@
     "type": "monsterplus:demon_eye",
     "weight": 50,
     "minCount": 1,
-    "maxCount": 5
+    "maxCount": 3
   }
 }

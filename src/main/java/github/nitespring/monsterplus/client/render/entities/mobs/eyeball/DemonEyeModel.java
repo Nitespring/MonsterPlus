@@ -5,6 +5,7 @@ package github.nitespring.monsterplus.client.render.entities.mobs.eyeball;// Mad
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import github.nitespring.monsterplus.common.entity.DemonEye;
 import net.minecraft.client.animation.definitions.WardenAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.PhantomModel;
@@ -14,12 +15,14 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.monster.warden.Warden;
 
-public class DemonEyeModel<T extends Entity> extends EntityModel<T> {
+public class DemonEyeModel<T extends DemonEye> extends EntityModel<T> {
+	private final ModelPart root;
 	private final ModelPart eye;
 	private final ModelPart tendrils;
 	private final ModelPart tendrils_child;
 
-	public DemonEyeModel(ModelPart root) {
+	public DemonEyeModel(ModelPart part) {
+		this.root = part.getChild("root");
 		this.eye = root.getChild("eye");
 		this.tendrils = root.getChild("tendrils");
 		this.tendrils_child = tendrils.getChild("tendrils_child");
@@ -28,11 +31,11 @@ public class DemonEyeModel<T extends Entity> extends EntityModel<T> {
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
-
-		PartDefinition eye = partdefinition.addOrReplaceChild("eye", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -4.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F))
+		PartDefinition root = partdefinition.addOrReplaceChild("root",CubeListBuilder.create().texOffs(0,0).addBox(0,0,0,0,0,0),PartPose.ZERO);
+		PartDefinition eye = root.addOrReplaceChild("eye", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -4.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F))
 		.texOffs(0, 16).addBox(-4.0F, -4.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)), PartPose.offset(0.0F, 20.0F, 0.0F));
 
-		PartDefinition tendrils = partdefinition.addOrReplaceChild("tendrils", CubeListBuilder.create().texOffs(44, 0).addBox(-3.0F, -3.0F, 0.0F, 6.0F, 6.0F, 4.0F, new CubeDeformation(-0.25F)), PartPose.offset(0.0F, 20.0F, 4.0F));
+		PartDefinition tendrils = root.addOrReplaceChild("tendrils", CubeListBuilder.create().texOffs(44, 0).addBox(-3.0F, -3.0F, 0.0F, 6.0F, 6.0F, 4.0F, new CubeDeformation(-0.25F)), PartPose.offset(0.0F, 20.0F, 4.0F));
 
 		PartDefinition tendrils_child = tendrils.addOrReplaceChild("tendrils_child", CubeListBuilder.create().texOffs(40, 14).addBox(-2.0F, -2.0F, -1.0F, 4.0F, 4.0F, 8.0F, new CubeDeformation(0.0F))
 		.texOffs(32, 10).addBox(0.0F, -3.0F, -1.0F, 0.0F, 6.0F, 16.0F, new CubeDeformation(0.0F))
@@ -42,10 +45,15 @@ public class DemonEyeModel<T extends Entity> extends EntityModel<T> {
 	}
 
 	@Override
-	public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.eye.yRot = 0.5f * netHeadYaw * (float) (Math.PI / 180.0);
-		this.eye.xRot = 0.15f * headPitch * (float) (Math.PI / 180.0);
-		this.tendrils_child.yRot = - 0.75f * netHeadYaw * (float) (Math.PI / 180.0) + 0.5f * (entity.getYRot() - entity.yRotO) * (float) (Math.PI / 180.0);
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		this.eye.xScale=entity.getEyeScale();
+		this.eye.yScale=entity.getEyeScale();
+		this.eye.zScale=entity.getEyeScale();
+		//this.root.xRot = - headPitch * (float) (Math.PI / 180.0)*(entity.getXRot() - entity.xRotO)* (float) (Math.PI / 180.0);
+		this.eye.yRot = 0.5f * netHeadYaw * (float) (Math.PI / 180.0) /*+ (entity.getYRot() - entity.yRotO) * (float) (Math.PI / 180.0)*/;
+		this.eye.xRot = -0.15f * headPitch * (float) (Math.PI / 180.0) /*+ (entity.getXRot() - entity.xRotO) * (float) (Math.PI / 180.0)*/;
+		tendrils.copyFrom(eye);
+		this.tendrils_child.yRot = (float) (15.0 * Math.cos(ageInTicks*0.1)* (float) (Math.PI / 180.0) - 0.75f * netHeadYaw * (float) (Math.PI / 180.0) + 0.5f * (entity.getYRot() - entity.yRotO) * (float) (Math.PI / 180.0));
 		this.tendrils_child.xRot = - 0.5f * headPitch * (float) (Math.PI / 180.0) + 0.25f * (entity.getXRot() - entity.xRotO) * (float) (Math.PI / 180.0);
 	}
 

@@ -1,12 +1,14 @@
 package github.nitespring.monsterplus.client.render.entities.mobs.eyeball;
 
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import github.nitespring.monsterplus.ClientListener;
 import github.nitespring.monsterplus.MonsterPlus;
 import github.nitespring.monsterplus.client.render.entities.mobs.abyssologer.EyeModel;
 import github.nitespring.monsterplus.client.render.entities.mobs.abyssologer.EyeOverlayLayer;
 import github.nitespring.monsterplus.common.entity.DemonEye;
 import github.nitespring.monsterplus.common.entity.Eye;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.core.BlockPos;
@@ -25,15 +27,21 @@ public class DemonEyeRenderer<T extends DemonEye> extends MobRenderer<T, DemonEy
 	public static final ResourceLocation TEETH_CLOSED = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/entities/demon_eye/demon_eye_teeth_closed.png");
 	 public DemonEyeRenderer(Context context) {
 	     super(context, new DemonEyeModel<T>(context.bakeLayer(ClientListener.DEMON_EYE_LAYER)), 0.75f);
-	     this.addLayer(new DemonEyeOverlayLayer<>(this, context.getModelSet()));
+		 this.addLayer(new DemonEyeIrisLayer<>(this, context.getModelSet()));
+		 this.addLayer(new DemonEyeOverlayLayer<>(this, context.getModelSet()));
+
 	   }
 
 	public DemonEyeRenderer(Context context, DemonEyeModel<T> e, float f) {
 		super(context, e, f);
 	}
 
-	
-	
+	@Override
+	public void render(T pEntity, float pEntityYaw, float pPartialTicks, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
+		 pPoseStack.scale(pEntity.getDimensionScale(),pEntity.getDimensionScale(),pEntity.getDimensionScale());
+		 super.render(pEntity, pEntityYaw, pPartialTicks, pPoseStack, pBuffer, pPackedLight);
+	}
+
 	@Override
 	public ResourceLocation getTextureLocation(T e) {
 		switch(e.getEyeType()) {
@@ -46,7 +54,7 @@ public class DemonEyeRenderer<T extends DemonEye> extends MobRenderer<T, DemonEy
 			case 4:
 				return BLUE;
 			case 5:
-				return (e.tickCount%12==0||e.tickCount%12==1||e.tickCount%12==3||e.tickCount%12==4)?TEETH_CLOSED:TEETH_OPEN;
+				return (e.getAnimationState()==1)?TEETH_CLOSED:TEETH_OPEN;
 			default:
 				return RED;
 
@@ -56,8 +64,11 @@ public class DemonEyeRenderer<T extends DemonEye> extends MobRenderer<T, DemonEy
 	@Override
 	protected int getBlockLightLevel(T e, BlockPos pos) {
 		
-		return super.getBlockLightLevel(e,pos);
+		return Math.max(super.getBlockLightLevel(e,pos),3);
 	}
 
-	
+	@Override
+	protected float getShadowRadius(T pEntity) {
+		return super.getShadowRadius(pEntity) * pEntity.getDimensionScale();
+	}
 }

@@ -2,12 +2,7 @@ package github.nitespring.monsterplus.core.init;
 
 
 import github.nitespring.monsterplus.MonsterPlus;
-import github.nitespring.monsterplus.common.item.CrystalArmour;
-import github.nitespring.monsterplus.common.item.CrystalArrowItem;
-import github.nitespring.monsterplus.common.item.CrystalClumpItem;
-import github.nitespring.monsterplus.common.item.CrystalSword;
-import github.nitespring.monsterplus.common.item.Darkstar;
-import github.nitespring.monsterplus.common.item.GnawingJaw;
+import github.nitespring.monsterplus.common.item.*;
 import github.nitespring.monsterplus.core.enums.CustomArmourMaterials;
 import github.nitespring.monsterplus.core.enums.CustomItemTiers;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -110,8 +105,11 @@ public class ItemInit {
 			() -> new CrystalArmour(CustomArmourMaterials.CRYSTAL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
 	public static final DeferredHolder<Item,Item> CRYSTAL_BOOTS = ITEMS.register("crystal_boots", 
 			() -> new CrystalArmour(CustomArmourMaterials.CRYSTAL, ArmorItem.Type.BOOTS, new Item.Properties()));
-	
-	
+
+	public static final DeferredHolder<Item,Item> DARK_HELMET = ITEMS.register("dark_helmet",
+			() -> new DarkArmour(ArmorMaterials.NETHERITE, ArmorItem.Type.HELMET, new Item.Properties()));
+	public static final DeferredHolder<Item,Item> DARK_CHESTPLATE = ITEMS.register("dark_chestplate",
+			() -> new DarkArmour(ArmorMaterials.NETHERITE, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
 	
 	
 	public static final DeferredHolder<Item,Item> PURPLE_FIREBALL = ITEMS.register("purple_fireball", 

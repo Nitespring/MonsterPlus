@@ -33,6 +33,8 @@ public class CreativeTabsRegistration {
 	            event.accept(ItemInit.CRYSTAL_CHESTPLATE.get());
 	            event.accept(ItemInit.CRYSTAL_LEGGINGS.get());
 	            event.accept(ItemInit.CRYSTAL_BOOTS.get());
+				event.accept(ItemInit.DARK_HELMET.get());
+				event.accept(ItemInit.DARK_CHESTPLATE.get());
 	            event.accept(ItemInit.GNAWING_JAW.get());
 	            event.accept(ItemInit.DARKSTAR.get());
 	        }

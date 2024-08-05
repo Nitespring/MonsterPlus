@@ -28,7 +28,8 @@ import github.nitespring.monsterplus.client.render.entities.mobs.overgrownskelet
 import github.nitespring.monsterplus.client.render.entities.mobs.swampzombie.SwampZombieRenderer;
 import github.nitespring.monsterplus.client.render.entities.projectiles.CrystalArrowRenderer;
 import github.nitespring.monsterplus.client.render.entities.specialeffects.BloodySlashRenderer;
-import github.nitespring.monsterplus.client.render.equipment.crystalarmour.CrystalArmourModel;
+import github.nitespring.monsterplus.client.render.equipment.armour.CrystalArmourModel;
+import github.nitespring.monsterplus.client.render.equipment.armour.DarkArmourModel;
 import github.nitespring.monsterplus.core.init.EntityInit;
 import net.minecraft.client.model.SquidModel;
 import net.minecraft.client.model.geom.LayerDefinitions;
@@ -58,6 +59,7 @@ public class ClientListener {
 	public static final ModelLayerLocation OVERGROWN_SKELETON_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "overgrown_skeleton"), "main");
 	public static final ModelLayerLocation DEMON_EYE_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "demon_eye"), "main");
 	public static final ModelLayerLocation ANCIENT_HERO_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "ancient_hero"), "main");
+	public static final ModelLayerLocation DARK_ARMOUR_MAIN_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "dark_armour"), "main");
 	@SubscribeEvent
     public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event)
     {
@@ -73,9 +75,10 @@ public class ClientListener {
 		event.registerLayerDefinition(OVERGROWN_SKELETON_LAYER, OvergrownSkeletonModel::createBodyLayer);
 		event.registerLayerDefinition(DEMON_EYE_LAYER, DemonEyeModel::createBodyLayer);
 		event.registerLayerDefinition(ANCIENT_HERO_LAYER, AncientHeroModel::createBodyLayer);
-		
+
 		event.registerLayerDefinition(CRYSTAL_ARMOUR_MAIN_LAYER, 
 				() -> LayerDefinition.create(CrystalArmourModel.createBodyLayer(LayerDefinitions.OUTER_ARMOR_DEFORMATION), 64, 64));
+		event.registerLayerDefinition(DARK_ARMOUR_MAIN_LAYER, DarkArmourModel::createBodyLayer);
     }
 	
 	@SubscribeEvent

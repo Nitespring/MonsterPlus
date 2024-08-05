@@ -36,7 +36,7 @@ public class CrystalSword extends SwordItem{
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
 		
-		String string = "\u00A77\u00A7oSummons Crystal Spikes from the ground when you hit enemies";
+		String string = "\u00A77\u00A7oSummons Crystal Spikes from the ground after hitting enemies";
 		tooltip.add(Component.literal(string));
 	}
 	

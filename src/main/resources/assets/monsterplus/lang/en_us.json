@@ -27,6 +27,11 @@
   "item.monsterplus.crystal_chestplate" : "Ancient Crystal Chestplate",
   "item.monsterplus.crystal_arrow" : "Crystal Arrow",
   "item.monsterplus.crystal_clump" : "Crystal Clump",
+  "item.monsterplus.purple_fireball" : "Purple Fireball",
+  "item.monsterplus.spectral_essence" : "Ethereal Essence",
+  "item.monsterplus.demonic_essence" : "Demonic Essence",
+  "item.monsterplus.dark_essence" : "Dark Essence",
+  "item.monsterplus.ancient_broken_sword" : "Ancient Broken Sword",
 
   "item.monsterplus.abyssologer_spawn_egg" : "Abyssologer Spawn Egg",
   "item.monsterplus.glow_skeleton_spawn_egg" : "Glow Skeleton Spawn Egg",

@@ -38,9 +38,12 @@ public class CreativeTabsRegistration {
 	        }
 	        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS)
 	        {
-
+				event.accept(ItemInit.CRYSTAL_SHARD.get());
+				event.accept(ItemInit.SPECTRAL_ESSENCE.get());
+				event.accept(ItemInit.DEMONIC_ESSENCE.get());
+				event.accept(ItemInit.DARK_ESSENCE.get());
 	            event.accept(ItemInit.ANCIENT_CRYSTAL.get());
-	            event.accept(ItemInit.CRYSTAL_SHARD.get());
+				event.accept(ItemInit.ANCIENT_BROKEN_SWORD.get());
 	        }
 	        if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS)
 	        {

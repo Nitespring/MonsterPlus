@@ -74,11 +74,18 @@ public class ItemInit {
 			() -> new CrystalClumpItem(new Item.Properties()));
 	public static final DeferredHolder<Item,CrystalArrowItem> CRYSTAL_ARROW = ITEMS.register("crystal_arrow",
 			() -> new CrystalArrowItem(new Item.Properties()));
-	
-	
+
+	public static final DeferredHolder<Item,Item> SPECTRAL_ESSENCE = ITEMS.register("spectral_essence",
+			() -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+	public static final DeferredHolder<Item,Item> DEMONIC_ESSENCE = ITEMS.register("demonic_essence",
+			() -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+	public static final DeferredHolder<Item,Item> DARK_ESSENCE = ITEMS.register("dark_essence",
+			() -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 	public static final DeferredHolder<Item,Item> CRYSTAL_SHARD = ITEMS.register("crystal_shard", 
 			() -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 	public static final DeferredHolder<Item,Item> ANCIENT_CRYSTAL = ITEMS.register("ancient_crystal", 
+			() -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
+	public static final DeferredHolder<Item,Item> ANCIENT_BROKEN_SWORD = ITEMS.register("ancient_broken_sword",
 			() -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
 
 	public static final DeferredHolder<Item,Item> CRYSTAL_SWORD = ITEMS.register("crystal_sword", 

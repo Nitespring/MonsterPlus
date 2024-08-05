@@ -87,6 +87,8 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
 	public static final DeferredHolder<Item,Item> ANCIENT_BROKEN_SWORD = ITEMS.register("ancient_broken_sword",
 			() -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
+	public static final DeferredHolder<Item,Item> DARK_GEM = ITEMS.register("dark_gem",
+			() -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 
 	public static final DeferredHolder<Item,Item> CRYSTAL_SWORD = ITEMS.register("crystal_sword", 
 			() -> new CrystalSword(CustomItemTiers.CRYSTAL, new Item.Properties()));

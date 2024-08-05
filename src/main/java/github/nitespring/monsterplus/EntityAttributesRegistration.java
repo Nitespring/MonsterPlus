@@ -30,6 +30,7 @@ public class EntityAttributesRegistration {
 		event.put(EntityInit.OVERGROWN_SKELETON.get(), OvergrownSkeleton.setCustomAttributes().build());
 		event.put(EntityInit.DEMON_EYE.get(), DemonEye.setCustomAttributes().build());
 		event.put(EntityInit.ENDER_EYE.get(), EnderEye.setCustomAttributes().build());
+		event.put(EntityInit.ANCIENT_HERO.get(), AncientHero.setCustomAttributes().build());
 		
 	
 	}

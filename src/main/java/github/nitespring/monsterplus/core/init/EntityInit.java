@@ -78,7 +78,10 @@ public class EntityInit {
 			() -> EntityType.Builder.<EnderEye>of(EnderEye::new, MobCategory.MONSTER)
 					.sized(0.75F, 0.75F)
 					.build("ender_eye"));
-	
+	public static final DeferredHolder<EntityType<?>,EntityType<AncientHero>> ANCIENT_HERO = ENTITIES.register("ancient_hero",
+			()-> EntityType.Builder.<AncientHero>of(AncientHero::new,MobCategory.MONSTER)
+					.sized(0.6F, 2.0F)
+					.build("ancient_hero"));
 	
 	public static final DeferredHolder<EntityType<?>,EntityType<CrystalSpikes>> CRYSTAL_SPIKES = ENTITIES.register("crystal_spikes", 
             ()-> EntityType.Builder.<CrystalSpikes>of(CrystalSpikes::new,MobCategory.MISC)

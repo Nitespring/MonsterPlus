@@ -43,6 +43,7 @@ public class CreativeTabsRegistration {
 				event.accept(ItemInit.DEMONIC_ESSENCE.get());
 				event.accept(ItemInit.DARK_ESSENCE.get());
 	            event.accept(ItemInit.ANCIENT_CRYSTAL.get());
+				event.accept(ItemInit.DARK_GEM.get());
 				event.accept(ItemInit.ANCIENT_BROKEN_SWORD.get());
 	        }
 	        if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS)

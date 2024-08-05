@@ -11,6 +11,8 @@ import github.nitespring.monsterplus.client.render.entities.mobs.abyssologer.Eye
 import github.nitespring.monsterplus.client.render.entities.mobs.abyssologer.EyeRenderer;
 import github.nitespring.monsterplus.client.render.entities.mobs.abyssologer.SpectralSkeletonRenderer;
 import github.nitespring.monsterplus.client.render.entities.mobs.abyssologer.SpikeCountdownRenderer;
+import github.nitespring.monsterplus.client.render.entities.mobs.ancienthero.AncientHeroModel;
+import github.nitespring.monsterplus.client.render.entities.mobs.ancienthero.AncientHeroRenderer;
 import github.nitespring.monsterplus.client.render.entities.mobs.crystalzombie.CrystalZombieModel;
 import github.nitespring.monsterplus.client.render.entities.mobs.crystalzombie.CrystalZombieRenderer;
 import github.nitespring.monsterplus.client.render.entities.mobs.eyeball.DemonEyeModel;
@@ -55,6 +57,7 @@ public class ClientListener {
 	public static final ModelLayerLocation CRYSTAL_ARMOUR_MAIN_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "crystal_armour"), "main");
 	public static final ModelLayerLocation OVERGROWN_SKELETON_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "overgrown_skeleton"), "main");
 	public static final ModelLayerLocation DEMON_EYE_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "demon_eye"), "main");
+	public static final ModelLayerLocation ANCIENT_HERO_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "ancient_hero"), "main");
 	@SubscribeEvent
     public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event)
     {
@@ -69,6 +72,7 @@ public class ClientListener {
 		event.registerLayerDefinition(CRYSTAL_ZOMBIE_LAYER, CrystalZombieModel::createBodyLayer);
 		event.registerLayerDefinition(OVERGROWN_SKELETON_LAYER, OvergrownSkeletonModel::createBodyLayer);
 		event.registerLayerDefinition(DEMON_EYE_LAYER, DemonEyeModel::createBodyLayer);
+		event.registerLayerDefinition(ANCIENT_HERO_LAYER, AncientHeroModel::createBodyLayer);
 		
 		event.registerLayerDefinition(CRYSTAL_ARMOUR_MAIN_LAYER, 
 				() -> LayerDefinition.create(CrystalArmourModel.createBodyLayer(LayerDefinitions.OUTER_ARMOR_DEFORMATION), 64, 64));
@@ -94,6 +98,7 @@ public class ClientListener {
 		event.registerEntityRenderer(EntityInit.BLOODY_SLASH.get(), BloodySlashRenderer::new);
 		event.registerEntityRenderer(EntityInit.DEMON_EYE.get(), DemonEyeRenderer::new);
 		event.registerEntityRenderer(EntityInit.ENDER_EYE.get(), EnderEyeRenderer::new);
+		event.registerEntityRenderer(EntityInit.ANCIENT_HERO.get(), AncientHeroRenderer::new);
 
 	}
 	

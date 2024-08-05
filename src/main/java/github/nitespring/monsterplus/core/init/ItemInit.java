@@ -68,6 +68,9 @@ public class ItemInit {
 	public static final DeferredHolder<Item,Item> ENDER_EYE_SPAWN_EGG = ITEMS.register("ender_eye_spawn_egg",
 			() -> new SpawnEggItem(EntityInit.ENDER_EYE.get(), 1717060, 6989398, new Item.Properties()
 			));
+	public static final DeferredHolder<Item,Item> ANCIENT_HERO_SPAWN_EGG = ITEMS.register("ancient_hero_spawn_egg",
+			() -> new SpawnEggItem(EntityInit.ANCIENT_HERO.get(), 4603992, 8401567, new Item.Properties()
+			));
 	
 	
 	public static final DeferredHolder<Item,Item> CRYSTAL_CLUMP = ITEMS.register("crystal_clump", 

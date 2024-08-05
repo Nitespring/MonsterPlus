@@ -10,6 +10,7 @@
   "entity.monsterplus.overgrown_skeleton" : "Overgrown Skeleton",
   "entity.monsterplus.demon_eye" : "Demon Eye",
   "entity.monsterplus.ender_eye" : "Ender Watcher",
+  "entity.monsterplus.ancient_hero" : "Corrupted Ancient Hero",
 
   "entity.monsterplus.crystal_spikes" : "Crystal Spikes",
   "entity.monsterplus.purple_fireball" : "Abyssal Fireball",
@@ -31,6 +32,7 @@
   "item.monsterplus.spectral_essence" : "Ethereal Essence",
   "item.monsterplus.demonic_essence" : "Demonic Essence",
   "item.monsterplus.dark_essence" : "Dark Essence",
+  "item.monsterplus.dark_gem" : "Dark Gem",
   "item.monsterplus.ancient_broken_sword" : "Ancient Broken Sword",
 
   "item.monsterplus.abyssologer_spawn_egg" : "Abyssologer Spawn Egg",
@@ -43,6 +45,7 @@
   "item.monsterplus.crystal_zombie_spawn_egg" : "Crystalian Spawn Egg",
   "item.monsterplus.overgrown_skeleton_spawn_egg" : "Overgrown Skeleton Spawn Egg",
   "item.monsterplus.demon_eye_spawn_egg" : "Demon Eye Spawn Egg",
-  "item.monsterplus.ender_eye_spawn_egg" : "Ender Watcher Spawn Egg"
+  "item.monsterplus.ender_eye_spawn_egg" : "Ender Watcher Spawn Egg",
+  "item.monsterplus.ancient_hero_spawn_egg" : "Ancient Hero Spawn Egg"
 
 }

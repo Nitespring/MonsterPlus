@@ -90,31 +90,52 @@ public class AncientHeroModel<T extends AncientHero> extends SkeletonModel<T> {
 		if(entity.getTarget()!=null){
 			head.y = -2.0f;
 			hat.y = -2.0f;
-			mouth.y = 3.0f +1.25f*limbSwingAmount+ (float) (1.5f * Math.cos(ageInTicks*0.25));
+			mouth.y = 3.0f + 1.5f*limbSwingAmount+ (float) (1.5f * Math.cos(ageInTicks*0.25));
 		}else{
-			mouth.y = 1.0f +1.0f*limbSwingAmount+ (float) (0.25f * Math.cos(ageInTicks*0.1));
+			mouth.y = 1.0f + 1.25f*limbSwingAmount+ (float) (0.5f * Math.cos(ageInTicks*0.1));
 		}
 		cape.xRot = 0.25f*limbSwingAmount + (15f + (float) ((10.0 + Math.abs(limbSwingAmount)) * Math.cos(ageInTicks*0.1*(1+0.05f*limbSwingAmount))))* (float) (Math.PI / 180.0);
+		switch(entity.getEntityState()){
+			case 1:
+				hat.visible=false;
+				head.visible=true;
+				body_armour.visible=true;
+				right_arm_armour.visible=true;
+				left_arm_armour.visible=true;
+				cape.visible=true;
+				break;
+			case 2:
+				hat.visible=false;
+				head.visible=false;
+				body_armour.visible=true;
+				right_arm_armour.visible=true;
+				left_arm_armour.visible=true;
+				cape.visible=true;
+				break;
+			case 3:
+				hat.visible=false;
+				head.visible=false;
+				body_armour.visible=false;
+				right_arm_armour.visible=false;
+				left_arm_armour.visible=false;
+				cape.visible=false;
+				break;
+			default:
+				hat.visible=true;
+				head.visible=true;
+				body_armour.visible=true;
+				right_arm_armour.visible=true;
+				left_arm_armour.visible=true;
+				cape.visible=true;
+				break;
+		}
 	}
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int colour) {
 		super.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay, colour);
-		/*head.render(poseStack, vertexConsumer, packedLight, packedOverlay, colour);
-		mouth.render(poseStack, vertexConsumer, packedLight, packedOverlay, colour);
-		hat.render(poseStack, vertexConsumer, packedLight, packedOverlay, colour);
-		body.render(poseStack, vertexConsumer, packedLight, packedOverlay, colour);
-		body_armour.render(poseStack, vertexConsumer, packedLight, packedOverlay, colour);
-		cape.render(poseStack, vertexConsumer, packedLight, packedOverlay, colour);
-		crest.render(poseStack, vertexConsumer, packedLight, packedOverlay, colour);
-		left_arm.render(poseStack, vertexConsumer, packedLight, packedOverlay, colour);
-		right_arm.render(poseStack, vertexConsumer, packedLight, packedOverlay, colour);
-		left_arm_armour.render(poseStack, vertexConsumer, packedLight, packedOverlay, colour);
-		right_arm_armour.render(poseStack, vertexConsumer, packedLight, packedOverlay, colour);
-		left_leg.render(poseStack, vertexConsumer, packedLight, packedOverlay, colour);
-		right_leg.render(poseStack, vertexConsumer, packedLight, packedOverlay, colour);*/
 	}
-	
+
 	
 
 }

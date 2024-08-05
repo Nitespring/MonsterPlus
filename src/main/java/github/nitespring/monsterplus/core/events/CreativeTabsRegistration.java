@@ -59,6 +59,7 @@ public class CreativeTabsRegistration {
 	            event.accept(ItemInit.MOTHER_LAVA_SQUID_SPAWN_EGG.get());
 				event.accept(ItemInit.DEMON_EYE_SPAWN_EGG.get());
 				event.accept(ItemInit.ENDER_EYE_SPAWN_EGG.get());
+				event.accept(ItemInit.ANCIENT_HERO_SPAWN_EGG.get());
 	        }
 	    }
 	

@@ -1,7 +1,8 @@
-package github.nitespring.monsterplus.common.entity;
+package github.nitespring.monsterplus.common.entity.ancienthero;
 
+import github.nitespring.monsterplus.common.entity.projectiles.SkullProjectile;
+import github.nitespring.monsterplus.core.init.EntityInit;
 import github.nitespring.monsterplus.core.init.ItemInit;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -17,21 +18,14 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.target.TargetGoal;
-import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.Skeleton;
-import net.minecraft.world.entity.monster.WitherSkeleton;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
-import javax.annotation.Nullable;
+import java.util.Random;
 
 public class AncientHero extends AbstractSkeleton{
 
@@ -46,7 +40,7 @@ public class AncientHero extends AbstractSkeleton{
 
 	public AncientHero(EntityType<? extends AbstractSkeleton> p_32133_, Level p_32134_) {
 		super(p_32133_, p_32134_);
-		
+		this.xpReward = 30;
 	}
 
 	@Override
@@ -114,6 +108,13 @@ public class AncientHero extends AbstractSkeleton{
 						playSound(SoundEvents.WITHER_SPAWN);
 						this.getAttributes().getInstance(Attributes.MOVEMENT_SPEED).setBaseValue(getAttributeBaseValue(Attributes.MOVEMENT_SPEED)+0.01f);
 						this.getAttributes().getInstance(Attributes.ATTACK_SPEED).setBaseValue(getAttributeBaseValue(Attributes.ATTACK_SPEED)+0.25f);
+						AncientHeroSkull skull = new AncientHeroSkull(EntityInit.ANCIENT_HERO_SKULL.get(),this.level());
+						skull.setPos(this.position().add(0,2.0f,0));
+						skull.setOwner(this);
+						if(this.getTarget()!=null){
+							skull.setTarget(getTarget());
+						}
+						this.level().addFreshEntity(skull);
 					}
 					break;
 				case 2:
@@ -143,8 +144,8 @@ public class AncientHero extends AbstractSkeleton{
 		protected void registerGoals() {
 			super.registerGoals();
 		     
-		   }
-	 
+	}
+
 
 	@Override
 	protected void populateDefaultEquipmentSlots(RandomSource p_218949_, DifficultyInstance p_218950_) {
@@ -153,10 +154,34 @@ public class AncientHero extends AbstractSkeleton{
 	}
 	public void aiStep() {
 		super.aiStep();
-
+		//if(this.getTarget()!=null){
+			if(tickCount%24==0) {
+				shootSkull();
+				playSound(SoundEvents.WITHER_SHOOT, 0.2f, 0.4f);
+			}
+		//}
 
 		this.level().addParticle(ParticleTypes.SOUL, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0, 0.0, 0.0);
 	}
+
+	public void shootSkull(){
+		SkullProjectile skull = new SkullProjectile(EntityInit.SPECTRAL_SKULL_PROJECTILE.get(),this.level());
+		skull.setOwner(this);
+		if(this.getTarget()!=null) {
+			skull.setTarget(this.getTarget());
+		}
+		Vec3 aim = getLookAngle();
+		Random rn = new Random();
+		aim = aim.add(1.5f*(rn.nextFloat()-0.5f),0.75f*rn.nextFloat(),1.5f*(rn.nextFloat()-0.5f));
+		skull.setPos(this.position().add(1.5f*aim.x+2.5f*(rn.nextFloat()-0.5f),1.5+0.75f*aim.y,1.5f*aim.z+2.5f*(rn.nextFloat()-0.5f)));
+		skull.setDeltaMovement(aim.normalize().scale(0.05f));
+		skull.accelerationPower=0.05f;
+		skull.setYRot(this.yHeadRot);
+		level().addFreshEntity(skull);
+	}
+
+
+
 	public int getEntityState(){return this.getEntityData().get(ENTITYSTATE);}
 	public void setEntityState(int i){this.getEntityData().set(ENTITYSTATE, i);}
 	public int getCombatState(){return this.getEntityData().get(COMBATSTATE);}

@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import github.nitespring.monsterplus.ClientListener;
 import github.nitespring.monsterplus.MonsterPlus;
 import github.nitespring.monsterplus.common.entity.ancienthero.AncientHero;
+import github.nitespring.monsterplus.common.entity.ancienthero.AncientHeroSkull;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -14,16 +15,16 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
 
-public class AncientHeroEmissiveLayer<T extends AncientHero> extends RenderLayer<T, AncientHeroModel<T>> {
-	
+public class AncientHeroSkullEmissiveLayer<T extends AncientHeroSkull> extends RenderLayer<T, AncientHeroSkullModel<T>> {
+
 
 	private static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/entities/ancient_hero_emissive.png");
 
-	   private final AncientHeroModel<T> model;
-	   
-	   public AncientHeroEmissiveLayer(RenderLayerParent<T, AncientHeroModel<T>> p_117346_, EntityModelSet p_174491_) {
+	   private final AncientHeroSkullModel<T> model;
+
+	   public AncientHeroSkullEmissiveLayer(RenderLayerParent<T, AncientHeroSkullModel<T>> p_117346_, EntityModelSet p_174491_) {
 			super(p_117346_);
-			this.model = new AncientHeroModel<>(p_174491_.bakeLayer(ClientListener.ANCIENT_HERO_LAYER));
+			this.model = new AncientHeroSkullModel<>(p_174491_.bakeLayer(ClientListener.ANCIENT_HERO_SKULL_LAYER));
 			
 		}
 

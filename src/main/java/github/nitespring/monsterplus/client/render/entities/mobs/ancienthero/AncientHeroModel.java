@@ -2,15 +2,12 @@ package github.nitespring.monsterplus.client.render.entities.mobs.ancienthero;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import github.nitespring.monsterplus.common.entity.AncientHero;
-import github.nitespring.monsterplus.common.entity.OvergrownSkeleton;
-import net.minecraft.client.model.EndermanModel;
+import github.nitespring.monsterplus.common.entity.ancienthero.AncientHero;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.SkeletonModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.world.entity.HumanoidArm;
 
 public class AncientHeroModel<T extends AncientHero> extends SkeletonModel<T> {
 

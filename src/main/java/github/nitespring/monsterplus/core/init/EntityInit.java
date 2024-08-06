@@ -3,12 +3,9 @@ package github.nitespring.monsterplus.core.init;
 
 import github.nitespring.monsterplus.MonsterPlus;
 import github.nitespring.monsterplus.common.entity.*;
-import github.nitespring.monsterplus.common.entity.projectiles.BloodySlashEntity;
-import github.nitespring.monsterplus.common.entity.projectiles.CrystalArrow;
-import github.nitespring.monsterplus.common.entity.projectiles.CrystalClump;
-import github.nitespring.monsterplus.common.entity.projectiles.CrystalSpikes;
-import github.nitespring.monsterplus.common.entity.projectiles.PurpleFireball;
-import github.nitespring.monsterplus.common.entity.projectiles.SpikeCountdown;
+import github.nitespring.monsterplus.common.entity.ancienthero.AncientHero;
+import github.nitespring.monsterplus.common.entity.ancienthero.AncientHeroSkull;
+import github.nitespring.monsterplus.common.entity.projectiles.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -82,6 +79,10 @@ public class EntityInit {
 			()-> EntityType.Builder.<AncientHero>of(AncientHero::new,MobCategory.MONSTER)
 					.sized(0.6F, 2.0F)
 					.build("ancient_hero"));
+	public static final DeferredHolder<EntityType<?>,EntityType<AncientHeroSkull>> ANCIENT_HERO_SKULL = ENTITIES.register("ancient_hero_skull",
+			()-> EntityType.Builder.<AncientHeroSkull>of(AncientHeroSkull::new,MobCategory.MONSTER)
+					.sized(0.6F, 0.6F)
+					.build("ancient_hero_skull"));
 	
 	public static final DeferredHolder<EntityType<?>,EntityType<CrystalSpikes>> CRYSTAL_SPIKES = ENTITIES.register("crystal_spikes", 
             ()-> EntityType.Builder.<CrystalSpikes>of(CrystalSpikes::new,MobCategory.MISC)
@@ -107,6 +108,11 @@ public class EntityInit {
             ()-> EntityType.Builder.<BloodySlashEntity>of(BloodySlashEntity::new,MobCategory.MISC)
             .sized(3.5F, 1.5F)
 			.build("bloody_slash"));
+
+	public static final DeferredHolder<EntityType<?>,EntityType<SkullProjectile>> SPECTRAL_SKULL_PROJECTILE = ENTITIES.register("spectral_skull_projectile",
+			()-> EntityType.Builder.<SkullProjectile>of(SkullProjectile::new,MobCategory.MISC)
+					.sized(0.6F, 0.6F)
+					.build("spectral_skull_projectile"));
 	
 	
 }

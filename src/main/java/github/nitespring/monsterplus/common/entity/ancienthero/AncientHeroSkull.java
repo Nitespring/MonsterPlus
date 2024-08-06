@@ -1,5 +1,7 @@
 package github.nitespring.monsterplus.common.entity.ancienthero;
 
+import github.nitespring.monsterplus.common.entity.projectiles.SkullProjectile;
+import github.nitespring.monsterplus.core.init.EntityInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -30,6 +32,7 @@ import javax.annotation.Nullable;
 import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Random;
 
 public class AncientHeroSkull extends FlyingMob implements Enemy{
 
@@ -77,7 +80,7 @@ public class AncientHeroSkull extends FlyingMob implements Enemy{
 				.add(Attributes.ATTACK_SPEED, 1.2D)
 				.add(Attributes.ATTACK_KNOCKBACK, 0.25D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.0D)
-				.add(Attributes.FOLLOW_RANGE, 30);
+				.add(Attributes.FOLLOW_RANGE, 50);
 
 	  }
 	
@@ -122,8 +125,38 @@ public class AncientHeroSkull extends FlyingMob implements Enemy{
 
 	@Override
 	   protected void customServerAiStep() {
-	      super.customServerAiStep();
+
+		super.customServerAiStep();
+
 	   }
+
+	@Override
+	public void aiStep() {
+		super.aiStep();
+		if(tickCount%24==0){
+			shootSkull();
+		}
+	}
+
+	public void shootSkull(){
+		SkullProjectile skull = new SkullProjectile(EntityInit.SPECTRAL_SKULL_PROJECTILE.get(),this.level());
+		skull.setOwner(this);
+		Vec3 aim = getLookAngle();
+		if(this.getTarget()!=null) {
+			skull.setTarget(this.getTarget());
+			aim=getTarget().position().add(position().scale(-1)).normalize();
+		}
+
+		Random rn = new Random();
+		aim = aim.add(1.75f*(rn.nextFloat()-0.5f),0.75f*(rn.nextFloat()-0.5f),1.75f*(rn.nextFloat()-0.5f));
+		skull.setPos(this.position().add(1.5f*aim.x,0.25+1.5f*aim.y,1.5f*aim.z));
+		skull.setDeltaMovement(aim.normalize().scale(0.05f));
+		skull.accelerationPower=0.05f;
+		skull.setYRot(this.yHeadRot);
+		level().addFreshEntity(skull);
+	}
+
+
 	@Override
 	   public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_33126_, DifficultyInstance p_33127_, MobSpawnType p_33128_, @Nullable SpawnGroupData p_33129_) {
 	      this.anchorPoint = this.blockPosition().above(5);
@@ -295,10 +328,10 @@ public class AncientHeroSkull extends FlyingMob implements Enemy{
 		      }
 		      
 		      private void setAnchorAboveTarget() {
-		          AncientHeroSkull.this.anchorPoint = AncientHeroSkull.this.getTarget().blockPosition().above(20 + AncientHeroSkull.this.random.nextInt(20));
-		          if (AncientHeroSkull.this.anchorPoint.getY() < AncientHeroSkull.this.level().getSeaLevel()) {
-		        	  AncientHeroSkull.this.anchorPoint = new BlockPos(AncientHeroSkull.this.anchorPoint.getX(), AncientHeroSkull.this.level().getSeaLevel() + 1, AncientHeroSkull.this.anchorPoint.getZ());
-		          }
+		          AncientHeroSkull.this.anchorPoint = AncientHeroSkull.this.getTarget().blockPosition().above(5 + AncientHeroSkull.this.random.nextInt(15));
+		          /*if (AncientHeroSkull.this.anchorPoint.getY() < AncientHeroSkull.this.level().getSeaLevel()) {
+		        	  AncientHeroSkull.this.anchorPoint = new BlockPos(AncientHeroSkull.this.anchorPoint.getX(), AncientHeroSkull.this.getTarget().blockPosition().getX() + 1, AncientHeroSkull.this.anchorPoint.getZ());
+		          }*/
 
 		       }
 

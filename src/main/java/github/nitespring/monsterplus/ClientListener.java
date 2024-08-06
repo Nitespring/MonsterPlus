@@ -34,13 +34,22 @@ import github.nitespring.monsterplus.client.render.entities.projectiles.SkullPro
 import github.nitespring.monsterplus.client.render.entities.specialeffects.BloodySlashRenderer;
 import github.nitespring.monsterplus.client.render.equipment.armour.CrystalArmourModel;
 import github.nitespring.monsterplus.client.render.equipment.armour.DarkArmourModel;
+
 import github.nitespring.monsterplus.core.init.EntityInit;
+import net.minecraft.client.model.SkullModel;
+import net.minecraft.client.model.SkullModelBase;
 import net.minecraft.client.model.SquidModel;
+import net.minecraft.client.model.VillagerHeadModel;
 import net.minecraft.client.model.geom.LayerDefinitions;
 import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.renderer.blockentity.SkullBlockRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.SkullBlock;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.api.distmarker.Dist;
 
 import net.neoforged.bus.api.SubscribeEvent;
@@ -66,6 +75,8 @@ public class ClientListener {
 	public static final ModelLayerLocation ANCIENT_HERO_SKULL_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "ancient_hero_skull"), "main");
 	public static final ModelLayerLocation DARK_ARMOUR_MAIN_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "dark_armour"), "main");
 	public static final ModelLayerLocation SKULL_PROJECTILE_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "skull"), "main");
+
+	//public static final ModelLayerLocation EYE_MASK = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "eye_mask"), "main");
 	@SubscribeEvent
     public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event)
     {
@@ -87,6 +98,7 @@ public class ClientListener {
 		event.registerLayerDefinition(CRYSTAL_ARMOUR_MAIN_LAYER, 
 				() -> LayerDefinition.create(CrystalArmourModel.createBodyLayer(LayerDefinitions.OUTER_ARMOR_DEFORMATION), 64, 64));
 		event.registerLayerDefinition(DARK_ARMOUR_MAIN_LAYER, DarkArmourModel::createBodyLayer);
+//		event.registerLayerDefinition(EYE_MASK, SkullModel::createMobHeadLayer);
     }
 	
 	@SubscribeEvent
@@ -112,7 +124,11 @@ public class ClientListener {
 		event.registerEntityRenderer(EntityInit.ANCIENT_HERO.get(), AncientHeroRenderer::new);
 		event.registerEntityRenderer(EntityInit.ANCIENT_HERO_SKULL.get(), AncientHeroSkullRenderer::new);
 		event.registerEntityRenderer(EntityInit.SPECTRAL_SKULL_PROJECTILE.get(), SkullProjectileRenderer::new);
-
 	}
+	//@SubscribeEvent
+	/*public static void registerRenderers(final EntityRenderersEvent.CreateSkullModels event) {
+		event.registerSkullModel(CustomSkullBlock.CustomSkullTypes.EYE, new SkullModel(event.getEntityModelSet().bakeLayer(EYE_MASK)));
+	}*/
+
 	
 }

@@ -5,6 +5,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -21,8 +22,10 @@ public class SkullProjectile extends AbstractHurtingProjectile {
 
     @Nullable
     LivingEntity target;
+    private float attackDamage;
     public SkullProjectile(EntityType<? extends AbstractHurtingProjectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+        attackDamage=4.0f;
     }
 
     @Nullable
@@ -30,6 +33,13 @@ public class SkullProjectile extends AbstractHurtingProjectile {
         return this.target;
     }
 
+    public float getAttackDamage() {
+        return attackDamage;
+    }
+
+    public void setAttackDamage(float attackDamage) {
+        this.attackDamage = attackDamage;
+    }
 
     public void setTarget(LivingEntity mob) {
         this.target = mob;
@@ -95,12 +105,24 @@ public class SkullProjectile extends AbstractHurtingProjectile {
 
     @Override
     protected void onHitBlock(BlockHitResult pResult) {
+        playSound(SoundEvents.GENERIC_EXPLODE.value(), 0.2f,1.2f);
         this.discard();
     }
 
     @Override
+    protected boolean canHitEntity(Entity e) {
+        if(getOwner()!=null){
+            if(e==getOwner()||getOwner().isAlliedTo(e)){
+                return false;
+            }
+        }
+        return super.canHitEntity(e);
+    }
+
+    @Override
     protected void onHitEntity(EntityHitResult pResult) {
-        pResult.getEntity().hurt(level().damageSources().indirectMagic(this.getOwner(),this), 4.0f);
+        pResult.getEntity().hurt(level().damageSources().indirectMagic(this.getOwner(),this), this.getAttackDamage());
+        playSound(SoundEvents.GENERIC_EXPLODE.value(), 0.2f,1.2f);
         this.discard();
     }
 

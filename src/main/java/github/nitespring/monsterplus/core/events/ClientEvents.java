@@ -9,6 +9,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 
 @OnlyIn(Dist.CLIENT)
@@ -32,8 +33,7 @@ public class ClientEvents {
 	 }
 	 
 	 
-	
-	    
+
 	    
 	   
 	   

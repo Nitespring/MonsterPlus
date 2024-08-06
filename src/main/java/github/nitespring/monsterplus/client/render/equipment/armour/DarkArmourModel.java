@@ -7,6 +7,8 @@ import net.minecraft.client.model.geom.LayerDefinitions;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -43,9 +45,19 @@ public class DarkArmourModel<T extends LivingEntity> extends HumanoidArmorModel<
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         //cloak.copyFrom(body);
-        cloak.xRot = 1.5f*limbSwingAmount + (15f - (float) ((10.0 + Math.abs(limbSwingAmount)) * Math.cos(ageInTicks*0.1*(1-0.1f*limbSwingAmount))))* (float) (Math.PI / 180.0);
+        float xRot0 =  cloak.xRot;
+        float xRotWanted =  (15f - (float) ((15) * Math.cos(ageInTicks*0.15)))* (float) (Math.PI / 180.0);
+        //if(Math.abs(limbSwingAmount)>=0.75) {
+            Float f = Math.min(1.25f,Math.abs(limbSwingAmount));
+            Float f1 = Math.min(1.25f,Math.abs(limbSwing));
+            f=Math.abs(limbSwingAmount);
+            f1=Math.abs(limbSwing);
+            //xRotWanted = 0.75f * f + 0.25f * 0.1f * f1 + (15f - (float) ((15 + 5 * f) * Math.cos(ageInTicks * 0.15 * (1 +  0.4f*f1)))) * (float) (Math.PI / 180.0);
+            xRotWanted = (Math.min(60f,45f * 6*f1))* (float) (Math.PI / 180.0) + (10f - (float) ((12 + 10 * f) * Math.cos(ageInTicks * 0.17))) * (float) (Math.PI / 180.0);
+        //}
+        //cloak.xRot = Mth.lerp(0.75f,xRot0,xRotWanted);
+        cloak.xRot = xRotWanted;
     }
-
 
 
 }

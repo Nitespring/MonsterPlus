@@ -21,9 +21,9 @@ public class Darkstar extends SwordItem implements ILeftClickSpecialActionItem{
 
 
 	@Override
-	public boolean isFoil(ItemStack p_41453_) {
+	public boolean isFoil(ItemStack i) {
 		
-		return true;
+		return super.isFoil(i);
 	}
 
 	@Override

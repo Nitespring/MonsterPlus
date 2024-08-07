@@ -541,6 +541,9 @@ public class AncientHero extends AbstractSkeleton{
 						if (flag) {
 							this.mob.performRangedAttack(livingentity,0);
 							this.attackTime = this.attackIntervalMin;
+							if(mob.distanceToSqr(mob.getTarget())<=2*2) {
+								mob.setDeltaMovement(mob.getDeltaMovement().add(getTarget().position().add(position().scale(-1)).scale(-1).add(0, 0.25f, 0).normalize().scale(0.75f)));
+							}
 						}
 					}
 				}

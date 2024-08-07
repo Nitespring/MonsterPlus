@@ -1,6 +1,7 @@
 {
 "replace" : false,
 "values" : [
-	"monsterplus:crystal_helmet"
+	"monsterplus:crystal_helmet",
+	"monsterplus:dark_helmet"
 	]
 }

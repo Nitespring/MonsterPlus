@@ -40,7 +40,7 @@ public class DarkArmour extends ArmorItem{
 	public static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "textures/armour/crystal_layer_1.png");
 
 	public DarkArmour(Holder<ArmorMaterial> material, Type type, Properties properties) {
-		super(material, type, properties.stacksTo(1).rarity(Rarity.EPIC).durability(512));
+		super(material, type, properties.stacksTo(1).rarity(Rarity.EPIC).durability(1024));
 	}
 
 

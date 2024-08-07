@@ -472,9 +472,9 @@ public class DemonEye extends FlyingMob implements Enemy{
 
 		private void setAnchorAboveTarget() {
 			DemonEye.this.anchorPoint = DemonEye.this.getTarget().blockPosition().above(20 + DemonEye.this.random.nextInt(20));
-			if (DemonEye.this.anchorPoint.getY() < DemonEye.this.level().getSeaLevel()) {
+			/*if (DemonEye.this.anchorPoint.getY() < DemonEye.this.level().getSeaLevel()) {
 				DemonEye.this.anchorPoint = new BlockPos(DemonEye.this.anchorPoint.getX(), DemonEye.this.level().getSeaLevel() + 1, DemonEye.this.anchorPoint.getZ());
-			}
+			}*/
 
 		}
 

@@ -1,7 +1,6 @@
 {
 "replace" : false,
 "values" : [
-	"monsterplus:crystal_clump",
 	"monsterplus:purple_fireball",
 	"monsterplus:spectral_skull_projectile"
 	]

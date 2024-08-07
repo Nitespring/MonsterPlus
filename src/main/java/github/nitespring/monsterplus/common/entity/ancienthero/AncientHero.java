@@ -1,6 +1,7 @@
 package github.nitespring.monsterplus.common.entity.ancienthero;
 
 import github.nitespring.monsterplus.common.entity.projectiles.SkullProjectile;
+import github.nitespring.monsterplus.config.CommonConfig;
 import github.nitespring.monsterplus.core.init.EntityInit;
 import github.nitespring.monsterplus.core.init.ItemInit;
 import net.minecraft.core.BlockPos;
@@ -13,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
@@ -31,6 +33,7 @@ import net.minecraft.world.entity.projectile.LargeFireball;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
 
@@ -97,7 +100,10 @@ public class AncientHero extends AbstractSkeleton{
 					.add(Attributes.WATER_MOVEMENT_EFFICIENCY, 1.0D);
 	
 		  }
-	 
+	public static boolean checkAncientHeroSpawnRules(EntityType<? extends Monster> p_219014_, ServerLevelAccessor p_219015_, MobSpawnType p_219016_, BlockPos blockPos, RandomSource p_219018_) {
+		return p_219015_.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(p_219015_, blockPos, p_219018_) && checkMobSpawnRules(p_219014_, p_219015_, p_219016_, blockPos, p_219018_)
+				&& blockPos.getY() <= 12 && CommonConfig.spawn_ancient_hero.get();
+	}
 	 @Override
 		public void tick() {
 			super.tick();
@@ -172,7 +178,9 @@ public class AncientHero extends AbstractSkeleton{
 	}
 	@Override
 	public boolean isAlliedTo(Entity pEntity) {
-		if(pEntity instanceof AncientHeroSkull skull){
+		if(pEntity instanceof AncientHeroSkull||pEntity instanceof AncientHero) {
+			return true;
+		}else if(pEntity instanceof AncientHeroSkull skull){
 			if(skull.owner!=null&&this==skull.owner){
 				return true;
 			}else{
@@ -213,6 +221,7 @@ public class AncientHero extends AbstractSkeleton{
 		skull.setDeltaMovement(aim.normalize().scale(0.05f));
 		skull.accelerationPower=0.05f;
 		skull.setYRot(this.yHeadRot);
+		skull.setAttackDamage(4.0f);
 		level().addFreshEntity(skull);
 	}
 
@@ -230,6 +239,7 @@ public class AncientHero extends AbstractSkeleton{
 		skull.setDeltaMovement(aim.normalize().scale(0.05f));
 		skull.accelerationPower=0.075f;
 		skull.setYRot(this.yHeadRot);
+		skull.setAttackDamage(4.0f);
 		level().addFreshEntity(skull);
 	}
 
@@ -463,6 +473,14 @@ public class AncientHero extends AbstractSkeleton{
 
 		public void doMovement(){
 			LivingEntity livingentity = this.mob.getTarget();
+			if (livingentity != null) {
+				boolean flag = this.mob.getSensing().hasLineOfSight(livingentity);
+				if (flag) {
+					this.seeTime++;
+				} else {
+					this.seeTime--;
+				}
+			}
 			if(mob.getCombatState()==1) {
 				//System.out.println("Performing Strafing");
 				if (livingentity != null) {
@@ -472,11 +490,7 @@ public class AncientHero extends AbstractSkeleton{
 					if (flag != flag1) {
 						this.seeTime = 0;
 					}
-					if (flag) {
-						this.seeTime++;
-					} else {
-						this.seeTime--;
-					}
+//
 					if (!(d0 > (double) this.rangedAttackRadiusSqr) && this.seeTime >= 20) {
 						this.mob.getNavigation().stop();
 						this.strafingTime++;

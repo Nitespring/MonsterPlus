@@ -103,10 +103,10 @@ public class GlowSkeleton extends AbstractSkeleton{
 		}
 	   }
 	
-	 public static boolean checkGlowSkeletonSpawnRules(EntityType<? extends Monster> p_219014_, ServerLevelAccessor p_219015_, MobSpawnType p_219016_, BlockPos blockPos, RandomSource p_219018_) {
-	      return p_219015_.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(p_219015_, blockPos, p_219018_) && checkMobSpawnRules(p_219014_, p_219015_, p_219016_, blockPos, p_219018_) 
-	    		  && blockPos.getY() <= 40 && CommonConfig.spawn_glow_skeleton.get();
-	   }
+		public static boolean checkGlowSkeletonSpawnRules(EntityType<? extends Monster> p_219014_, ServerLevelAccessor p_219015_, MobSpawnType p_219016_, BlockPos blockPos, RandomSource p_219018_) {
+		  return p_219015_.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(p_219015_, blockPos, p_219018_) && checkMobSpawnRules(p_219014_, p_219015_, p_219016_, blockPos, p_219018_)
+				  && blockPos.getY() <= 40 && CommonConfig.spawn_glow_skeleton.get();
+		}
 	 
 	
 	

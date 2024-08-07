@@ -146,7 +146,7 @@ public class AncientHeroSkull extends FlyingMob implements Enemy{
 			skull.setTarget(this.getTarget());
 			aim=getTarget().position().add(position().scale(-1)).normalize();
 		}
-
+		skull.setAttackDamage(4.0f);
 		Random rn = new Random();
 		aim = aim.add(1.75f*(rn.nextFloat()-0.5f),0.75f*(rn.nextFloat()-0.5f),1.75f*(rn.nextFloat()-0.5f));
 		skull.setPos(this.position().add(1.5f*aim.x,0.25+1.5f*aim.y,1.5f*aim.z));
@@ -339,10 +339,12 @@ public class AncientHeroSkull extends FlyingMob implements Enemy{
 
 	@Override
 	public boolean isAlliedTo(Entity pEntity) {
-		if(this.getOwner()!=null){
-			if(pEntity == this.owner){
+		if(pEntity instanceof AncientHeroSkull||pEntity instanceof AncientHero) {
+			return true;
+		}else if (this.getOwner() != null) {
+			if (pEntity == this.owner) {
 				return true;
-			}else{
+			} else {
 				return this.getOwner().isAlliedTo(pEntity);
 			}
 		} else {

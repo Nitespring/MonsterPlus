@@ -293,10 +293,10 @@ public class FlyingSkull extends FlyingMob implements Enemy{
 		      }
 		      
 		      private void setAnchorAboveTarget() {
-		          FlyingSkull.this.anchorPoint = FlyingSkull.this.getTarget().blockPosition().above(20 + FlyingSkull.this.random.nextInt(20));
-		          if (FlyingSkull.this.anchorPoint.getY() < FlyingSkull.this.level().getSeaLevel()) {
+		          FlyingSkull.this.anchorPoint = FlyingSkull.this.getTarget().blockPosition().above(5 + FlyingSkull.this.random.nextInt(20));
+		          /*if (FlyingSkull.this.anchorPoint.getY() < FlyingSkull.this.level().getSeaLevel()) {
 		        	  FlyingSkull.this.anchorPoint = new BlockPos(FlyingSkull.this.anchorPoint.getX(), FlyingSkull.this.level().getSeaLevel() + 1, FlyingSkull.this.anchorPoint.getZ());
-		          }
+		          }*/
 
 		       }
 

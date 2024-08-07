@@ -67,7 +67,7 @@ public class ItemInit {
 			() -> new SpawnEggItem(EntityInit.ANCIENT_HERO.get(), 4603992, 8401567, new Item.Properties()
 			));
 	public static final DeferredHolder<Item,Item> ANCIENT_HERO_SKULL_SPAWN_EGG = ITEMS.register("ancient_hero_skull_spawn_egg",
-			() -> new SpawnEggItem(EntityInit.ANCIENT_HERO_SKULL.get(), 4603992, 8401567, new Item.Properties()
+			() -> new SpawnEggItem(EntityInit.ANCIENT_HERO_SKULL.get(), 10266542, 2434082, new Item.Properties()
 			));
 	
 	

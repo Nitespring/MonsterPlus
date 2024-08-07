@@ -1,6 +1,7 @@
 package github.nitespring.monsterplus;
 
 import github.nitespring.monsterplus.common.entity.*;
+import github.nitespring.monsterplus.common.entity.ancienthero.AncientHero;
 import github.nitespring.monsterplus.core.init.EntityInit;
 import net.minecraft.world.entity.SpawnPlacementType;
 import net.minecraft.world.entity.SpawnPlacementTypes;
@@ -64,6 +65,11 @@ public class EntitySpawnRegistration {
 				SpawnPlacementTypes.NO_RESTRICTIONS,
 				Types.MOTION_BLOCKING,
 				EnderEye::checkEnderEyeSpawnRules,
+				RegisterSpawnPlacementsEvent.Operation.REPLACE);
+		event.register(EntityInit.ANCIENT_HERO.get(),
+				SpawnPlacementTypes.ON_GROUND,
+				Types.MOTION_BLOCKING_NO_LEAVES,
+				AncientHero::checkAncientHeroSpawnRules,
 				RegisterSpawnPlacementsEvent.Operation.REPLACE);
     }
 	

@@ -211,11 +211,11 @@ public class EnderEye extends DemonEye {
         } else {
             for (int i = 0; i < 64; i++) {
                 if (this.teleport()) {
-                    return true;
+                    return super.hurt(pSource,pAmount);
                 }
             }
 
-            return true;
+            return super.hurt(pSource,pAmount);
         }
     }
     public static boolean checkEnderEyeSpawnRules(EntityType<? extends DemonEye> pType, ServerLevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {

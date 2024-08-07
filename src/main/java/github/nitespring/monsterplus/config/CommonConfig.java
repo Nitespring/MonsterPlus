@@ -17,6 +17,7 @@ public class CommonConfig {
 		public static  ModConfigSpec.BooleanValue spawn_overgrown_skeleton;
 		public static  ModConfigSpec.BooleanValue spawn_demon_eye;
 		public static  ModConfigSpec.BooleanValue spawn_ender_eye;
+		public static  ModConfigSpec.BooleanValue spawn_ancient_hero;
 		public static  ModConfigSpec.BooleanValue do_abyssologer_darkness;
 		
 		
@@ -57,15 +58,19 @@ public class CommonConfig {
 		spawn_overgrown_skeleton = server
 				.comment("Will the Overgrown Skeleton spawn?")
 				.define("spawnconfig.spawn_overgrown_skeleton", true);
-
 		spawn_demon_eye = server
 				.comment("Will the Demon Eye spawn?")
 				.define("spawnconfig.spawn_demon_eye", true);
 		spawn_ender_eye = server
 				.comment("Will the Ender Eye spawn?")
 				.define("spawnconfig.spawn_ender_eye", true);
-			
+		spawn_ancient_hero = server
+				.comment("Will the Corrupted Ancient Hero spawn?")
+				.define("spawnconfig.spawn_ancient_hero", true);
+
+
 		}
+
 
 	
 }

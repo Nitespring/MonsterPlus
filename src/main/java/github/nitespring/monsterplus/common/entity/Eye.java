@@ -305,9 +305,9 @@ public class Eye extends FlyingMob implements Enemy{
 		      
 		      private void setAnchorAboveTarget() {
 		          Eye.this.anchorPoint = Eye.this.getTarget().blockPosition().above(20 + Eye.this.random.nextInt(20));
-		          if (Eye.this.anchorPoint.getY() < Eye.this.level().getSeaLevel()) {
+		          /*if (Eye.this.anchorPoint.getY() < Eye.this.level().getSeaLevel()) {
 		        	  Eye.this.anchorPoint = new BlockPos(Eye.this.anchorPoint.getX(), Eye.this.level().getSeaLevel() + 1, Eye.this.anchorPoint.getZ());
-		          }
+		          }*/
 
 		       }
 		      

@@ -12,6 +12,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.entity.projectile.Fireball;
 import net.minecraft.world.entity.projectile.LargeFireball;
+import net.minecraft.world.entity.projectile.ProjectileDeflection;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -90,17 +91,17 @@ public class SkullProjectile extends AbstractHurtingProjectile {
 
     @Override
     public boolean isPickable() {
-        return true;
+        return super.isPickable();
     }
 
     @Override
     public boolean canBeCollidedWith() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean canBeHitByProjectile() {
-        return super.canBeHitByProjectile();
+        return false;
     }
 
     @Override
@@ -129,5 +130,21 @@ public class SkullProjectile extends AbstractHurtingProjectile {
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
         return false;
+    }
+
+    @Override
+    protected void onDeflection(@Nullable Entity pEntity, boolean pDeflectedByPlayer) {
+        super.onDeflection(pEntity, pDeflectedByPlayer);
+
+    }
+
+    @Override
+    public boolean deflect(ProjectileDeflection pDeflection, @Nullable Entity pEntity, @Nullable Entity pOwner, boolean pDeflectedByPlayer) {
+        if (this.getOwner() != null && this.getOwner() instanceof LivingEntity owner) {
+            this.setTarget(owner);
+        }else{
+            this.setTarget(null);
+        }
+        return super.deflect(pDeflection, pEntity, pOwner, pDeflectedByPlayer);
     }
 }

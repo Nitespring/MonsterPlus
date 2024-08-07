@@ -32,6 +32,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.LargeFireball;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.BowItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.Path;
@@ -39,6 +40,8 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
 import java.util.Random;
+import java.util.Set;
+import java.util.function.Predicate;
 
 public class AncientHero extends AbstractSkeleton{
 
@@ -104,7 +107,9 @@ public class AncientHero extends AbstractSkeleton{
 		return p_219015_.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(p_219015_, blockPos, p_219018_) && checkMobSpawnRules(p_219014_, p_219015_, p_219016_, blockPos, p_219018_)
 				&& blockPos.getY() <= 12 && CommonConfig.spawn_ancient_hero.get();
 	}
-	 @Override
+
+
+	@Override
 		public void tick() {
 			super.tick();
 			switch(getEntityState()){
@@ -196,6 +201,10 @@ public class AncientHero extends AbstractSkeleton{
 			this.goalSelector.addGoal(1, new AncientHeroAttackGoal(this));
 	}
 
+	@Override
+	protected float getEquipmentDropChance(EquipmentSlot pSlot) {
+		return 0;
+	}
 
 	@Override
 	protected void populateDefaultEquipmentSlots(RandomSource p_218949_, DifficultyInstance p_218950_) {

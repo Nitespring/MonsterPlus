@@ -7,11 +7,7 @@
       "#minecraft:is_nether",
       {
         "type": "neoforge:not",
-        "value":
-        [
-          "minecraft:soul_sand_valley",
-          "minecraft:warped_forest"
-        ]
+        "value": "#monsterplus:cannot_spawn_lava_squid"
       }
     ]
   },

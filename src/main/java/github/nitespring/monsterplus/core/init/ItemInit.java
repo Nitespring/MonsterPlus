@@ -20,10 +20,10 @@ public class ItemInit {
 	
 	
 	
-	
+
 	
 	public static final DeferredHolder<Item,Item> GLOW_SKELETON_SPAWN_EGG = ITEMS.register("glow_skeleton_spawn_egg", 
-			() -> new SpawnEggItem(EntityInit.GLOW_SKELETON.get(), 1288644, 55269, new Item.Properties()
+			() -> new SpawnEggItem(EntityInit.GLOW_SKELETON.get(), 24668, 7471060, new Item.Properties()
 					));
 	
 	public static final DeferredHolder<Item,Item> LAVA_SQUID_SPAWN_EGG = ITEMS.register("lava_squid_spawn_egg", 
@@ -64,7 +64,7 @@ public class ItemInit {
 			() -> new SpawnEggItem(EntityInit.ENDER_EYE.get(), 1717060, 6989398, new Item.Properties()
 			));
 	public static final DeferredHolder<Item,Item> ANCIENT_HERO_SPAWN_EGG = ITEMS.register("ancient_hero_spawn_egg",
-			() -> new SpawnEggItem(EntityInit.ANCIENT_HERO.get(), 4603992, 8401567, new Item.Properties()
+			() -> new SpawnEggItem(EntityInit.ANCIENT_HERO.get(), 7893628, 4603992, new Item.Properties()
 			));
 	public static final DeferredHolder<Item,Item> ANCIENT_HERO_SKULL_SPAWN_EGG = ITEMS.register("ancient_hero_skull_spawn_egg",
 			() -> new SpawnEggItem(EntityInit.ANCIENT_HERO_SKULL.get(), 10266542, 2434082, new Item.Properties()

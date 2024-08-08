@@ -1,9 +1,19 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#c:is_swamp",
+  "biomes": {
+    "type": "neoforge:and",
+    "values":
+    [
+      "#c:is_swamp",
+      {
+        "type": "neoforge:not",
+        "value": "#c:no_default_monsters"
+      }
+    ]
+  },
   "spawners": {
     "type": "monsterplus:swamp_zombie",
-    "weight": 150,
+    "weight": 200,
     "minCount": 2,
     "maxCount": 5
   }

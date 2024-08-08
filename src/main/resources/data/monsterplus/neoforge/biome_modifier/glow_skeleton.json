@@ -7,17 +7,13 @@
       "#minecraft:is_overworld",
       {
         "type": "neoforge:not",
-        "value":
-        [
-          "minecraft:deep_dark",
-          "minecraft:mushroom_fields"
-        ]
+        "value": "#c:no_default_monsters"
       }
     ]
   },
   "spawners": {
     "type": "monsterplus:glow_skeleton",
-    "weight": 80,
+    "weight": 100,
     "minCount": 1,
     "maxCount": 5
   }

@@ -7,11 +7,7 @@
       "#minecraft:is_overworld",
       {
         "type": "neoforge:not",
-        "value":
-        [
-          "minecraft:deep_dark",
-          "minecraft:mushroom_fields"
-        ]
+        "value": "#c:no_default_monsters"
       }
     ]
   },

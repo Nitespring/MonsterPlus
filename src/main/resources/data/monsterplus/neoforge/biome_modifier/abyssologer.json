@@ -7,17 +7,13 @@
       "#minecraft:is_overworld",
       {
         "type": "neoforge:not",
-        "value":
-        [
-          "minecraft:deep_dark",
-          "minecraft:mushroom_fields"
-        ]
+        "value": "#c:no_default_monsters"
       }
     ]
   },
   "spawners": {
     "type": "monsterplus:abyssologer",
-    "weight": 10,
+    "weight": 15,
     "minCount": 1,
     "maxCount": 1
   }

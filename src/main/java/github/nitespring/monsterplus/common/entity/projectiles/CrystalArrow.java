@@ -14,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
 
 public class CrystalArrow extends AbstractArrow{
 	
@@ -56,9 +57,10 @@ public class CrystalArrow extends AbstractArrow{
 	}
 	
 	private void createCrystals(){
-		
+		Vec3 mov = getDeltaMovement();
+		this.level().addFreshEntity(new CrystalSpikes(this.level(), 5.0f, this.position().x + 0.75f*mov.x,  this.getY() -0.5 , this.position().z +0.75f*mov.z, this.yRotO+new Random().nextFloat(), 10, (LivingEntity)this.getOwner()));
 		for(int k = 0; k<5; k++) {
-		   this.level().addFreshEntity(new CrystalSpikes(this.level(), 5.0f, this.position().x + 2.5f*(new Random().nextFloat() - 0.5), /*blockpos.getY()*/ this.getY() -0.5 /*new Random().nextFloat() - 0.5*/, this.position().z + 2.5f*(new Random().nextFloat() - 0.5), this.yRotO+new Random().nextFloat(), new Random().nextInt(5), (LivingEntity)this.getOwner()));
+		   this.level().addFreshEntity(new CrystalSpikes(this.level(), 5.0f, this.position().x + 0.25f*mov.x + 2.5f*(new Random().nextFloat() - 0.5), /*blockpos.getY()*/ this.getY() -0.5 /*new Random().nextFloat() - 0.5*/, this.position().z + 0.25f*mov.z+ 2.5f*(new Random().nextFloat() - 0.5), this.yRotO+new Random().nextFloat(), new Random().nextInt(8), (LivingEntity)this.getOwner()));
 		}
 		
 	}

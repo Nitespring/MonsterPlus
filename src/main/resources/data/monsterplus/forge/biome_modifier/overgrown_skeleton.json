@@ -7,7 +7,7 @@
       "#monsterplus:can_spawn_overgrown",
       {
         "type": "forge:not",
-        "value": "#forge:no_default_monsters"
+        "value": "#monsterplus:no_monster_spawns"
       }
     ]
   },

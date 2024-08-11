@@ -4,10 +4,10 @@
     "type": "forge:and",
     "values":
     [
-      "#c:is_swamp",
+      "#forge:is_swamp",
       {
         "type": "forge:not",
-        "value": "#forge:no_default_monsters"
+        "value": "#monsterplus:no_monster_spawns"
       }
     ]
   },

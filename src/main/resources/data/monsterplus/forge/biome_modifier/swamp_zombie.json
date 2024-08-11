@@ -1,9 +1,19 @@
 {
   "type": "forge:add_spawns",
-  "biomes": "#forge:is_swamp",
+  "biomes": {
+    "type": "forge:and",
+    "values":
+    [
+      "#c:is_swamp",
+      {
+        "type": "forge:not",
+        "value": "#forge:no_default_monsters"
+      }
+    ]
+  },
   "spawners": {
     "type": "monsterplus:swamp_zombie",
-    "weight": 150,
+    "weight": 200,
     "minCount": 2,
     "maxCount": 5
   }

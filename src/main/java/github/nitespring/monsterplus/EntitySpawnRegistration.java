@@ -1,12 +1,7 @@
 package github.nitespring.monsterplus;
 
-import github.nitespring.monsterplus.common.entity.Abyssologer;
-import github.nitespring.monsterplus.common.entity.CrystalZombie;
-import github.nitespring.monsterplus.common.entity.GlowSkeleton;
-import github.nitespring.monsterplus.common.entity.LavaSquid;
-import github.nitespring.monsterplus.common.entity.MotherLavaSquid;
-import github.nitespring.monsterplus.common.entity.OvergrownSkeleton;
-import github.nitespring.monsterplus.common.entity.SwampZombie;
+import github.nitespring.monsterplus.common.entity.*;
+import github.nitespring.monsterplus.common.entity.ancienthero.AncientHero;
 import github.nitespring.monsterplus.core.init.EntityInit;
 import net.minecraft.world.entity.SpawnPlacementType;
 import net.minecraft.world.entity.SpawnPlacementTypes;
@@ -58,7 +53,21 @@ public class EntitySpawnRegistration {
 				Types.MOTION_BLOCKING,
 				OvergrownSkeleton::checkOvergrownSkeletonSpawnRules,
 				SpawnPlacementRegisterEvent.Operation.REPLACE);
-
+		event.register(EntityInit.DEMON_EYE.get(),
+				SpawnPlacementTypes.NO_RESTRICTIONS,
+				Types.MOTION_BLOCKING,
+				DemonEye::checkDemonEyeSpawnRules,
+				SpawnPlacementRegisterEvent.Operation.REPLACE);
+		event.register(EntityInit.ENDER_EYE.get(),
+				SpawnPlacementTypes.NO_RESTRICTIONS,
+				Types.MOTION_BLOCKING,
+				EnderEye::checkEnderEyeSpawnRules,
+				SpawnPlacementRegisterEvent.Operation.REPLACE);
+		event.register(EntityInit.ANCIENT_HERO.get(),
+				SpawnPlacementTypes.ON_GROUND,
+				Types.MOTION_BLOCKING_NO_LEAVES,
+				AncientHero::checkAncientHeroSpawnRules,
+				SpawnPlacementRegisterEvent.Operation.REPLACE);
     }
 	
 	

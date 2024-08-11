@@ -36,7 +36,7 @@ public class SpikeCountdownRenderer<T extends Entity> extends EntityRenderer<T>{
 	         p_114531_.translate(0.0f, 0.1, -1.5f);
 	         p_114531_.mulPose(Axis.XP.rotationDegrees(90));
 	        
-	         VertexConsumer vertexconsumer = p_114532_.getBuffer(RenderType.entityTranslucent(TEXTURE_LOCATION));
+	         VertexConsumer vertexconsumer = p_114532_.getBuffer(RenderType.entityTranslucentCull(TEXTURE_LOCATION));
 	         this.model.renderToBuffer(p_114531_, vertexconsumer, p_114533_, OverlayTexture.NO_OVERLAY, -1);
 	         p_114531_.popPose();
 	         super.render(p_114528_, p_114529_, p_114530_, p_114531_, p_114532_, p_114533_);

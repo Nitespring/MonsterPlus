@@ -79,19 +79,21 @@ protected ParticleOptions getTrailParticle() {
 	}	
 	@Override
 	public void tick() {
-		super.tick();
 		Vec3 vec3 = this.getDeltaMovement();
-	      if (this.xRotO == 0.0F && this.yRotO == 0.0F) {
-	         double d0 = vec3.horizontalDistance();
-	         this.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * (double)(180F / (float)Math.PI)));
-	         this.setXRot((float)(Mth.atan2(vec3.y, d0) * (double)(180F / (float)Math.PI)));
-	         this.yRotO = this.getYRot();
-	         this.xRotO = this.getXRot();
-	      }
+		if (this.xRotO == 0.0F && this.yRotO == 0.0F) {
+			double d0 = vec3.horizontalDistance();
+			this.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * (double)(180F / (float)Math.PI)));
+			this.setXRot((float)(Mth.atan2(vec3.y, d0) * (double)(180F / (float)Math.PI)));
+			this.yRotO = this.getYRot();
+			this.xRotO = this.getXRot();
+		}
 		livingTicks++;
-		  if(livingTicks>=3) {
-			  this.setDeltaMovement(vec3.x() * 0.9f, Math.max(Math.min(vec3.y() * 0.9f - 0.025, vec3.y() * 1.15f) - Math.max(vec3.y, 0.1) * 0.00005 * (livingTicks-3) * (livingTicks-3) * Math.sqrt(vec3.x * vec3.x + vec3.z * vec3.z) - 0.01, -1.25f * (1f + 0.5f * Math.sqrt(vec3.x * vec3.x + vec3.z * vec3.z))), vec3.z() * 0.9f);
-		  }
+		if(livingTicks>=3) {
+			this.setDeltaMovement(vec3.x(), Math.max(vec3.y() - 0.1, -2f), vec3.z());
+		}
+		this.accelerationPower = accelerationPower*0.9f;
+		super.tick();
+
 		
 		
 	}

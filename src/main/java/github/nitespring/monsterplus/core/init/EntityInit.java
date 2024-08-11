@@ -2,21 +2,10 @@ package github.nitespring.monsterplus.core.init;
 
 
 import github.nitespring.monsterplus.MonsterPlus;
-import github.nitespring.monsterplus.common.entity.Abyssologer;
-import github.nitespring.monsterplus.common.entity.CrystalZombie;
-import github.nitespring.monsterplus.common.entity.Eye;
-import github.nitespring.monsterplus.common.entity.GlowSkeleton;
-import github.nitespring.monsterplus.common.entity.LavaSquid;
-import github.nitespring.monsterplus.common.entity.MotherLavaSquid;
-import github.nitespring.monsterplus.common.entity.OvergrownSkeleton;
-import github.nitespring.monsterplus.common.entity.SpectralSkeleton;
-import github.nitespring.monsterplus.common.entity.SwampZombie;
-import github.nitespring.monsterplus.common.entity.projectiles.BloodySlashEntity;
-import github.nitespring.monsterplus.common.entity.projectiles.CrystalArrow;
-import github.nitespring.monsterplus.common.entity.projectiles.CrystalClump;
-import github.nitespring.monsterplus.common.entity.projectiles.CrystalSpikes;
-import github.nitespring.monsterplus.common.entity.projectiles.PurpleFireball;
-import github.nitespring.monsterplus.common.entity.projectiles.SpikeCountdown;
+import github.nitespring.monsterplus.common.entity.*;
+import github.nitespring.monsterplus.common.entity.ancienthero.AncientHero;
+import github.nitespring.monsterplus.common.entity.ancienthero.AncientHeroSkull;
+import github.nitespring.monsterplus.common.entity.projectiles.*;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.registries.DeferredRegister;
@@ -77,7 +66,22 @@ public class EntityInit {
             ()-> EntityType.Builder.<OvergrownSkeleton>of(OvergrownSkeleton::new,MobCategory.MONSTER)
             .sized(0.6F, 1.99F)
 			.build("overgrown_skeleton"));
-	
+	public static final RegistryObject<EntityType<DemonEye>> DEMON_EYE = ENTITIES.register("demon_eye",
+			() -> EntityType.Builder.<DemonEye>of(DemonEye::new, MobCategory.MONSTER)
+					.sized(0.75F, 0.75F)
+					.build("demon_eye"));
+	public static final RegistryObject<EntityType<EnderEye>> ENDER_EYE = ENTITIES.register("ender_eye",
+			() -> EntityType.Builder.<EnderEye>of(EnderEye::new, MobCategory.MONSTER)
+					.sized(0.75F, 0.75F)
+					.build("ender_eye"));
+	public static final RegistryObject<EntityType<AncientHero>> ANCIENT_HERO = ENTITIES.register("ancient_hero",
+			()-> EntityType.Builder.<AncientHero>of(AncientHero::new,MobCategory.MONSTER)
+					.sized(0.6F, 2.0F)
+					.build("ancient_hero"));
+	public static final RegistryObject<EntityType<AncientHeroSkull>> ANCIENT_HERO_SKULL = ENTITIES.register("ancient_hero_skull",
+			()-> EntityType.Builder.<AncientHeroSkull>of(AncientHeroSkull::new,MobCategory.MONSTER)
+					.sized(0.6F, 0.6F)
+					.build("ancient_hero_skull"));
 	
 	
 	public static final RegistryObject<EntityType<CrystalSpikes>> CRYSTAL_SPIKES = ENTITIES.register("crystal_spikes", 
@@ -104,6 +108,9 @@ public class EntityInit {
             ()-> EntityType.Builder.<BloodySlashEntity>of(BloodySlashEntity::new,MobCategory.MISC)
             .sized(3.5F, 1.5F)
 			.build("bloody_slash"));
-	
+	public static final RegistryObject<EntityType<SkullProjectile>> SPECTRAL_SKULL_PROJECTILE = ENTITIES.register("spectral_skull_projectile",
+			()-> EntityType.Builder.<SkullProjectile>of(SkullProjectile::new,MobCategory.MISC)
+					.sized(0.6F, 0.6F)
+					.build("spectral_skull_projectile"));
 	
 }

@@ -3,6 +3,10 @@
     "forge_data": {
         "layers": {
             "0": {
+                "block_light": 0,
+                "sky_light": 10
+            },
+            "1": {
                 "block_light": 15,
                 "sky_light": 15
             }
@@ -11,7 +15,8 @@
     "loader": "forge:item_layers",
     "render_types": {},
 	"textures": {
-    		"layer0": "monsterplus:item/darkstar"
+    		"layer0": "monsterplus:item/darkstar",
+            "layer1": "monsterplus:item/darkstar_emissive"
     		},
     "display": {
         "thirdperson_righthand": {

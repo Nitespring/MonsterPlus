@@ -1,6 +1,7 @@
 {
   "replace" : false,
   "values" : [
-    "monsterplus:opalescent_eye"
+    "monsterplus:opalescent_eye",
+    "monsterplus:demon_eye"
   ]
 }

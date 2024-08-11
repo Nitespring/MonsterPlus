@@ -11,8 +11,15 @@ import github.nitespring.monsterplus.client.render.entities.mobs.abyssologer.Eye
 import github.nitespring.monsterplus.client.render.entities.mobs.abyssologer.EyeRenderer;
 import github.nitespring.monsterplus.client.render.entities.mobs.abyssologer.SpectralSkeletonRenderer;
 import github.nitespring.monsterplus.client.render.entities.mobs.abyssologer.SpikeCountdownRenderer;
+import github.nitespring.monsterplus.client.render.entities.mobs.ancienthero.AncientHeroModel;
+import github.nitespring.monsterplus.client.render.entities.mobs.ancienthero.AncientHeroRenderer;
+import github.nitespring.monsterplus.client.render.entities.mobs.ancienthero.AncientHeroSkullModel;
+import github.nitespring.monsterplus.client.render.entities.mobs.ancienthero.AncientHeroSkullRenderer;
 import github.nitespring.monsterplus.client.render.entities.mobs.crystalzombie.CrystalZombieModel;
 import github.nitespring.monsterplus.client.render.entities.mobs.crystalzombie.CrystalZombieRenderer;
+import github.nitespring.monsterplus.client.render.entities.mobs.eyeball.DemonEyeModel;
+import github.nitespring.monsterplus.client.render.entities.mobs.eyeball.DemonEyeRenderer;
+import github.nitespring.monsterplus.client.render.entities.mobs.eyeball.EnderEyeRenderer;
 import github.nitespring.monsterplus.client.render.entities.mobs.glowskeleton.GlowSkeletonModel;
 import github.nitespring.monsterplus.client.render.entities.mobs.glowskeleton.GlowSkeletonRenderer;
 import github.nitespring.monsterplus.client.render.entities.mobs.lavasquid.LavaSquidRenderer;
@@ -22,17 +29,17 @@ import github.nitespring.monsterplus.client.render.entities.mobs.overgrownskelet
 import github.nitespring.monsterplus.client.render.entities.mobs.overgrownskeleton.OvergrownSkeletonRenderer;
 import github.nitespring.monsterplus.client.render.entities.mobs.swampzombie.SwampZombieRenderer;
 import github.nitespring.monsterplus.client.render.entities.projectiles.CrystalArrowRenderer;
+import github.nitespring.monsterplus.client.render.entities.projectiles.SkullProjectileModel;
+import github.nitespring.monsterplus.client.render.entities.projectiles.SkullProjectileRenderer;
 import github.nitespring.monsterplus.client.render.entities.specialeffects.BloodySlashRenderer;
-import github.nitespring.monsterplus.client.render.equipment.crystalarmour.CrystalArmourModel;
-import github.nitespring.monsterplus.client.render.equipment.crystalarmour.CrystalArmourModelNew;
+import github.nitespring.monsterplus.client.render.equipment.armour.CrystalArmourModel;
+import github.nitespring.monsterplus.client.render.equipment.armour.DarkArmourModel;
 import github.nitespring.monsterplus.core.init.EntityInit;
 import net.minecraft.client.model.SquidModel;
 import net.minecraft.client.model.geom.LayerDefinitions;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.client.renderer.entity.TippableArrowRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -52,7 +59,12 @@ public class ClientListener {
 	public static final ModelLayerLocation CRYSTAL_ZOMBIE_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "crystal_zombie"), "main");
 	public static final ModelLayerLocation CRYSTAL_ARMOUR_MAIN_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "crystal_armour"), "main");
 	public static final ModelLayerLocation OVERGROWN_SKELETON_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "overgrown_skeleton"), "main");
-	
+	public static final ModelLayerLocation DEMON_EYE_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "demon_eye"), "main");
+	public static final ModelLayerLocation ANCIENT_HERO_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "ancient_hero"), "main");
+	public static final ModelLayerLocation ANCIENT_HERO_SKULL_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "ancient_hero_skull"), "main");
+	public static final ModelLayerLocation DARK_ARMOUR_MAIN_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "dark_armour"), "main");
+	public static final ModelLayerLocation SKULL_PROJECTILE_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "skull"), "main");
+
 	@SubscribeEvent
     public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event)
     {
@@ -66,13 +78,16 @@ public class ClientListener {
 		event.registerLayerDefinition(SQUARE_TEXTURE, SquareTextureEntityModel::createBodyLayer);
 		event.registerLayerDefinition(CRYSTAL_ZOMBIE_LAYER, CrystalZombieModel::createBodyLayer);
 		event.registerLayerDefinition(OVERGROWN_SKELETON_LAYER, OvergrownSkeletonModel::createBodyLayer);
-		
+		event.registerLayerDefinition(DEMON_EYE_LAYER, DemonEyeModel::createBodyLayer);
+		event.registerLayerDefinition(ANCIENT_HERO_LAYER, AncientHeroModel::createBodyLayer);
+		event.registerLayerDefinition(ANCIENT_HERO_SKULL_LAYER, AncientHeroSkullModel::createBodyLayer);
+		event.registerLayerDefinition(SKULL_PROJECTILE_LAYER, SkullProjectileModel::createBodyLayer);
+
 		event.registerLayerDefinition(CRYSTAL_ARMOUR_MAIN_LAYER, 
 				() -> LayerDefinition.create(CrystalArmourModel.createBodyLayer(LayerDefinitions.OUTER_ARMOR_DEFORMATION), 64, 64));
-		//event.registerLayerDefinition(CRYSTAL_ARMOUR_MAIN_LAYER, 
-		//		() -> LayerDefinition.create(CrystalArmourModelNew.createBodyLayer(LayerDefinitions.OUTER_ARMOR_DEFORMATION), 64, 64));
-		
-    }
+		event.registerLayerDefinition(DARK_ARMOUR_MAIN_LAYER, DarkArmourModel::createBodyLayer);
+
+	}
 	
 	@SubscribeEvent
 	public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
@@ -91,8 +106,13 @@ public class ClientListener {
 		event.registerEntityRenderer(EntityInit.CRYSTAL_CLUMP.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(EntityInit.CRYSTAL_ARROW.get(), CrystalArrowRenderer::new);
 		event.registerEntityRenderer(EntityInit.OVERGROWN_SKELETON.get(), OvergrownSkeletonRenderer::new);
-		event.registerEntityRenderer(EntityInit.BLOODY_SLASH.get(), BloodySlashRenderer::new); 
-		
+		event.registerEntityRenderer(EntityInit.BLOODY_SLASH.get(), BloodySlashRenderer::new);
+		event.registerEntityRenderer(EntityInit.DEMON_EYE.get(), DemonEyeRenderer::new);
+		event.registerEntityRenderer(EntityInit.ENDER_EYE.get(), EnderEyeRenderer::new);
+		event.registerEntityRenderer(EntityInit.ANCIENT_HERO.get(), AncientHeroRenderer::new);
+		event.registerEntityRenderer(EntityInit.ANCIENT_HERO_SKULL.get(), AncientHeroSkullRenderer::new);
+		event.registerEntityRenderer(EntityInit.SPECTRAL_SKULL_PROJECTILE.get(), SkullProjectileRenderer::new);
+
 	}
 	
 }

@@ -3,46 +3,33 @@ package github.nitespring.monsterplus.common.item;
 
 
 
-import java.awt.MenuComponent;
-import java.awt.event.TextEvent;
 import java.util.List;
 import java.util.function.Consumer;
-
-import javax.swing.text.JTextComponent;
 
 import net.minecraft.core.Holder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-
 import github.nitespring.monsterplus.ClientListener;
 import github.nitespring.monsterplus.MonsterPlus;
-import github.nitespring.monsterplus.client.render.equipment.crystalarmour.CrystalArmourModel;
-import github.nitespring.monsterplus.client.render.equipment.crystalarmour.CrystalArmourModelNew;
+import github.nitespring.monsterplus.client.render.equipment.armour.CrystalArmourModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.ChunkRenderTypeSet;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 
 public class CrystalArmour extends ArmorItem{

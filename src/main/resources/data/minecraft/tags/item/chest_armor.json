@@ -1,6 +1,7 @@
 {
 "replace" : false,
 "values" : [
-	"monsterplus:crystal_chestplate"
+	"monsterplus:crystal_chestplate",
+	"monsterplus:dark_chestplate"
 	]
 }

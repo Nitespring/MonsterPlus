@@ -3,15 +3,9 @@ package github.nitespring.monsterplus;
 
 
 
-import github.nitespring.monsterplus.common.entity.Abyssologer;
-import github.nitespring.monsterplus.common.entity.CrystalZombie;
-import github.nitespring.monsterplus.common.entity.Eye;
-import github.nitespring.monsterplus.common.entity.GlowSkeleton;
-import github.nitespring.monsterplus.common.entity.LavaSquid;
-import github.nitespring.monsterplus.common.entity.MotherLavaSquid;
-import github.nitespring.monsterplus.common.entity.OvergrownSkeleton;
-import github.nitespring.monsterplus.common.entity.SpectralSkeleton;
-import github.nitespring.monsterplus.common.entity.SwampZombie;
+import github.nitespring.monsterplus.common.entity.*;
+import github.nitespring.monsterplus.common.entity.ancienthero.AncientHero;
+import github.nitespring.monsterplus.common.entity.ancienthero.AncientHeroSkull;
 import github.nitespring.monsterplus.core.init.EntityInit;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,7 +27,11 @@ public class EntityAttributesRegistration {
 		event.put(EntityInit.SWAMP_ZOMBIE.get(), SwampZombie.createAttributes().build());
 		event.put(EntityInit.CRYSTAL_ZOMBIE.get(), CrystalZombie.createAttributes().build());
 		event.put(EntityInit.OVERGROWN_SKELETON.get(), OvergrownSkeleton.setCustomAttributes().build());
-		
-	
+		event.put(EntityInit.DEMON_EYE.get(), DemonEye.setCustomAttributes().build());
+		event.put(EntityInit.ENDER_EYE.get(), EnderEye.setCustomAttributes().build());
+		event.put(EntityInit.ANCIENT_HERO.get(), AncientHero.setCustomAttributes().build());
+		event.put(EntityInit.ANCIENT_HERO_SKULL.get(), AncientHeroSkull.setCustomAttributes().build());
+
+
 	}
 }

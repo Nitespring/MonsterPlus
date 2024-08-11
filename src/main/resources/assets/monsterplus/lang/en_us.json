@@ -16,9 +16,17 @@
   "entity.monsterplus.crystal_spikes" : "Crystal Spikes",
   "entity.monsterplus.purple_fireball" : "Abyssal Fireball",
   "entity.monsterplus.crystal_arrow" : "Crystal Arrow",
+  "entity.monsterplus.spectral_skull_projectile" : "Spectral Skull",
+
 
   "item.monsterplus.crystal_shard" : "Ancient Crystal Fragment",
   "item.monsterplus.ancient_crystal" : "Ancient Crystal",
+  "item.monsterplus.purple_fireball" : "Purple Fireball",
+  "item.monsterplus.spectral_essence" : "Ethereal Essence",
+  "item.monsterplus.demonic_essence" : "Demonic Essence",
+  "item.monsterplus.dark_essence" : "Dark Essence",
+  "item.monsterplus.dark_gem" : "Dark Gem",
+  "item.monsterplus.ancient_broken_sword" : "Ancient Broken Sword",
 
   "item.monsterplus.crystal_sword" : "Ancient Crystal Sword",
   "item.monsterplus.darkstar" : "Darkstar",
@@ -29,12 +37,6 @@
   "item.monsterplus.crystal_chestplate" : "Ancient Crystal Chestplate",
   "item.monsterplus.crystal_arrow" : "Crystal Arrow",
   "item.monsterplus.crystal_clump" : "Crystal Clump",
-  "item.monsterplus.purple_fireball" : "Purple Fireball",
-  "item.monsterplus.spectral_essence" : "Ethereal Essence",
-  "item.monsterplus.demonic_essence" : "Demonic Essence",
-  "item.monsterplus.dark_essence" : "Dark Essence",
-  "item.monsterplus.dark_gem" : "Dark Gem",
-  "item.monsterplus.ancient_broken_sword" : "Ancient Broken Sword",
   "item.monsterplus.dark_helmet" : "Dark Helmet",
   "item.monsterplus.dark_chestplate" : "Dark Chestplate",
 

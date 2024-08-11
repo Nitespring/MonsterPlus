@@ -30,6 +30,22 @@
         },
         {
           "type": "minecraft:item",
+          "name": "minecraft:slime_ball",
+          "weight": 8,
+          "quality": 2,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 0,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
           "name": "minecraft:spider_eye",
           "weight": 6,
           "quality": 2,

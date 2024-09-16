@@ -12,6 +12,7 @@
   "entity.monsterplus.ender_eye" : "Ender Watcher",
   "entity.monsterplus.ancient_hero" : "Corrupted Ancient Hero",
   "entity.monsterplus.ancient_hero_skull" : "Corrupted Ancient Hero",
+  "entity.monsterplus.wisp" : "Wisp",
 
   "entity.monsterplus.crystal_spikes" : "Crystal Spikes",
   "entity.monsterplus.purple_fireball" : "Abyssal Fireball",
@@ -52,6 +53,7 @@
   "item.monsterplus.demon_eye_spawn_egg" : "Demon Eye Spawn Egg",
   "item.monsterplus.ender_eye_spawn_egg" : "Ender Watcher Spawn Egg",
   "item.monsterplus.ancient_hero_spawn_egg" : "Corrupted Ancient Hero Spawn Egg",
-  "item.monsterplus.ancient_hero_skull_spawn_egg" : "Corrupted Ancient Hero Skull Spawn Egg"
+  "item.monsterplus.ancient_hero_skull_spawn_egg" : "Corrupted Ancient Hero Skull Spawn Egg",
+  "item.monsterplus.wisp_spawn_egg" : "Wisp Spawn Egg"
 
 }

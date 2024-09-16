@@ -83,6 +83,10 @@ public class EntityInit {
 			()-> EntityType.Builder.<AncientHeroSkull>of(AncientHeroSkull::new,MobCategory.MONSTER)
 					.sized(0.6F, 0.6F)
 					.build("ancient_hero_skull"));
+	public static final DeferredHolder<EntityType<?>,EntityType<Wisp>> WISP = ENTITIES.register("wisp",
+			()-> EntityType.Builder.<Wisp>of(Wisp::new,MobCategory.MONSTER)
+					.sized(0.75F, 0.75F)
+					.build("wisp"));
 	
 	public static final DeferredHolder<EntityType<?>,EntityType<CrystalSpikes>> CRYSTAL_SPIKES = ENTITIES.register("crystal_spikes", 
             ()-> EntityType.Builder.<CrystalSpikes>of(CrystalSpikes::new,MobCategory.MISC)

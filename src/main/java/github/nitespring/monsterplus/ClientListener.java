@@ -28,6 +28,8 @@ import github.nitespring.monsterplus.client.render.entities.mobs.lavasquid.Mothe
 import github.nitespring.monsterplus.client.render.entities.mobs.overgrownskeleton.OvergrownSkeletonModel;
 import github.nitespring.monsterplus.client.render.entities.mobs.overgrownskeleton.OvergrownSkeletonRenderer;
 import github.nitespring.monsterplus.client.render.entities.mobs.swampzombie.SwampZombieRenderer;
+import github.nitespring.monsterplus.client.render.entities.mobs.wisp.WispModel;
+import github.nitespring.monsterplus.client.render.entities.mobs.wisp.WispRenderer;
 import github.nitespring.monsterplus.client.render.entities.projectiles.CrystalArrowRenderer;
 import github.nitespring.monsterplus.client.render.entities.projectiles.SkullProjectileModel;
 import github.nitespring.monsterplus.client.render.entities.projectiles.SkullProjectileRenderer;
@@ -75,6 +77,8 @@ public class ClientListener {
 	public static final ModelLayerLocation ANCIENT_HERO_SKULL_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "ancient_hero_skull"), "main");
 	public static final ModelLayerLocation DARK_ARMOUR_MAIN_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "dark_armour"), "main");
 	public static final ModelLayerLocation SKULL_PROJECTILE_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "skull"), "main");
+	public static final ModelLayerLocation WISP_INNER_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "wisp"), "inner");
+	public static final ModelLayerLocation WISP_OUTER_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "wisp"), "outer");
 
 	//public static final ModelLayerLocation EYE_MASK = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "eye_mask"), "main");
 	@SubscribeEvent
@@ -94,12 +98,15 @@ public class ClientListener {
 		event.registerLayerDefinition(ANCIENT_HERO_LAYER, AncientHeroModel::createBodyLayer);
 		event.registerLayerDefinition(ANCIENT_HERO_SKULL_LAYER, AncientHeroSkullModel::createBodyLayer);
 		event.registerLayerDefinition(SKULL_PROJECTILE_LAYER, SkullProjectileModel::createBodyLayer);
-
+		event.registerLayerDefinition(WISP_INNER_LAYER, WispModel::createInnerLayer);
+		event.registerLayerDefinition(WISP_OUTER_LAYER, WispModel::createOuterLayer);
 		event.registerLayerDefinition(CRYSTAL_ARMOUR_MAIN_LAYER, 
 				() -> LayerDefinition.create(CrystalArmourModel.createBodyLayer(LayerDefinitions.OUTER_ARMOR_DEFORMATION), 64, 64));
 		event.registerLayerDefinition(DARK_ARMOUR_MAIN_LAYER, DarkArmourModel::createBodyLayer);
+
 //		event.registerLayerDefinition(EYE_MASK, SkullModel::createMobHeadLayer);
     }
+	//LayerDefinitions
 	
 	@SubscribeEvent
 	public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
@@ -124,6 +131,7 @@ public class ClientListener {
 		event.registerEntityRenderer(EntityInit.ANCIENT_HERO.get(), AncientHeroRenderer::new);
 		event.registerEntityRenderer(EntityInit.ANCIENT_HERO_SKULL.get(), AncientHeroSkullRenderer::new);
 		event.registerEntityRenderer(EntityInit.SPECTRAL_SKULL_PROJECTILE.get(), SkullProjectileRenderer::new);
+		event.registerEntityRenderer(EntityInit.WISP.get(), WispRenderer::new);
 	}
 	//@SubscribeEvent
 	/*public static void registerRenderers(final EntityRenderersEvent.CreateSkullModels event) {

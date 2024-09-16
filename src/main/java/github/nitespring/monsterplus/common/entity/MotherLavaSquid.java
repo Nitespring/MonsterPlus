@@ -46,7 +46,8 @@ public class MotherLavaSquid extends LavaSquid{
 				.add(Attributes.ATTACK_SPEED, 1.2D)
 				.add(Attributes.ATTACK_KNOCKBACK, 2.0D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
-				.add(Attributes.FOLLOW_RANGE, 50);
+				.add(Attributes.FOLLOW_RANGE, 50)
+				.add(Attributes.FALL_DAMAGE_MULTIPLIER, 0);
 
 	  }
 	

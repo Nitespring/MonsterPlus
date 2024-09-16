@@ -18,6 +18,7 @@ public class CommonConfig {
 		public static  ModConfigSpec.BooleanValue spawn_demon_eye;
 		public static  ModConfigSpec.BooleanValue spawn_ender_eye;
 		public static  ModConfigSpec.BooleanValue spawn_ancient_hero;
+		public static  ModConfigSpec.BooleanValue spawn_wisp;
 		public static  ModConfigSpec.BooleanValue do_abyssologer_darkness;
 		
 		
@@ -67,6 +68,9 @@ public class CommonConfig {
 		spawn_ancient_hero = server
 				.comment("Will the Corrupted Ancient Hero spawn?")
 				.define("spawnconfig.spawn_ancient_hero", true);
+		spawn_wisp = server
+				.comment("Will the Wisp spawn?")
+				.define("spawnconfig.spawn_wisp", true);
 
 
 		}

@@ -62,6 +62,7 @@ public class CreativeTabsRegistration {
 			event.accept(ItemInit.ENDER_EYE_SPAWN_EGG.get());
 			event.accept(ItemInit.ANCIENT_HERO_SPAWN_EGG.get());
 			event.accept(ItemInit.ANCIENT_HERO_SKULL_SPAWN_EGG.get());
+			event.accept(ItemInit.WISP_SPAWN_EGG.get());
 		}
 	}
 	

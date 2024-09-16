@@ -1,27 +1,15 @@
 package github.nitespring.monsterplus.common.entity;
 
-import java.util.EnumSet;
-
 import github.nitespring.monsterplus.config.CommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityDimensions;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.MoverType;
-import net.minecraft.world.entity.Pose;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -30,13 +18,14 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-public class LavaSquid extends Monster{
+import java.util.EnumSet;
+
+public class Wisp extends Monster{
 
 	   public float xBodyRot;
 	   public float xBodyRotO;
@@ -52,11 +41,11 @@ public class LavaSquid extends Monster{
 	   public float tx;
 	   public float ty;
 	   public float tz;
-	
+
 	//Squid
 	   //Blaze
-	
-	public LavaSquid(EntityType<? extends Monster> p_33002_, Level p_33003_) {
+
+	public Wisp(EntityType<? extends Monster> p_33002_, Level p_33003_) {
 		super(p_33002_, p_33003_);
 		this.random.setSeed((long)this.getId());
 	    this.tentacleSpeed = 1.0F / (this.random.nextFloat() + 1.0F) * 0.2F;
@@ -65,13 +54,13 @@ public class LavaSquid extends Monster{
 	
 	public static  AttributeSupplier.Builder setCustomAttributes(){
 		return Monster.createMonsterAttributes()
-				.add(Attributes.MAX_HEALTH, 16.0D)
+				.add(Attributes.MAX_HEALTH, 12.0D)
 				.add(Attributes.MOVEMENT_SPEED, 0.25D)
 				.add(Attributes.ATTACK_DAMAGE, 2)
 				.add(Attributes.ATTACK_SPEED, 1.2D)
 				.add(Attributes.ATTACK_KNOCKBACK, 0.2D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.0D)
-				.add(Attributes.FOLLOW_RANGE, 50)
+				.add(Attributes.FOLLOW_RANGE, 30)
 				.add(Attributes.FALL_DAMAGE_MULTIPLIER, 0);
 
 	  }
@@ -81,7 +70,7 @@ public class LavaSquid extends Monster{
 	    		MobSpawnType type, SpawnGroupData group) {
 	    	
 	    	   Vec3 pos = this.position();
-	    	   Vec3 deltaPos = new Vec3(0, 5, 0);
+	    	   Vec3 deltaPos = new Vec3(0, 1.5, 0);
 	    	   this.setPos(pos.add(deltaPos));
 	    	   
 	    	return super.finalizeSpawn(server, difficulty, type, group);
@@ -96,17 +85,17 @@ public class LavaSquid extends Monster{
      
 	@Override	
 	protected void registerGoals() {
-		  this.goalSelector.addGoal(1, new LavaSquid.LavaSquidAttackGoal(this));
-	      this.goalSelector.addGoal(3, new LavaSquid.SquidRandomMovementGoal(this));
-	      this.goalSelector.addGoal(2, new LavaSquid.SquidFleeGoal());
+		  //this.goalSelector.addGoal(1, new Wisp.LavaSquidAttackGoal(this));
+	      this.goalSelector.addGoal(3, new Wisp.SquidRandomMovementGoal(this));
+	      this.goalSelector.addGoal(2, new Wisp.SquidFleeGoal());
 	      this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers());
 	      //this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
 	   }
 
 
-	public static boolean checkLavaSquidSpawnRules(EntityType<LavaSquid> p_218985_, ServerLevelAccessor p_218986_, MobSpawnType p_218987_, BlockPos p_218988_, RandomSource p_218989_) {
+	public static boolean checkWispSpawnRules(EntityType<Wisp> p_218985_, ServerLevelAccessor p_218986_, MobSpawnType p_218987_, BlockPos p_218988_, RandomSource p_218989_) {
 	      return checkMobSpawnRules(p_218985_, p_218986_, p_218987_, p_218988_, p_218989_) 
-	    		  && CommonConfig.spawn_lava_squid.get();
+	    		  && CommonConfig.spawn_wisp.get();
 	   }
        @Override
 	   protected SoundEvent getAmbientSound() {
@@ -121,8 +110,8 @@ public class LavaSquid extends Monster{
 	      return SoundEvents.SQUID_DEATH;
 	   }
        @Override
-	   protected Entity.MovementEmission getMovementEmission() {
-		      return Entity.MovementEmission.EVENTS;
+	   protected MovementEmission getMovementEmission() {
+		      return MovementEmission.EVENTS;
 		   }
        
        @Override
@@ -236,7 +225,7 @@ public class LavaSquid extends Monster{
 			return true;
 		} else if (super.isAlliedTo(e)) {
 			return true;
-		} else if (e instanceof LavaSquid || e instanceof MotherLavaSquid) {
+		} else if (e instanceof Wisp || e instanceof MotherLavaSquid) {
 			return true;
 		}  else {
 			return false;
@@ -244,9 +233,9 @@ public class LavaSquid extends Monster{
 	}
 
 	class SquidRandomMovementGoal extends Goal {
-	      private final LavaSquid squid;
+	      private final Wisp squid;
 
-	      public SquidRandomMovementGoal(LavaSquid p_30004_) {
+	      public SquidRandomMovementGoal(Wisp p_30004_) {
 	         this.squid = p_30004_;
 	      }
 
@@ -276,10 +265,10 @@ public class LavaSquid extends Monster{
 	      private int fleeTicks;
 
 	      public boolean canUse() {
-	         LivingEntity livingentity = LavaSquid.this.getLastHurtByMob();
+	         LivingEntity livingentity = Wisp.this.getLastHurtByMob();
 	         //double d0 = (new Vec3(LavaSquidEntity.this.getX() - livingentity.getX(), LavaSquidEntity.this.getY() - livingentity.getY(), LavaSquidEntity.this.getZ() - livingentity.getZ())).length();
 	         if (livingentity != null /*&& d0 <= 10*/) {
-	            return LavaSquid.this.distanceToSqr(livingentity) < 100.0D;
+	            return Wisp.this.distanceToSqr(livingentity) < 100.0D;
 	         } else {
 	            return false;
 	         }
@@ -295,10 +284,10 @@ public class LavaSquid extends Monster{
 
 	      public void tick() {
 	         ++this.fleeTicks;
-	         LivingEntity livingentity = LavaSquid.this.getLastHurtByMob();
+	         LivingEntity livingentity = Wisp.this.getLastHurtByMob();
 	         if (livingentity != null) {
-	            Vec3 vec3 = new Vec3(LavaSquid.this.getX() - livingentity.getX(), LavaSquid.this.getY() - livingentity.getY(), LavaSquid.this.getZ() - livingentity.getZ());
-	            BlockState blockstate = LavaSquid.this.level().getBlockState(new BlockPos((int)(LavaSquid.this.getX() + vec3.x), (int)(LavaSquid.this.getY() + vec3.y), (int)(LavaSquid.this.getZ() + vec3.z)));
+	            Vec3 vec3 = new Vec3(Wisp.this.getX() - livingentity.getX(), Wisp.this.getY() - livingentity.getY(), Wisp.this.getZ() - livingentity.getZ());
+	            BlockState blockstate = Wisp.this.level().getBlockState(new BlockPos((int)(Wisp.this.getX() + vec3.x), (int)(Wisp.this.getY() + vec3.y), (int)(Wisp.this.getZ() + vec3.z)));
 	            //FluidState fluidstate = LavaSquidEntity.this.level.getFluidState(new BlockPos(LavaSquidEntity.this.getX() + vec3.x, LavaSquidEntity.this.getY() + vec3.y, LavaSquidEntity.this.getZ() + vec3.z));
 	            if (blockstate.isAir()) {
 	               double d0 = vec3.length();
@@ -315,25 +304,25 @@ public class LavaSquid extends Monster{
 	               }
 
 
-	               LavaSquid.this.setMovementVector((float)vec3.x / 20.0F, (float)vec3.y / 20.0F, (float)vec3.z / 20.0F);
+	               Wisp.this.setMovementVector((float)vec3.x / 20.0F, (float)vec3.y / 20.0F, (float)vec3.z / 20.0F);
 	            }
 
 	            if (this.fleeTicks % 10 == 5) {
-	            	LavaSquid.this.level().addParticle(ParticleTypes.SMALL_FLAME, LavaSquid.this.getX(), LavaSquid.this.getY(), LavaSquid.this.getZ(), 0.0D, 0.0D, 0.0D);
+	            	Wisp.this.level().addParticle(ParticleTypes.SMALL_FLAME, Wisp.this.getX(), Wisp.this.getY(), Wisp.this.getZ(), 0.0D, 0.0D, 0.0D);
 	            }
 
 	         }
 	      }
 	   }
 	 static class LavaSquidAttackGoal extends Goal {
-	      private final LavaSquid squid;
+	      private final Wisp squid;
 	      private int attackStep;
 	      private int attackTime;
 	      private int lastSeen;
 
-	      public LavaSquidAttackGoal(LavaSquid p_32247_) {
+	      public LavaSquidAttackGoal(Wisp p_32247_) {
 	         this.squid = p_32247_;
-	         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
+	         this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
 	      }
 
 	      public boolean canUse() {

@@ -32,6 +32,7 @@ public class EntityAttributesRegistration {
 		event.put(EntityInit.ENDER_EYE.get(), EnderEye.setCustomAttributes().build());
 		event.put(EntityInit.ANCIENT_HERO.get(), AncientHero.setCustomAttributes().build());
 		event.put(EntityInit.ANCIENT_HERO_SKULL.get(), AncientHeroSkull.setCustomAttributes().build());
+		event.put(EntityInit.WISP.get(), Wisp.setCustomAttributes().build());
 	
 	}
 

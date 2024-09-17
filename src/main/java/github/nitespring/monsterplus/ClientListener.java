@@ -33,11 +33,14 @@ import github.nitespring.monsterplus.client.render.entities.mobs.wisp.WispRender
 import github.nitespring.monsterplus.client.render.entities.projectiles.CrystalArrowRenderer;
 import github.nitespring.monsterplus.client.render.entities.projectiles.SkullProjectileModel;
 import github.nitespring.monsterplus.client.render.entities.projectiles.SkullProjectileRenderer;
+import github.nitespring.monsterplus.client.render.entities.projectiles.SmallThrownItemRenderer;
 import github.nitespring.monsterplus.client.render.entities.specialeffects.BloodySlashRenderer;
 import github.nitespring.monsterplus.client.render.equipment.armour.CrystalArmourModel;
 import github.nitespring.monsterplus.client.render.equipment.armour.DarkArmourModel;
 
+import github.nitespring.monsterplus.client.render.particles.CurseflameParticleProvider;
 import github.nitespring.monsterplus.core.init.EntityInit;
+import github.nitespring.monsterplus.core.init.ParticleInit;
 import net.minecraft.client.model.SkullModel;
 import net.minecraft.client.model.SkullModelBase;
 import net.minecraft.client.model.SquidModel;
@@ -46,9 +49,13 @@ import net.minecraft.client.model.geom.LayerDefinitions;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SimpleAnimatedParticle;
 import net.minecraft.client.renderer.blockentity.SkullBlockRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.texture.SimpleTexture;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -57,6 +64,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 
 
 @EventBusSubscriber(modid = MonsterPlus.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -132,11 +140,14 @@ public class ClientListener {
 		event.registerEntityRenderer(EntityInit.ANCIENT_HERO_SKULL.get(), AncientHeroSkullRenderer::new);
 		event.registerEntityRenderer(EntityInit.SPECTRAL_SKULL_PROJECTILE.get(), SkullProjectileRenderer::new);
 		event.registerEntityRenderer(EntityInit.WISP.get(), WispRenderer::new);
+		event.registerEntityRenderer(EntityInit.CURSEFLAME_FIREBALL.get(), SmallThrownItemRenderer::new);
 	}
-	//@SubscribeEvent
-	/*public static void registerRenderers(final EntityRenderersEvent.CreateSkullModels event) {
-		event.registerSkullModel(CustomSkullBlock.CustomSkullTypes.EYE, new SkullModel(event.getEntityModelSet().bakeLayer(EYE_MASK)));
-	}*/
+	@SubscribeEvent
+	public static void registerRenderers(final RegisterParticleProvidersEvent event) {
+		event.registerSpriteSet(ParticleInit.CURSEFLAME.get(), CurseflameParticleProvider::new);
+	}
+
+
 
 	
 }

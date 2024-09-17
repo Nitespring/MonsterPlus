@@ -1,6 +1,8 @@
 package github.nitespring.monsterplus.common.entity;
 
+import github.nitespring.monsterplus.common.entity.projectiles.CurseflameFireball;
 import github.nitespring.monsterplus.config.CommonConfig;
+import github.nitespring.monsterplus.core.init.EntityInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
@@ -16,7 +18,6 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -85,7 +86,7 @@ public class Wisp extends Monster{
      
 	@Override	
 	protected void registerGoals() {
-		  //this.goalSelector.addGoal(1, new Wisp.LavaSquidAttackGoal(this));
+		  this.goalSelector.addGoal(1, new Wisp.WispAttackGoal(this));
 	      this.goalSelector.addGoal(3, new Wisp.SquidRandomMovementGoal(this));
 	      this.goalSelector.addGoal(2, new Wisp.SquidFleeGoal());
 	      this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers());
@@ -225,7 +226,7 @@ public class Wisp extends Monster{
 			return true;
 		} else if (super.isAlliedTo(e)) {
 			return true;
-		} else if (e instanceof Wisp || e instanceof MotherLavaSquid) {
+		} else if (e instanceof Wisp) {
 			return true;
 		}  else {
 			return false;
@@ -266,7 +267,7 @@ public class Wisp extends Monster{
 
 	      public boolean canUse() {
 	         LivingEntity livingentity = Wisp.this.getLastHurtByMob();
-	         //double d0 = (new Vec3(LavaSquidEntity.this.getX() - livingentity.getX(), LavaSquidEntity.this.getY() - livingentity.getY(), LavaSquidEntity.this.getZ() - livingentity.getZ())).length();
+
 	         if (livingentity != null /*&& d0 <= 10*/) {
 	            return Wisp.this.distanceToSqr(livingentity) < 100.0D;
 	         } else {
@@ -314,13 +315,13 @@ public class Wisp extends Monster{
 	         }
 	      }
 	   }
-	 static class LavaSquidAttackGoal extends Goal {
+	 static class WispAttackGoal extends Goal {
 	      private final Wisp squid;
 	      private int attackStep;
 	      private int attackTime;
 	      private int lastSeen;
 
-	      public LavaSquidAttackGoal(Wisp p_32247_) {
+	      public WispAttackGoal(Wisp p_32247_) {
 	         this.squid = p_32247_;
 	         this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
 	      }
@@ -397,7 +398,7 @@ public class Wisp extends Monster{
                          //Vec3 aim = this.squid.getLookAngle();
 	                     for(int i = 0; i < 1; ++i) {
 	                    	 
-	                        SmallFireball smallfireball = new SmallFireball(this.squid.level(), this.squid, new Vec3(this.squid.getRandom().triangle(d1, 2.297D * d4), d2, this.squid.getRandom().triangle(d3, 2.297D * d4)));
+	                        CurseflameFireball smallfireball = new CurseflameFireball(EntityInit.CURSEFLAME_FIREBALL.get(), this.squid, new Vec3(this.squid.getRandom().triangle(d1, 2.297D * d4), d2, this.squid.getRandom().triangle(d3, 2.297D * d4)),this.squid.level());
 	                        double rn = (this.squid.getRandom().nextInt(10)+1)/6;
 	                        smallfireball.setPos(this.squid.getX()+Math.cos(Math.PI*2*rn), this.squid.getY(0.5D) + 0.5D + 2.5*Math.sin(Math.PI*2*rn), this.squid.getZ()+Math.sin(Math.PI*2*rn));
 	                        smallfireball.setOwner(squid);

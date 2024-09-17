@@ -84,7 +84,7 @@ public class EntityInit {
 					.sized(0.6F, 0.6F)
 					.build("ancient_hero_skull"));
 	public static final DeferredHolder<EntityType<?>,EntityType<Wisp>> WISP = ENTITIES.register("wisp",
-			()-> EntityType.Builder.<Wisp>of(Wisp::new,MobCategory.MONSTER)
+			()-> EntityType.Builder.<Wisp>of(Wisp::new,MobCategory.AMBIENT)
 					.sized(0.75F, 0.75F)
 					.build("wisp"));
 	
@@ -112,11 +112,14 @@ public class EntityInit {
             ()-> EntityType.Builder.<BloodySlashEntity>of(BloodySlashEntity::new,MobCategory.MISC)
             .sized(3.5F, 1.5F)
 			.build("bloody_slash"));
-
 	public static final DeferredHolder<EntityType<?>,EntityType<SkullProjectile>> SPECTRAL_SKULL_PROJECTILE = ENTITIES.register("spectral_skull_projectile",
 			()-> EntityType.Builder.<SkullProjectile>of(SkullProjectile::new,MobCategory.MISC)
 					.sized(0.6F, 0.6F)
 					.build("spectral_skull_projectile"));
+	public static final DeferredHolder<EntityType<?>,EntityType<CurseflameFireball>> CURSEFLAME_FIREBALL = ENTITIES.register("curseflame_fireball",
+			()-> EntityType.Builder.<CurseflameFireball>of(CurseflameFireball::new,MobCategory.MISC)
+					.sized(0.35F, 0.35F)
+					.build("curseflame_fireball"));
 	
 	
 }

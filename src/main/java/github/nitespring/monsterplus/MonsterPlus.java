@@ -5,6 +5,7 @@ import com.mojang.logging.LogUtils;
 import github.nitespring.monsterplus.config.Config;
 import github.nitespring.monsterplus.core.init.EntityInit;
 import github.nitespring.monsterplus.core.init.ItemInit;
+import github.nitespring.monsterplus.core.init.ParticleInit;
 import github.nitespring.monsterplus.networking.MonsterPlusPacketHandler;
 import net.minecraft.client.Minecraft;
 import net.neoforged.bus.api.IEventBus;
@@ -33,6 +34,7 @@ public class MonsterPlus
         modEventBus.addListener(MonsterPlusPacketHandler::onRegisterPayloadHandler);
         EntityInit.ENTITIES.register(modEventBus);
         ItemInit.ITEMS.register(modEventBus);
+        ParticleInit.PARTICLES.register(modEventBus);
         
 
         //NeoForge.EVENT_BUS.register(this);

@@ -3,6 +3,7 @@ package github.nitespring.monsterplus.common.entity;
 import github.nitespring.monsterplus.common.entity.projectiles.CurseflameFireball;
 import github.nitespring.monsterplus.config.CommonConfig;
 import github.nitespring.monsterplus.core.init.EntityInit;
+import github.nitespring.monsterplus.core.init.ParticleInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
@@ -28,6 +29,7 @@ import java.util.EnumSet;
 
 public class Wisp extends Monster{
 
+
 	   public float xBodyRot;
 	   public float xBodyRotO;
 	   public float zBodyRot;
@@ -43,16 +45,22 @@ public class Wisp extends Monster{
 	   public float ty;
 	   public float tz;
 
-	//Squid
-	   //Blaze
+
 
 	public Wisp(EntityType<? extends Monster> p_33002_, Level p_33003_) {
 		super(p_33002_, p_33003_);
 		this.random.setSeed((long)this.getId());
-	    this.tentacleSpeed = 1.0F / (this.random.nextFloat() + 1.0F) * 0.2F;
+		this.tentacleSpeed = 1.0F / (this.random.nextFloat() + 1.0F) * 0.2F;
 	}
-	
-	
+	@Override
+	protected boolean shouldDespawnInPeaceful() {
+		return false;
+	}
+	@Override
+	public boolean isPreventingPlayerRest(Player pPlayer) {
+		return false;
+	}
+
 	public static  AttributeSupplier.Builder setCustomAttributes(){
 		return Monster.createMonsterAttributes()
 				.add(Attributes.MAX_HEALTH, 12.0D)
@@ -63,66 +71,89 @@ public class Wisp extends Monster{
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.0D)
 				.add(Attributes.FOLLOW_RANGE, 30)
 				.add(Attributes.FALL_DAMAGE_MULTIPLIER, 0);
+	}
 
-	  }
-	
-	 @Override
-	    public SpawnGroupData finalizeSpawn(ServerLevelAccessor server, DifficultyInstance difficulty,
-	    		MobSpawnType type, SpawnGroupData group) {
-	    	
-	    	   Vec3 pos = this.position();
-	    	   Vec3 deltaPos = new Vec3(0, 1.5, 0);
-	    	   this.setPos(pos.add(deltaPos));
-	    	   
-	    	return super.finalizeSpawn(server, difficulty, type, group);
-	    }
+	@Override
+	public float getVoicePitch() {
+		return 1.6f;
+	}
+
+	@Override
+	protected float getSoundVolume() {
+		return 0.6f;
+	}
+
+	@Override
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor server, DifficultyInstance difficulty,
+			MobSpawnType type, SpawnGroupData group) {
+
+		   Vec3 pos = this.position();
+		   Vec3 deltaPos = new Vec3(0, 1.5, 0);
+		   this.setPos(pos.add(deltaPos));
+
+		return super.finalizeSpawn(server, difficulty, type, group);
+	}
 	 
 	 
-     @Override
-  public boolean checkSpawnObstruction(LevelReader p_21433_) {
-
-  	return p_21433_.isUnobstructed(this);
-  }
+	@Override
+	public boolean checkSpawnObstruction(LevelReader p_21433_) {
+		return p_21433_.isUnobstructed(this);
+	}
      
-	@Override	
+	@Override
 	protected void registerGoals() {
 		  this.goalSelector.addGoal(1, new Wisp.WispAttackGoal(this));
-	      this.goalSelector.addGoal(3, new Wisp.SquidRandomMovementGoal(this));
-	      this.goalSelector.addGoal(2, new Wisp.SquidFleeGoal());
-	      this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers());
-	      //this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
-	   }
+		  this.goalSelector.addGoal(3, new Wisp.SquidRandomMovementGoal(this));
+		  this.goalSelector.addGoal(2, new Wisp.SquidFleeGoal());
+		  this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers());
+		  //this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+	}
 
 
 	public static boolean checkWispSpawnRules(EntityType<Wisp> p_218985_, ServerLevelAccessor p_218986_, MobSpawnType p_218987_, BlockPos p_218988_, RandomSource p_218989_) {
-	      return checkMobSpawnRules(p_218985_, p_218986_, p_218987_, p_218988_, p_218989_) 
-	    		  && CommonConfig.spawn_wisp.get();
+		  return checkMobSpawnRules(p_218985_, p_218986_, p_218987_, p_218988_, p_218989_)
+				  //&& p_218986_.canSeeSky(p_218988_)
+				  && CommonConfig.spawn_wisp.get();
+	}
+
+	@Override
+	protected SoundEvent getAmbientSound() {
+	  return SoundEvents.SQUID_AMBIENT;
+	}
+	@Override
+	protected SoundEvent getHurtSound(DamageSource p_29980_) {
+	  return SoundEvents.SQUID_HURT;
+	}
+	@Override
+	protected SoundEvent getDeathSound() {
+	  return SoundEvents.SQUID_DEATH;
+	}
+	@Override
+	protected MovementEmission getMovementEmission() {
+		  return MovementEmission.EVENTS;
 	   }
-       @Override
-	   protected SoundEvent getAmbientSound() {
-	      return SoundEvents.SQUID_AMBIENT;
-	   }
-       @Override
-	   protected SoundEvent getHurtSound(DamageSource p_29980_) {
-	      return SoundEvents.SQUID_HURT;
-	   }
-       @Override
-	   protected SoundEvent getDeathSound() {
-	      return SoundEvents.SQUID_DEATH;
-	   }
-       @Override
-	   protected MovementEmission getMovementEmission() {
-		      return MovementEmission.EVENTS;
-		   }
        
-       @Override
-    public boolean fireImmune() {
-    	
-    	return true;
-    }
-       
-       
-       @Override
+	@Override
+	public boolean fireImmune() {
+
+	return true;
+	}
+
+	@Override
+	public void tick() {
+		super.tick();
+		/*if(tickCount%56==0) {
+			this.playSound(SoundEvents.FIRE_AMBIENT, 0.2f,0.4f);
+		}*/
+		if(tickCount%3==0) {
+			double x = this.getRandomX(0.6D);
+			double y = this.getRandomY() - 0.2;
+			double z = this.getRandomZ(0.6D);
+			this.level().addParticle(ParticleInit.SMALL_CURSEFLAME.get(), x, y, z, 0.01*(this.getRandom().nextFloat()-0.5), 0, 0.01*(this.getRandom().nextFloat()-0.5));
+		}
+	}
+
+	@Override
 		   public void aiStep() {
 		      super.aiStep();
 		      this.xBodyRotO = this.xBodyRot;

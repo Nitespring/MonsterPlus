@@ -71,6 +71,11 @@ public class EntitySpawnRegistration {
 				Types.MOTION_BLOCKING_NO_LEAVES,
 				AncientHero::checkAncientHeroSpawnRules,
 				RegisterSpawnPlacementsEvent.Operation.REPLACE);
+		event.register(EntityInit.WISP.get(),
+				SpawnPlacementTypes.NO_RESTRICTIONS,
+				Types.MOTION_BLOCKING,
+				Wisp::checkWispSpawnRules,
+				RegisterSpawnPlacementsEvent.Operation.REPLACE);
     }
 	
 	

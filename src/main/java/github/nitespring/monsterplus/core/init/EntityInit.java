@@ -9,6 +9,8 @@ import github.nitespring.monsterplus.common.entity.projectiles.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -84,9 +86,10 @@ public class EntityInit {
 					.sized(0.6F, 0.6F)
 					.build("ancient_hero_skull"));
 	public static final DeferredHolder<EntityType<?>,EntityType<Wisp>> WISP = ENTITIES.register("wisp",
-			()-> EntityType.Builder.<Wisp>of(Wisp::new,MobCategory.AMBIENT)
-					.sized(0.75F, 0.75F)
+			()-> EntityType.Builder.<Wisp>of(Wisp::new,MobCategory.valueOf("MONSTERPLUS_WISP"))
+					.sized(0.75F, 0.6F)
 					.build("wisp"));
+
 	
 	public static final DeferredHolder<EntityType<?>,EntityType<CrystalSpikes>> CRYSTAL_SPIKES = ENTITIES.register("crystal_spikes", 
             ()-> EntityType.Builder.<CrystalSpikes>of(CrystalSpikes::new,MobCategory.MISC)

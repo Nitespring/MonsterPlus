@@ -38,27 +38,15 @@ import github.nitespring.monsterplus.client.render.entities.specialeffects.Blood
 import github.nitespring.monsterplus.client.render.equipment.armour.CrystalArmourModel;
 import github.nitespring.monsterplus.client.render.equipment.armour.DarkArmourModel;
 
-import github.nitespring.monsterplus.client.render.particles.CurseflameParticleProvider;
+import github.nitespring.monsterplus.common.particles.CurseflameParticle;
 import github.nitespring.monsterplus.core.init.EntityInit;
 import github.nitespring.monsterplus.core.init.ParticleInit;
-import net.minecraft.client.model.SkullModel;
-import net.minecraft.client.model.SkullModelBase;
 import net.minecraft.client.model.SquidModel;
-import net.minecraft.client.model.VillagerHeadModel;
 import net.minecraft.client.model.geom.LayerDefinitions;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.particle.ParticleProvider;
-import net.minecraft.client.particle.SimpleAnimatedParticle;
-import net.minecraft.client.renderer.blockentity.SkullBlockRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.client.renderer.texture.SimpleTexture;
-import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.SkullBlock;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.api.distmarker.Dist;
 
 import net.neoforged.bus.api.SubscribeEvent;
@@ -144,7 +132,8 @@ public class ClientListener {
 	}
 	@SubscribeEvent
 	public static void registerRenderers(final RegisterParticleProvidersEvent event) {
-		event.registerSpriteSet(ParticleInit.CURSEFLAME.get(), CurseflameParticleProvider::new);
+		event.registerSpriteSet(ParticleInit.CURSEFLAME.get(), CurseflameParticle.CurseflameParticleProvider::new);
+		event.registerSpriteSet(ParticleInit.SMALL_CURSEFLAME.get(), CurseflameParticle.SmallCurseflameParticleProvider::new);
 	}
 
 

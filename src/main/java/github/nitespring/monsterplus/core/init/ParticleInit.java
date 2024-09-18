@@ -19,6 +19,8 @@ public class ParticleInit {
 
 	public static final DeferredHolder<ParticleType<?>,SimpleParticleType> CURSEFLAME = PARTICLES.register("curseflame",
 			() -> new SimpleParticleType(false));
+	public static final DeferredHolder<ParticleType<?>,SimpleParticleType> SMALL_CURSEFLAME = PARTICLES.register("small_curseflame",
+			() -> new SimpleParticleType(false));
 
 
 }

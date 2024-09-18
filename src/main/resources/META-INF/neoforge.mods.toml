@@ -15,10 +15,10 @@ logoFile="logo.png" #optional
 
 authors="Nitespring"
 
-
 # The description text for the mod (multi line!) (#mandatory)
 description='''New challenges await you, go explore'''
 
+enumExtensions="META-INF/enumextensions.json"
 
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.monsterplus]] #optional

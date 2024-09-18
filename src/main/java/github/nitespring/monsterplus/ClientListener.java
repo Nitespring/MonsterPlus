@@ -28,6 +28,7 @@ import github.nitespring.monsterplus.client.render.entities.mobs.lavasquid.Mothe
 import github.nitespring.monsterplus.client.render.entities.mobs.overgrownskeleton.OvergrownSkeletonModel;
 import github.nitespring.monsterplus.client.render.entities.mobs.overgrownskeleton.OvergrownSkeletonRenderer;
 import github.nitespring.monsterplus.client.render.entities.mobs.swampzombie.SwampZombieRenderer;
+import github.nitespring.monsterplus.client.render.entities.mobs.wisp.SoulRenderer;
 import github.nitespring.monsterplus.client.render.entities.mobs.wisp.WispModel;
 import github.nitespring.monsterplus.client.render.entities.mobs.wisp.WispRenderer;
 import github.nitespring.monsterplus.client.render.entities.projectiles.CrystalArrowRenderer;
@@ -45,6 +46,7 @@ import net.minecraft.client.model.SquidModel;
 import net.minecraft.client.model.geom.LayerDefinitions;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
@@ -129,11 +131,14 @@ public class ClientListener {
 		event.registerEntityRenderer(EntityInit.SPECTRAL_SKULL_PROJECTILE.get(), SkullProjectileRenderer::new);
 		event.registerEntityRenderer(EntityInit.WISP.get(), WispRenderer::new);
 		event.registerEntityRenderer(EntityInit.CURSEFLAME_FIREBALL.get(), SmallThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityInit.SOUL.get(), SoulRenderer::new);
+		event.registerEntityRenderer(EntityInit.SOULFLAME_FIREBALL.get(), SmallThrownItemRenderer::new);
 	}
 	@SubscribeEvent
 	public static void registerRenderers(final RegisterParticleProvidersEvent event) {
-		event.registerSpriteSet(ParticleInit.CURSEFLAME.get(), CurseflameParticle.CurseflameParticleProvider::new);
-		event.registerSpriteSet(ParticleInit.SMALL_CURSEFLAME.get(), CurseflameParticle.SmallCurseflameParticleProvider::new);
+		event.registerSpriteSet(ParticleInit.CURSEFLAME.get(), FlameParticle.Provider::new);
+		event.registerSpriteSet(ParticleInit.SMALL_CURSEFLAME.get(), FlameParticle.SmallFlameProvider::new);
+		event.registerSpriteSet(ParticleInit.SMALL_SOULFLAME.get(), FlameParticle.SmallFlameProvider::new);
 	}
 
 

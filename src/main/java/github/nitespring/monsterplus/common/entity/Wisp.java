@@ -1,11 +1,13 @@
 package github.nitespring.monsterplus.common.entity;
 
+import github.nitespring.monsterplus.MonsterPlus;
 import github.nitespring.monsterplus.common.entity.projectiles.CurseflameFireball;
 import github.nitespring.monsterplus.config.CommonConfig;
 import github.nitespring.monsterplus.core.init.EntityInit;
 import github.nitespring.monsterplus.core.init.ParticleInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -13,11 +15,13 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Vex;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -26,6 +30,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
+import java.util.Random;
 
 public class Wisp extends Monster{
 
@@ -49,6 +54,7 @@ public class Wisp extends Monster{
 
 	public Wisp(EntityType<? extends Monster> p_33002_, Level p_33003_) {
 		super(p_33002_, p_33003_);
+		this.xpReward = 1;
 		this.random.setSeed((long)this.getId());
 		this.tentacleSpeed = 1.0F / (this.random.nextFloat() + 1.0F) * 0.2F;
 	}
@@ -90,6 +96,15 @@ public class Wisp extends Monster{
 		   Vec3 pos = this.position();
 		   Vec3 deltaPos = new Vec3(0, 1.5, 0);
 		   this.setPos(pos.add(deltaPos));
+
+		   float randomScale = new Random().nextFloat()-0.5f;
+			this.getAttributes().getInstance(Attributes.SCALE).addPermanentModifier(
+					new AttributeModifier(
+							ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID,
+									"wisp_scale_modifier"),
+							randomScale,
+							AttributeModifier.Operation.ADD_VALUE)
+			);
 
 		return super.finalizeSpawn(server, difficulty, type, group);
 	}
@@ -145,6 +160,11 @@ public class Wisp extends Monster{
 		/*if(tickCount%56==0) {
 			this.playSound(SoundEvents.FIRE_AMBIENT, 0.2f,0.4f);
 		}*/
+		this.doParticles();
+	}
+
+
+	public void doParticles(){
 		if(tickCount%3==0) {
 			double x = this.getRandomX(0.6D);
 			double y = this.getRandomY() - 0.2;
@@ -152,6 +172,7 @@ public class Wisp extends Monster{
 			this.level().addParticle(ParticleInit.SMALL_CURSEFLAME.get(), x, y, z, 0.01*(this.getRandom().nextFloat()-0.5), 0, 0.01*(this.getRandom().nextFloat()-0.5));
 		}
 	}
+
 
 	@Override
 		   public void aiStep() {

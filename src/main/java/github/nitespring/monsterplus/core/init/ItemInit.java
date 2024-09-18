@@ -72,6 +72,9 @@ public class ItemInit {
 	public static final DeferredHolder<Item,Item> WISP_SPAWN_EGG = ITEMS.register("wisp_spawn_egg",
 			() -> new SpawnEggItem(EntityInit.WISP.get(), 3145631, 14090135, new Item.Properties()
 			));
+	public static final DeferredHolder<Item,Item> SOUL_SPAWN_EGG = ITEMS.register("soul_spawn_egg",
+			() -> new SpawnEggItem(EntityInit.SOUL.get(), 3140095, 2162687, new Item.Properties()
+			));
 	
 	
 	public static final DeferredHolder<Item,Item> CRYSTAL_CLUMP = ITEMS.register("crystal_clump", 
@@ -94,6 +97,8 @@ public class ItemInit {
 	public static final DeferredHolder<Item,Item> DARK_GEM = ITEMS.register("dark_gem",
 			() -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 	public static final DeferredHolder<Item,Item> CURSEFLAME_POWDER = ITEMS.register("curseflame_powder",
+			() -> new Item(new Item.Properties()));
+	public static final DeferredHolder<Item,Item> SOULFLAME_POWDER = ITEMS.register("soulflame_powder",
 			() -> new Item(new Item.Properties()));
 
 	public static final DeferredHolder<Item,Item> CRYSTAL_SWORD = ITEMS.register("crystal_sword", 

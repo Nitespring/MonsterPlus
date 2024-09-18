@@ -89,6 +89,10 @@ public class EntityInit {
 			()-> EntityType.Builder.<Wisp>of(Wisp::new,MobCategory.valueOf("MONSTERPLUS_WISP"))
 					.sized(0.75F, 0.6F)
 					.build("wisp"));
+	public static final DeferredHolder<EntityType<?>,EntityType<Soul>> SOUL = ENTITIES.register("soul",
+			()-> EntityType.Builder.<Soul>of(Soul::new,MobCategory.valueOf("MONSTERPLUS_WISP"))
+					.sized(0.75F, 0.6F)
+					.build("soul"));
 
 	
 	public static final DeferredHolder<EntityType<?>,EntityType<CrystalSpikes>> CRYSTAL_SPIKES = ENTITIES.register("crystal_spikes", 
@@ -123,6 +127,10 @@ public class EntityInit {
 			()-> EntityType.Builder.<CurseflameFireball>of(CurseflameFireball::new,MobCategory.MISC)
 					.sized(0.35F, 0.35F)
 					.build("curseflame_fireball"));
+	public static final DeferredHolder<EntityType<?>,EntityType<SoulflameFireball>> SOULFLAME_FIREBALL = ENTITIES.register("soulflame_fireball",
+			()-> EntityType.Builder.<SoulflameFireball>of(SoulflameFireball::new,MobCategory.MISC)
+					.sized(0.35F, 0.35F)
+					.build("soulflame_fireball"));
 	
 	
 }

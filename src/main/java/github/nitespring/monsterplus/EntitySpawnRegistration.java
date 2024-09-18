@@ -76,6 +76,11 @@ public class EntitySpawnRegistration {
 				Types.MOTION_BLOCKING,
 				Wisp::checkWispSpawnRules,
 				RegisterSpawnPlacementsEvent.Operation.REPLACE);
+		event.register(EntityInit.SOUL.get(),
+				SpawnPlacementTypes.NO_RESTRICTIONS,
+				Types.MOTION_BLOCKING,
+				Soul::checkSoulSpawnRules,
+				RegisterSpawnPlacementsEvent.Operation.REPLACE);
     }
 	
 	

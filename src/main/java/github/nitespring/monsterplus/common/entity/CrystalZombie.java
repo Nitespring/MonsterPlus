@@ -89,7 +89,7 @@ public class CrystalZombie extends Zombie{
 			
 			 LivingEntity livingentity = CrystalZombie.this.getTarget();
 			 
-	         if (livingentity != null && livingentity.isAlive()&& CrystalZombie.this.getSensing().hasLineOfSight(livingentity)) {
+	         if (livingentity != null && livingentity.isAlive()&&CrystalZombie.this.isAlive()&& CrystalZombie.this.getSensing().hasLineOfSight(livingentity)) {
 	           
 	            return true;
 	            

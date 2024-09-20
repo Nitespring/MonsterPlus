@@ -252,6 +252,17 @@ public class Abyssologer extends SpellcasterIllager{
 	   }
 	 
 	 class SpikeSpellGoal extends SpellcasterIllager.SpellcasterUseSpellGoal {
+
+
+		 @Override
+		 public boolean canUse() {
+			 if(!Abyssologer.this.isAlive()){
+				 return false;
+			 }else {
+				 return super.canUse();
+			 }
+		 }
+
 	      protected int getCastingTime() {
 	         return 40;
 	      }
@@ -385,12 +396,11 @@ public class Abyssologer extends SpellcasterIllager{
 	         }
 
 	      }
-	      
-	      
-	    
-	     
 
-	      protected SoundEvent getSpellPrepareSound() {
+
+
+
+		 protected SoundEvent getSpellPrepareSound() {
 	         return SoundEvents.EVOKER_PREPARE_ATTACK;
 	      }
 

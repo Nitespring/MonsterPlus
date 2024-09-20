@@ -47,7 +47,7 @@ public class Soul extends Wisp{
     }
     public static  AttributeSupplier.Builder setCustomAttributes(){
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 16.0D)
+                .add(Attributes.MAX_HEALTH, 12.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.25D)
                 .add(Attributes.ATTACK_DAMAGE, 3)
                 .add(Attributes.ATTACK_SPEED, 1.2D)

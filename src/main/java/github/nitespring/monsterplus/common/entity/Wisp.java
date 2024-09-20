@@ -73,7 +73,7 @@ public class Wisp extends Monster{
 
 	public static  AttributeSupplier.Builder setCustomAttributes(){
 		return Monster.createMonsterAttributes()
-				.add(Attributes.MAX_HEALTH, 12.0D)
+				.add(Attributes.MAX_HEALTH, 8.0D)
 				.add(Attributes.MOVEMENT_SPEED, 0.25D)
 				.add(Attributes.ATTACK_DAMAGE, 2)
 				.add(Attributes.ATTACK_SPEED, 1.2D)

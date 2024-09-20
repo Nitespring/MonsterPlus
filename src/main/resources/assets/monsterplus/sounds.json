@@ -1,0 +1,37 @@
+{
+	"entity.wisp.ambient": {
+		"sounds": [
+			"monsterplus:entity/wisp/ambient1",
+			"monsterplus:entity/wisp/ambient2",
+			"monsterplus:entity/wisp/ambient3",
+			"monsterplus:entity/wisp/ambient4",
+			"monsterplus:entity/wisp/ambient5"
+		],
+		"subtitle": "subtitles.monsterplus.wisp"
+	},
+	"entity.wisp.death": {
+		"sounds": [
+			 "monsterplus:entity/wisp/death1",
+			 "monsterplus:entity/wisp/death2",
+			 "monsterplus:entity/wisp/death3"
+		],
+		"subtitle": "subtitles.monsterplus.wisp"
+	},
+	"entity.wisp.hurt": {
+		"sounds": [
+			 "monsterplus:entity/wisp/hurt1",
+			 "monsterplus:entity/wisp/hurt2",
+			 "monsterplus:entity/wisp/hurt3",
+			 "monsterplus:entity/wisp/hurt4"
+		],
+		"subtitle": "subtitles.monsterplus.wisp"
+	},
+	"entity.wisp.squirt": {
+		"sounds": [
+			 "monsterplus:entity/wisp/squirt1",
+			 "monsterplus:entity/wisp/squirt2",
+			 "monsterplus:entity/wisp/squirt3"
+		],
+		"subtitle": "subtitles.monsterplus.wisp"
+	}
+}

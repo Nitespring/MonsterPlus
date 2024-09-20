@@ -5,9 +5,12 @@ import github.nitespring.monsterplus.common.entity.projectiles.CurseflameFirebal
 import github.nitespring.monsterplus.config.CommonConfig;
 import github.nitespring.monsterplus.core.init.EntityInit;
 import github.nitespring.monsterplus.core.init.ParticleInit;
+import github.nitespring.monsterplus.core.init.SoundInit;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -20,6 +23,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.animal.Squid;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Vex;
 import net.minecraft.world.entity.player.Player;
@@ -133,15 +137,19 @@ public class Wisp extends Monster{
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-	  return SoundEvents.SQUID_AMBIENT;
+	  return SoundInit.WISP_AMBIENT.get();
 	}
 	@Override
 	protected SoundEvent getHurtSound(DamageSource p_29980_) {
-	  return SoundEvents.SQUID_HURT;
+	  return SoundInit.WISP_HURT.get();
 	}
 	@Override
 	protected SoundEvent getDeathSound() {
-	  return SoundEvents.SQUID_DEATH;
+	  return SoundInit.WISP_DEATH.get();
+	}
+
+	protected SoundEvent getSquirtSound() {
+		return SoundInit.WISP_SQUIRT.get();
 	}
 	@Override
 	protected MovementEmission getMovementEmission() {
@@ -244,7 +252,32 @@ public class Wisp extends Monster{
 			      Vec3 vec3 = p_29986_.xRot(this.xBodyRotO * ((float)Math.PI / 180F));
 			      return vec3.yRot(-this.yBodyRotO * ((float)Math.PI / 180F));
 			   }
-	
+	private void spawnInk() {
+		this.makeSound(this.getSquirtSound());
+		Vec3 vec3 = this.rotateVector(new Vec3(0.0, -1.0, 0.0)).add(this.getX(), this.getY(), this.getZ());
+
+		for (int i = 0; i < 30; i++) {
+			Vec3 vec31 = this.rotateVector(new Vec3((double)this.random.nextFloat() * 0.6 - 0.3, -1.0, (double)this.random.nextFloat() * 0.6 - 0.3));
+			Vec3 vec32 = vec31.scale(0.15 + (double)(this.random.nextFloat() * 1.5F));
+			((ServerLevel)this.level()).sendParticles(this.getInkParticle(), vec3.x, vec3.y + 0.5, vec3.z, 0, vec32.x, vec32.y, vec32.z, 0.1F);
+		}
+	}
+	@Override
+	public boolean hurt(DamageSource pSource, float pAmount) {
+		if (super.hurt(pSource, pAmount) && this.getLastHurtByMob() != null) {
+			if (!this.level().isClientSide) {
+				this.spawnInk();
+			}
+
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	protected ParticleOptions getInkParticle() {
+		return ParticleInit.SMALL_CURSEFLAME.get();
+	}
 		  
 		   @Override
 			   public void travel(Vec3 p_29984_) {
@@ -361,7 +394,7 @@ public class Wisp extends Monster{
 	            }
 
 	            if (this.fleeTicks % 10 == 5) {
-	            	Wisp.this.level().addParticle(ParticleTypes.SMALL_FLAME, Wisp.this.getX(), Wisp.this.getY(), Wisp.this.getZ(), 0.0D, 0.0D, 0.0D);
+	            	Wisp.this.level().addParticle(ParticleInit.SMALL_CURSEFLAME.get(), Wisp.this.getX(), Wisp.this.getY(), Wisp.this.getZ(), 0.0D, 0.0D, 0.0D);
 	            }
 
 	         }

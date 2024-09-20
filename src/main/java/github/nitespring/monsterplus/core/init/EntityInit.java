@@ -31,7 +31,7 @@ public class EntityInit {
 			.build("glow_skeleton"));
 	
 	public static final DeferredHolder<EntityType<?>,EntityType<LavaSquid>> LAVA_SQUID = ENTITIES.register("lava_squid",
-			() -> EntityType.Builder.<LavaSquid>of(LavaSquid::new, MobCategory.MONSTER)
+			() -> EntityType.Builder.<LavaSquid>of(LavaSquid::new, MobCategory.valueOf("MONSTERPLUS_LAVA_SQUID"))
 			.sized(0.8F, 0.8F)
 			.build("lava_squid"));
 	
@@ -78,7 +78,7 @@ public class EntityInit {
 					.sized(0.75F, 0.75F)
 					.build("ender_eye"));
 	public static final DeferredHolder<EntityType<?>,EntityType<AncientHero>> ANCIENT_HERO = ENTITIES.register("ancient_hero",
-			()-> EntityType.Builder.<AncientHero>of(AncientHero::new,MobCategory.MONSTER)
+			()-> EntityType.Builder.<AncientHero>of(AncientHero::new, MobCategory.valueOf("MONSTERPLUS_WRAITH"))
 					.sized(0.6F, 2.0F)
 					.build("ancient_hero"));
 	public static final DeferredHolder<EntityType<?>,EntityType<AncientHeroSkull>> ANCIENT_HERO_SKULL = ENTITIES.register("ancient_hero_skull",

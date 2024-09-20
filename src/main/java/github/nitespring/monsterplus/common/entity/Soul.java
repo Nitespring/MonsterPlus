@@ -6,6 +6,7 @@ import github.nitespring.monsterplus.config.CommonConfig;
 import github.nitespring.monsterplus.core.init.EntityInit;
 import github.nitespring.monsterplus.core.init.ParticleInit;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
@@ -59,6 +60,9 @@ public class Soul extends Wisp{
         return checkMobSpawnRules(p_218985_, p_218986_, p_218987_, p_218988_, p_218989_)
                 //&& p_218986_.canSeeSky(p_218988_)
                 && CommonConfig.spawn_wisp.get();
+    }
+    protected ParticleOptions getInkParticle() {
+        return ParticleInit.SMALL_SOULFLAME.get();
     }
 
     static class SoulAttackGoal extends Goal {

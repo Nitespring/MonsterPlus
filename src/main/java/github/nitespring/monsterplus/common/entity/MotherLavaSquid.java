@@ -8,6 +8,7 @@ import java.util.Random;
 import github.nitespring.monsterplus.config.CommonConfig;
 import github.nitespring.monsterplus.core.init.EntityInit;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.*;
@@ -40,16 +41,35 @@ public class MotherLavaSquid extends LavaSquid{
 	
 	public static  AttributeSupplier.Builder setCustomAttributes(){
 		return Monster.createMonsterAttributes()
-				.add(Attributes.MAX_HEALTH, 40.0D)
+				.add(Attributes.MAX_HEALTH, 36.0D)
 				.add(Attributes.MOVEMENT_SPEED, 0.25D)
 				.add(Attributes.ATTACK_DAMAGE, 5)
 				.add(Attributes.ATTACK_SPEED, 1.2D)
 				.add(Attributes.ATTACK_KNOCKBACK, 2.0D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
-				.add(Attributes.FOLLOW_RANGE, 50)
+				.add(Attributes.FOLLOW_RANGE, 40)
 				.add(Attributes.FALL_DAMAGE_MULTIPLIER, 0);
 
 	  }
+
+	public void doParticles(){
+		if(tickCount%3==0) {
+			double x = this.getRandomX(0.6D);
+			double y = this.getRandomY();
+			double z = this.getRandomZ(0.6D);
+			this.level().addParticle(ParticleTypes.FLAME, x, y, z, 0.01 * (this.getRandom().nextFloat() - 0.5), 0, 0.01 * (this.getRandom().nextFloat() - 0.5));
+		}
+	}
+	@Override
+	protected boolean shouldDespawnInPeaceful() {
+		return true;
+	}
+	@Override
+	protected void spawnInk() {}
+	@Override
+	public boolean isPreventingPlayerRest(Player pPlayer) {
+		return true;
+	}
 	
 	public static boolean checkMotherLavaSquidSpawnRules(EntityType<MotherLavaSquid> p_218985_, LevelAccessor p_218986_, MobSpawnType p_218987_, BlockPos p_218988_, RandomSource p_218989_) {
 	      return p_218986_.getDifficulty() != Difficulty.PEACEFUL && checkMobSpawnRules(p_218985_, p_218986_, p_218987_, p_218988_, p_218989_) 

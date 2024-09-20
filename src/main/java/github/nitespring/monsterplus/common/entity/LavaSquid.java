@@ -3,9 +3,12 @@ package github.nitespring.monsterplus.common.entity;
 import java.util.EnumSet;
 
 import github.nitespring.monsterplus.config.CommonConfig;
+import github.nitespring.monsterplus.core.init.ParticleInit;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.EntityTypeTags;
@@ -75,6 +78,14 @@ public class LavaSquid extends Monster{
 				.add(Attributes.FALL_DAMAGE_MULTIPLIER, 0);
 
 	  }
+	@Override
+	protected boolean shouldDespawnInPeaceful() {
+		return this.isAggressive();
+	}
+	@Override
+	public boolean isPreventingPlayerRest(Player pPlayer) {
+		return this.isAggressive();
+	}
 	
 	 @Override
 	    public SpawnGroupData finalizeSpawn(ServerLevelAccessor server, DifficultyInstance difficulty,
@@ -93,6 +104,49 @@ public class LavaSquid extends Monster{
 
   	return p_21433_.isUnobstructed(this);
   }
+	protected void spawnInk() {
+		this.makeSound(this.getSquirtSound());
+		Vec3 vec3 = this.rotateVector(new Vec3(0.0, -1.0, 0.0)).add(this.getX(), this.getY(), this.getZ());
+
+		for (int i = 0; i < 30; i++) {
+			Vec3 vec31 = this.rotateVector(new Vec3((double)this.random.nextFloat() * 0.6 - 0.3, -1.0, (double)this.random.nextFloat() * 0.6 - 0.3));
+			Vec3 vec32 = vec31.scale(0.3 + (double)(this.random.nextFloat() * 2.0F));
+			((ServerLevel)this.level()).sendParticles(this.getInkParticle(), vec3.x, vec3.y + 0.5, vec3.z, 0, vec32.x, vec32.y, vec32.z, 0.1F);
+		}
+	}
+	@Override
+	public boolean hurt(DamageSource pSource, float pAmount) {
+		if (super.hurt(pSource, pAmount) && this.getLastHurtByMob() != null) {
+			if (!this.level().isClientSide) {
+				this.spawnInk();
+			}
+
+			return true;
+		} else {
+			return false;
+		}
+	}
+	@Override
+	public void tick() {
+		super.tick();
+		/*if(tickCount%56==0) {
+			this.playSound(SoundEvents.FIRE_AMBIENT, 0.2f,0.4f);
+		}*/
+		this.doParticles();
+	}
+
+
+	public void doParticles(){
+		if(tickCount%5==0) {
+			double x = this.getRandomX(0.6D);
+			double y = this.getRandomY() - 0.2;
+			double z = this.getRandomZ(0.6D);
+			this.level().addParticle(ParticleTypes.SMALL_FLAME, x, y, z, 0.01*(this.getRandom().nextFloat()-0.5), 0, 0.01*(this.getRandom().nextFloat()-0.5));
+		}
+	}
+	protected ParticleOptions getInkParticle() {
+		return ParticleTypes.LARGE_SMOKE;
+	}
      
 	@Override	
 	protected void registerGoals() {
@@ -102,7 +156,9 @@ public class LavaSquid extends Monster{
 	      this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers());
 	      //this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
 	   }
-
+	protected SoundEvent getSquirtSound() {
+		return SoundEvents.SQUID_SQUIRT;
+	}
 
 	public static boolean checkLavaSquidSpawnRules(EntityType<LavaSquid> p_218985_, ServerLevelAccessor p_218986_, MobSpawnType p_218987_, BlockPos p_218988_, RandomSource p_218989_) {
 	      return checkMobSpawnRules(p_218985_, p_218986_, p_218987_, p_218988_, p_218989_) 

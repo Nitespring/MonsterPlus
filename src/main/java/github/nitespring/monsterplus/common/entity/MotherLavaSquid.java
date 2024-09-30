@@ -241,7 +241,8 @@ public class MotherLavaSquid extends LavaSquid{
 									pos2.y+d*aim.y*Math.sin(b),
 									pos2.z+d*(aim.z*Math.cos(b)+aim.x*Math.sin(b)));*/
 							 double e = Math.sqrt(aim.x*aim.x+aim.z*aim.z);
-							 Vec3 pos3=new Vec3(pos2.x+d*(aim1.x*Math.cos(b)-aim.y*Math.sin(b)),
+							 Vec3 pos3=new Vec3(
+									 pos2.x+d*(aim1.x*Math.cos(b)-aim.y*Math.sin(b)),
 									 pos2.y+d*(aim.y*Math.cos(b)+e*Math.sin(b)),
 									 pos2.z+d*(aim1.z*Math.cos(b)-aim.y*Math.sin(b)));
 							if(i==1){

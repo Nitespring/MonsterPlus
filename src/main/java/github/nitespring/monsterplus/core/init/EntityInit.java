@@ -93,6 +93,10 @@ public class EntityInit {
 			()-> EntityType.Builder.<Soul>of(Soul::new,MobCategory.valueOf("MONSTERPLUS_WISP"))
 					.sized(0.75F, 0.6F)
 					.build("soul"));
+	public static final DeferredHolder<EntityType<?>,EntityType<DesertSorceress>> DESERT_SORCERESS = ENTITIES.register("desert_sorceress",
+			()-> EntityType.Builder.<DesertSorceress>of(DesertSorceress::new,MobCategory.MONSTER)
+					.sized(0.6F, 1.99F)
+					.build("desert_sorceress"));
 
 	
 	public static final DeferredHolder<EntityType<?>,EntityType<CrystalSpikes>> CRYSTAL_SPIKES = ENTITIES.register("crystal_spikes", 

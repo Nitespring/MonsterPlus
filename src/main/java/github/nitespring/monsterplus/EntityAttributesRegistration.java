@@ -34,6 +34,7 @@ public class EntityAttributesRegistration {
 		event.put(EntityInit.ANCIENT_HERO_SKULL.get(), AncientHeroSkull.setCustomAttributes().build());
 		event.put(EntityInit.WISP.get(), Wisp.setCustomAttributes().build());
 		event.put(EntityInit.SOUL.get(), Soul.setCustomAttributes().build());
+		event.put(EntityInit.DESERT_SORCERESS.get(), DesertSorceress.createAttributes().build());
 	
 	}
 

@@ -81,6 +81,9 @@ public class ItemInit {
 	public static final DeferredHolder<Item,Item> SPECTRAL_SKULL_SPAWN_EGG = ITEMS.register("spectral_skull_spawn_egg",
 			() -> new SpawnEggItem(EntityInit.FLYING_SKULL.get(), 3140095, 2162687, new Item.Properties()
 			));
+	public static final DeferredHolder<Item,Item> DESERT_ACOLYTE_SPAWN_EGG = ITEMS.register("desert_acolyte_spawn_egg",
+			() -> new SpawnEggItem(EntityInit.DESERT_ACOLYTE.get(), 3140095, 2162687, new Item.Properties()
+			));
 	
 	
 	public static final DeferredHolder<Item,Item> CRYSTAL_CLUMP = ITEMS.register("crystal_clump", 

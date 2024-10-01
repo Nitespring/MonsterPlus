@@ -101,6 +101,10 @@ public class EntityInit {
 			()-> EntityType.Builder.<FlyingSkull>of(FlyingSkull::new,MobCategory.MONSTER)
 					.sized(0.6F, 0.6F)
 					.build("spectral_skull"));
+	public static final DeferredHolder<EntityType<?>,EntityType<DesertAcolyte>> DESERT_ACOLYTE = ENTITIES.register("desert_acolyte",
+			()-> EntityType.Builder.<DesertAcolyte>of(DesertAcolyte::new,MobCategory.MONSTER)
+					.sized(0.6F, 1.99F)
+					.build("desert_acolyte"));
 
 	
 	public static final DeferredHolder<EntityType<?>,EntityType<CrystalSpikes>> CRYSTAL_SPIKES = ENTITIES.register("crystal_spikes", 

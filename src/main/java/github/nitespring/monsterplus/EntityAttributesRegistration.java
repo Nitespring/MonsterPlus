@@ -35,6 +35,7 @@ public class EntityAttributesRegistration {
 		event.put(EntityInit.WISP.get(), Wisp.setCustomAttributes().build());
 		event.put(EntityInit.SOUL.get(), Soul.setCustomAttributes().build());
 		event.put(EntityInit.DESERT_SORCERESS.get(), DesertSorceress.createAttributes().build());
+		event.put(EntityInit.FLYING_SKULL.get(), FlyingSkull.setCustomAttributes().build());
 	
 	}
 

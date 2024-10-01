@@ -20,6 +20,8 @@ import github.nitespring.monsterplus.client.render.entities.mobs.crystalzombie.C
 import github.nitespring.monsterplus.client.render.entities.mobs.eyeball.DemonEyeModel;
 import github.nitespring.monsterplus.client.render.entities.mobs.eyeball.DemonEyeRenderer;
 import github.nitespring.monsterplus.client.render.entities.mobs.eyeball.EnderEyeRenderer;
+import github.nitespring.monsterplus.client.render.entities.mobs.flyingskull.FlyingSkullModel;
+import github.nitespring.monsterplus.client.render.entities.mobs.flyingskull.FlyingSkullRenderer;
 import github.nitespring.monsterplus.client.render.entities.mobs.glowskeleton.GlowSkeletonModel;
 import github.nitespring.monsterplus.client.render.entities.mobs.glowskeleton.GlowSkeletonRenderer;
 import github.nitespring.monsterplus.client.render.entities.mobs.lavasquid.LavaSquidRenderer;
@@ -80,6 +82,7 @@ public class ClientListener {
 	public static final ModelLayerLocation WISP_INNER_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "wisp"), "inner");
 	public static final ModelLayerLocation WISP_OUTER_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "wisp"), "outer");
 	public static final ModelLayerLocation DESERT_SORCERESS = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "desert_sorceress"), "main");
+	public static final ModelLayerLocation FLYING_SKULL_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "flying_skull"), "main");
 
 	//public static final ModelLayerLocation EYE_MASK = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MonsterPlus.MODID, "eye_mask"), "main");
 	@SubscribeEvent
@@ -105,6 +108,7 @@ public class ClientListener {
 				() -> LayerDefinition.create(CrystalArmourModel.createBodyLayer(LayerDefinitions.OUTER_ARMOR_DEFORMATION), 64, 64));
 		event.registerLayerDefinition(DARK_ARMOUR_MAIN_LAYER, DarkArmourModel::createBodyLayer);
 		event.registerLayerDefinition(DESERT_SORCERESS, DesertSorceressModel::createDesertSorceressLayer);
+		event.registerLayerDefinition(FLYING_SKULL_LAYER, FlyingSkullModel::createBodyLayer);
 
 //		event.registerLayerDefinition(EYE_MASK, SkullModel::createMobHeadLayer);
     }
@@ -138,6 +142,7 @@ public class ClientListener {
 		event.registerEntityRenderer(EntityInit.SOUL.get(), SoulRenderer::new);
 		event.registerEntityRenderer(EntityInit.SOULFLAME_FIREBALL.get(), SmallThrownItemRenderer::new);
 		event.registerEntityRenderer(EntityInit.DESERT_SORCERESS.get(), DesertSorceressRenderer::new);
+		event.registerEntityRenderer(EntityInit.FLYING_SKULL.get(), FlyingSkullRenderer::new);
 	}
 	@SubscribeEvent
 	public static void registerRenderers(final RegisterParticleProvidersEvent event) {

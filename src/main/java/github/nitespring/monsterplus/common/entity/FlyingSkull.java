@@ -1,7 +1,9 @@
 package github.nitespring.monsterplus.common.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
@@ -70,9 +72,9 @@ public class FlyingSkull extends FlyingMob implements Enemy{
 	
 	public static  AttributeSupplier.Builder setCustomAttributes(){
 		return Monster.createMonsterAttributes()
-				.add(Attributes.MAX_HEALTH, 8.0D)
+				.add(Attributes.MAX_HEALTH, 20.0D)
 				.add(Attributes.MOVEMENT_SPEED, 0.25D)
-				.add(Attributes.ATTACK_DAMAGE, 3)
+				.add(Attributes.ATTACK_DAMAGE, 5)
 				.add(Attributes.ATTACK_SPEED, 1.2D)
 				.add(Attributes.ATTACK_KNOCKBACK, 0.2D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.0D)
@@ -89,6 +91,10 @@ public class FlyingSkull extends FlyingMob implements Enemy{
 	         this.remove(RemovalReason.DISCARDED);
 	         
 	      }
+		 if(tickCount%6==0) {
+			 playSound(SoundEvents.CAMPFIRE_CRACKLE, 0.2f, 0.4f);
+		 }
+		 this.level().addParticle(ParticleTypes.SOUL_FIRE_FLAME, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0, 0.0, 0.0);
 	}
 	
 	
@@ -276,7 +282,7 @@ public class FlyingSkull extends FlyingMob implements Enemy{
 		      }
 
 		      public void stop() {
-		    	  FlyingSkull.this.anchorPoint = FlyingSkull.this.level().getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, FlyingSkull.this.anchorPoint).above(10 + FlyingSkull.this.random.nextInt(20));
+		    	  FlyingSkull.this.anchorPoint = FlyingSkull.this.level().getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, FlyingSkull.this.anchorPoint).above(5 + FlyingSkull.this.random.nextInt(10));
 		      }
 
 		      public void tick() {

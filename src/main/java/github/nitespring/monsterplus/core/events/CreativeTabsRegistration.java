@@ -66,6 +66,8 @@ public class CreativeTabsRegistration {
 			event.accept(ItemInit.ANCIENT_HERO_SKULL_SPAWN_EGG.get());
 			event.accept(ItemInit.WISP_SPAWN_EGG.get());
 			event.accept(ItemInit.SOUL_SPAWN_EGG.get());
+			event.accept(ItemInit.SPECTRAL_SKULL_SPAWN_EGG.get());
+			event.accept(ItemInit.DESERT_SORCERESS_SPAWN_EGG.get());
 		}
 	}
 	

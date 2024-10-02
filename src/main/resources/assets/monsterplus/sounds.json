@@ -33,5 +33,47 @@
 			 "monsterplus:entity/wisp/squirt3"
 		],
 		"subtitle": "subtitles.monsterplus.wisp"
+	},
+	"entity.desert_sorceress.ambient": {
+		"sounds": [
+			"monsterplus:entity/desert_sorceress/idle1",
+			"monsterplus:entity/desert_sorceress/idle2",
+			"monsterplus:entity/desert_sorceress/idle3",
+			"monsterplus:entity/desert_sorceress/idle4"
+		],
+		"subtitle": "subtitles.monsterplus.desert_sorceress"
+	},
+	"entity.desert_sorceress.death": {
+		"sounds": [
+			"monsterplus:entity/desert_sorceress/death1",
+			"monsterplus:entity/desert_sorceress/death2"
+		],
+		"subtitle": "subtitles.monsterplus.desert_sorceress"
+	},
+	"entity.desert_sorceress.hurt": {
+		"sounds": [
+			"monsterplus:entity/desert_sorceress/hurt1",
+			"monsterplus:entity/desert_sorceress/hurt2"
+		],
+		"subtitle": "subtitles.monsterplus.desert_sorceress"
+	},
+	"entity.desert_sorceress.cast": {
+		"sounds": [
+			"monsterplus:entity/desert_sorceress/cast1",
+			"monsterplus:entity/desert_sorceress/cast2"
+		],
+		"subtitle": "subtitles.monsterplus.desert_sorceress"
+	},
+	"entity.desert_sorceress.wololo": {
+		"sounds": [
+			"monsterplus:entity/desert_sorceress/prepare_wololo"
+		],
+		"subtitle": "subtitles.monsterplus.desert_sorceress"
+	},
+	"entity.desert_sorceress.celebrate": {
+		"sounds": [
+			"monsterplus:entity/desert_sorceress/celebrate"
+		],
+		"subtitle": "subtitles.monsterplus.desert_sorceress"
 	}
 }

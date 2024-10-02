@@ -76,13 +76,13 @@ public class ItemInit {
 			() -> new SpawnEggItem(EntityInit.SOUL.get(), 3140095, 2162687, new Item.Properties()
 			));
 	public static final DeferredHolder<Item,Item> DESERT_SORCERESS_SPAWN_EGG = ITEMS.register("desert_sorceress_spawn_egg",
-			() -> new SpawnEggItem(EntityInit.DESERT_SORCERESS.get(), 3140095, 2162687, new Item.Properties()
+			() -> new SpawnEggItem(EntityInit.DESERT_SORCERESS.get(), 16708608, 5057279, new Item.Properties()
 			));
 	public static final DeferredHolder<Item,Item> SPECTRAL_SKULL_SPAWN_EGG = ITEMS.register("spectral_skull_spawn_egg",
-			() -> new SpawnEggItem(EntityInit.FLYING_SKULL.get(), 3140095, 2162687, new Item.Properties()
+			() -> new SpawnEggItem(EntityInit.FLYING_SKULL.get(), 12900599, 10334207, new Item.Properties()
 			));
 	public static final DeferredHolder<Item,Item> DESERT_ACOLYTE_SPAWN_EGG = ITEMS.register("desert_acolyte_spawn_egg",
-			() -> new SpawnEggItem(EntityInit.DESERT_ACOLYTE.get(), 3140095, 2162687, new Item.Properties()
+			() -> new SpawnEggItem(EntityInit.DESERT_ACOLYTE.get(), 6838585, 14804929, new Item.Properties()
 			));
 	
 	

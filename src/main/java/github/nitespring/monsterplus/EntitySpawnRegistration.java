@@ -81,6 +81,21 @@ public class EntitySpawnRegistration {
 				Types.MOTION_BLOCKING,
 				Soul::checkSoulSpawnRules,
 				RegisterSpawnPlacementsEvent.Operation.REPLACE);
+		event.register(EntityInit.DESERT_SORCERESS.get(),
+				SpawnPlacementTypes.ON_GROUND,
+				Types.MOTION_BLOCKING_NO_LEAVES,
+				DesertSorceress::checkDesertSorceressSpawnRules,
+				RegisterSpawnPlacementsEvent.Operation.REPLACE);
+		event.register(EntityInit.DESERT_ACOLYTE.get(),
+				SpawnPlacementTypes.ON_GROUND,
+				Types.MOTION_BLOCKING_NO_LEAVES,
+				DesertAcolyte::checkDesertAcolyteSpawnRules,
+				RegisterSpawnPlacementsEvent.Operation.REPLACE);
+		event.register(EntityInit.FLYING_SKULL.get(),
+				SpawnPlacementTypes.NO_RESTRICTIONS,
+				Types.MOTION_BLOCKING,
+				FlyingSkull::checkFlyingSkullSpawnRules,
+				RegisterSpawnPlacementsEvent.Operation.REPLACE);
     }
 	
 	

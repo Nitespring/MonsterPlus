@@ -1,11 +1,14 @@
 package github.nitespring.monsterplus.common.entity;
 
+import github.nitespring.monsterplus.config.CommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -23,7 +26,9 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
 
@@ -47,7 +52,7 @@ public class FlyingSkull extends FlyingMob implements Enemy{
 		super(p_21368_, p_21369_);
 		this.xpReward = 5;
 		this.moveControl = new FlyingSkull.EyeMoveControl(this);
-	      this.lookControl = new FlyingSkull.EyeLookControl(this);
+	    this.lookControl = new FlyingSkull.EyeLookControl(this);
 	}
 	
 	//Phantom
@@ -59,8 +64,25 @@ public class FlyingSkull extends FlyingMob implements Enemy{
 	   public Mob getOwner() {
 	      return this.owner;
 	   }
-	 
-	 
+
+	public static boolean checkFlyingSkullSpawnRules(EntityType<? extends Mob> p_219014_, ServerLevelAccessor p_219015_, MobSpawnType p_219016_, BlockPos blockPos, RandomSource p_219018_) {
+		return p_219015_.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(p_219015_, blockPos, p_219018_) && checkMobSpawnRules(p_219014_, p_219015_, p_219016_, blockPos, p_219018_)
+				&& blockPos.getY() <= 40 && CommonConfig.spawn_spectral_skull.get();
+	}
+	public static boolean isDarkEnoughToSpawn(ServerLevelAccessor pLevel, BlockPos pPos, RandomSource pRandom) {
+		if (pLevel.getBrightness(LightLayer.SKY, pPos) > pRandom.nextInt(32)) {
+			return false;
+		} else {
+			DimensionType dimensiontype = pLevel.dimensionType();
+			int i = dimensiontype.monsterSpawnBlockLightLimit();
+			if (i < 15 && pLevel.getBrightness(LightLayer.BLOCK, pPos) > i) {
+				return false;
+			} else {
+				int j = pLevel.getLevel().isThundering() ? pLevel.getMaxLocalRawBrightness(pPos, 10) : pLevel.getMaxLocalRawBrightness(pPos);
+				return j <= dimensiontype.monsterSpawnLightTest().sample(pRandom);
+			}
+		}
+	}
 	 public void setOwner(Mob p_33995_) {
 	      this.owner = p_33995_;
 	   }
@@ -130,7 +152,7 @@ public class FlyingSkull extends FlyingMob implements Enemy{
 	   }
 	@Override
 	   public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_33126_, DifficultyInstance p_33127_, MobSpawnType p_33128_, @Nullable SpawnGroupData p_33129_) {
-	      this.anchorPoint = this.blockPosition().above(5);
+	      this.anchorPoint = this.blockPosition().above(2);
 	     
 	      return super.finalizeSpawn(p_33126_, p_33127_, p_33128_, p_33129_);
 	   }
@@ -282,7 +304,7 @@ public class FlyingSkull extends FlyingMob implements Enemy{
 		      }
 
 		      public void stop() {
-		    	  FlyingSkull.this.anchorPoint = FlyingSkull.this.level().getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, FlyingSkull.this.anchorPoint).above(5 + FlyingSkull.this.random.nextInt(10));
+		    	  FlyingSkull.this.anchorPoint = FlyingSkull.this.level().getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, FlyingSkull.this.anchorPoint).above(1 + FlyingSkull.this.random.nextInt(5));
 		      }
 
 		      public void tick() {
@@ -299,7 +321,7 @@ public class FlyingSkull extends FlyingMob implements Enemy{
 		      }
 		      
 		      private void setAnchorAboveTarget() {
-		          FlyingSkull.this.anchorPoint = FlyingSkull.this.getTarget().blockPosition().above(5 + FlyingSkull.this.random.nextInt(20));
+		          FlyingSkull.this.anchorPoint = FlyingSkull.this.getTarget().blockPosition().above(FlyingSkull.this.random.nextInt(5));
 		          /*if (FlyingSkull.this.anchorPoint.getY() < FlyingSkull.this.level().getSeaLevel()) {
 		        	  FlyingSkull.this.anchorPoint = new BlockPos(FlyingSkull.this.anchorPoint.getX(), FlyingSkull.this.level().getSeaLevel() + 1, FlyingSkull.this.anchorPoint.getZ());
 		          }*/

@@ -4,6 +4,7 @@ import github.nitespring.monsterplus.common.entity.projectiles.PurpleFireball;
 import github.nitespring.monsterplus.common.entity.projectiles.SpikeCountdown;
 import github.nitespring.monsterplus.config.CommonConfig;
 import github.nitespring.monsterplus.core.init.EntityInit;
+import github.nitespring.monsterplus.core.init.SoundInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -47,7 +48,7 @@ public class DesertSorceress extends SpellcasterIllager{
 
 	public DesertSorceress(EntityType<? extends SpellcasterIllager> p_33724_, Level p_33725_) {
 		super(p_33724_, p_33725_);
-		this.xpReward = 10;
+		this.xpReward = 15;
 	}
 
 	@Nullable
@@ -63,14 +64,14 @@ public class DesertSorceress extends SpellcasterIllager{
 
 	@Override
 	protected SoundEvent getCastingSoundEvent() {
-		
-		return SoundEvents.EVOKER_CAST_SPELL;
+
+		return SoundInit.DESERT_SORCERESS_CAST.get();
 	}
 
 	@Override
 	public SoundEvent getCelebrateSound() {
-		
-		return SoundEvents.EVOKER_CELEBRATE;
+
+		return SoundInit.DESERT_SORCERESS_CELEBRATE.get();
 	}
 	@Override
 	protected void registerGoals() {
@@ -102,41 +103,37 @@ public class DesertSorceress extends SpellcasterIllager{
 	    		  .add(Attributes.MAX_HEALTH, 30.0D)
 	              .add(Attributes.FOLLOW_RANGE, 24);
 	   }
-	 @Override
-	 public boolean isAlliedTo(Entity p_32665_) {
-	      if (p_32665_ == null) {
-	         return false;
-	      } else if (p_32665_ == this) {
-	         return true;
-	      } else if (super.isAlliedTo(p_32665_)) {
-	         return true;
-	      } else if (p_32665_ instanceof Eye) {
-	         return this.isAlliedTo(((Eye)p_32665_).getOwner());
-	      }  else if (p_32665_ instanceof SpectralSkeleton) {
-		         return this.isAlliedTo(((SpectralSkeleton)p_32665_).getOwner());
-	      } else if (p_32665_ instanceof LivingEntity && ((LivingEntity)p_32665_).getType().is(EntityTypeTags.ILLAGER)) {
-	         return this.getTeam() == null && p_32665_.getTeam() == null;
-	      } else {
-	         return false;
-	      }
-	   }
+	@Override
+	public boolean isAlliedTo(Entity p_32665_) {
+	  if (p_32665_ == null) {
+		 return false;
+	  } else if (p_32665_ == this) {
+		 return true;
+	  } else if (super.isAlliedTo(p_32665_)) {
+		 return true;
+	  } else if (p_32665_ instanceof Eye) {
+		 return this.isAlliedTo(((Eye)p_32665_).getOwner());
+	  }  else if (p_32665_ instanceof SpectralSkeleton) {
+			 return this.isAlliedTo(((SpectralSkeleton)p_32665_).getOwner());
+	  } else if (p_32665_ instanceof LivingEntity && ((LivingEntity)p_32665_).getType().is(EntityTypeTags.ILLAGER)) {
+		 return this.getTeam() == null && p_32665_.getTeam() == null;
+	  } else {
+		 return false;
+	  }
+	}
 	 
-	 @Override
-	 protected SoundEvent getAmbientSound() {
-	      return SoundEvents.EVOKER_AMBIENT;
-	   }
-	 @Override
-	   protected SoundEvent getDeathSound() {
-	      return SoundEvents.EVOKER_DEATH;
-	   }
-	 @Override
-	   protected SoundEvent getHurtSound(DamageSource p_32654_) {
-	      return SoundEvents.EVOKER_HURT;
-	   }
+	@Override
+	protected SoundEvent getAmbientSound() {return SoundInit.DESERT_SORCERESS_AMBIENT.get();}
+	@Override
+	protected SoundEvent getDeathSound() {
+	  return SoundInit.DESERT_SORCERESS_DEATH.get();
+	}
+	@Override
+	protected SoundEvent getHurtSound(DamageSource p_32654_) {return SoundInit.DESERT_SORCERESS_HURT.get();}
 	 
 	 public static boolean checkDesertSorceressSpawnRules(EntityType<? extends Monster> p_219014_, ServerLevelAccessor p_219015_, MobSpawnType p_219016_, BlockPos blockPos, RandomSource p_219018_) {
 	      return p_219015_.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(p_219015_, blockPos, p_219018_) && checkMobSpawnRules(p_219014_, p_219015_, p_219016_, blockPos, p_219018_) 
-	    		  && blockPos.getY() <= 40 && CommonConfig.spawn_abyssologer.get();
+	    		  && CommonConfig.spawn_desert_sorceress.get();
 	   }
 	 
 	 class CastingSpellGoal extends SpellcasterCastingSpellGoal {

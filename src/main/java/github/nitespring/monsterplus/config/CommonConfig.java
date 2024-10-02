@@ -20,6 +20,9 @@ public class CommonConfig {
 		public static  ModConfigSpec.BooleanValue spawn_ancient_hero;
 		public static  ModConfigSpec.BooleanValue spawn_wisp;
 		public static  ModConfigSpec.BooleanValue spawn_soul;
+		public static  ModConfigSpec.BooleanValue spawn_spectral_skull;
+		public static  ModConfigSpec.BooleanValue spawn_desert_acolyte;
+		public static  ModConfigSpec.BooleanValue spawn_desert_sorceress;
 		public static  ModConfigSpec.BooleanValue do_abyssologer_darkness;
 		
 		
@@ -75,6 +78,15 @@ public class CommonConfig {
 		spawn_soul = server
 				.comment("Will the Soul spawn?")
 				.define("spawnconfig.spawn_soul", true);
+		spawn_spectral_skull = server
+				.comment("Will the Spectral Skull spawn?")
+				.define("spawnconfig.spawn_spectral_skull", true);
+		spawn_desert_acolyte = server
+				.comment("Will the Desert Acolyte spawn?")
+				.define("spawnconfig.spawn_desert_acolyte", true);
+		spawn_desert_sorceress = server
+				.comment("Will the Desert Sorceress spawn?")
+				.define("spawnconfig.spawn_desert_sorceress", true);
 
 
 		}

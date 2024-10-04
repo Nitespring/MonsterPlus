@@ -17,8 +17,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -28,12 +26,13 @@ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.SpellcasterIllager;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Fireball;
+import net.minecraft.world.entity.projectile.LargeFireball;
 import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -81,7 +80,7 @@ public class DesertSorceress extends SpellcasterIllager{
 	      this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Mob.class, 8.0F, 0.6D, 1.0D, (p_28879_) -> {
 	          return p_28879_ == this.getTarget();
 	      }));
-	      this.goalSelector.addGoal(5, new DesertSorceress.SpikeSpellGoal());
+	      this.goalSelector.addGoal(5, new FlameSpellGoal());
 	      this.goalSelector.addGoal(5, new DesertSorceress.FireballSpellGoal());
 	      this.goalSelector.addGoal(8, new RandomStrollGoal(this, 0.6D));
 	      this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
@@ -115,6 +114,8 @@ public class DesertSorceress extends SpellcasterIllager{
 		 return this.isAlliedTo(((Eye)p_32665_).getOwner());
 	  }  else if (p_32665_ instanceof SpectralSkeleton) {
 			 return this.isAlliedTo(((SpectralSkeleton)p_32665_).getOwner());
+	  } else if (p_32665_ instanceof DesertSorceress||p_32665_ instanceof DesertAcolyte) {
+		  return this.getTeam() == null && p_32665_.getTeam() == null;
 	  } else if (p_32665_ instanceof LivingEntity && ((LivingEntity)p_32665_).getType().is(EntityTypeTags.ILLAGER)) {
 		 return this.getTeam() == null && p_32665_.getTeam() == null;
 	  } else {
@@ -147,7 +148,7 @@ public class DesertSorceress extends SpellcasterIllager{
 	 
 
 	 
-	 class SpikeSpellGoal extends SpellcasterUseSpellGoal {
+	 class FlameSpellGoal extends SpellcasterUseSpellGoal {
 
 
 		 @Override
@@ -293,9 +294,6 @@ public class DesertSorceress extends SpellcasterIllager{
 
 	      }
 
-
-
-
 		 protected SoundEvent getSpellPrepareSound() {
 	         return SoundEvents.EVOKER_PREPARE_ATTACK;
 	      }
@@ -342,11 +340,13 @@ public class DesertSorceress extends SpellcasterIllager{
 		
 		 private void launchFireball(Vec3 pos, Vec3 aim, float damage) {
 	
-			 PurpleFireball fireball = new PurpleFireball(EntityInit.PURPLE_FIREBALL.get(), pos.x(), pos.y(), pos.z(), aim.x()*0.5, aim.y()*0.5, aim.z()*0.5, level(), DesertSorceress.this, damage);
+			 LargeFireball fireball = new LargeFireball(EntityType.FIREBALL,level());
+			 fireball.setPos(pos.x,pos.y,pos.z);
+			 fireball.setDeltaMovement(aim.x*0.5f,aim.y*0.5f,aim.z*0.5f);
 			 
 			 DesertSorceress.this.level().addFreshEntity(fireball);
 			 
-			 DesertSorceress.this.playSound(SoundEvents.PORTAL_TRAVEL, 0.5f, 0.75f);
+			 DesertSorceress.this.playSound(SoundEvents.FIRE_AMBIENT, 0.5f, 0.75f);
 		}
 		
 		

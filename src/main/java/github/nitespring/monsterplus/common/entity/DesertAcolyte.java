@@ -102,21 +102,23 @@ public class DesertAcolyte extends SpellcasterIllager{
 	   }
 	@Override
 	public boolean isAlliedTo(Entity p_32665_) {
-	  if (p_32665_ == null) {
-		 return false;
-	  } else if (p_32665_ == this) {
-		 return true;
-	  } else if (super.isAlliedTo(p_32665_)) {
-		 return true;
-	  } else if (p_32665_ instanceof Eye) {
-		 return this.isAlliedTo(((Eye)p_32665_).getOwner());
-	  }  else if (p_32665_ instanceof SpectralSkeleton) {
-			 return this.isAlliedTo(((SpectralSkeleton)p_32665_).getOwner());
-	  } else if (p_32665_ instanceof LivingEntity && ((LivingEntity)p_32665_).getType().is(EntityTypeTags.ILLAGER)) {
-		 return this.getTeam() == null && p_32665_.getTeam() == null;
-	  } else {
-		 return false;
-	  }
+		if (p_32665_ == null) {
+			return false;
+		} else if (p_32665_ == this) {
+			return true;
+		} else if (super.isAlliedTo(p_32665_)) {
+			return true;
+		} else if (p_32665_ instanceof Eye) {
+			return this.isAlliedTo(((Eye)p_32665_).getOwner());
+		}  else if (p_32665_ instanceof SpectralSkeleton) {
+			return this.isAlliedTo(((SpectralSkeleton)p_32665_).getOwner());
+		} else if (p_32665_ instanceof DesertSorceress||p_32665_ instanceof DesertAcolyte) {
+			return this.getTeam() == null && p_32665_.getTeam() == null;
+		} else if (p_32665_ instanceof LivingEntity && ((LivingEntity)p_32665_).getType().is(EntityTypeTags.ILLAGER)) {
+			return this.getTeam() == null && p_32665_.getTeam() == null;
+		} else {
+			return false;
+		}
 	}
 
 	@Override

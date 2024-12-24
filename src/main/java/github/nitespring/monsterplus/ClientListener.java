@@ -148,6 +148,7 @@ public class ClientListener {
 		event.registerEntityRenderer(EntityInit.DESERT_SORCERESS.get(), DesertSorceressRenderer::new);
 		event.registerEntityRenderer(EntityInit.FLYING_SKULL.get(), FlyingSkullRenderer::new);
 		event.registerEntityRenderer(EntityInit.DESERT_ACOLYTE.get(), DesertAcolyteRenderer::new);
+		event.registerEntityRenderer(EntityInit.FLAME.get(), SmallThrownItemRenderer::new);
 	}
 	@SubscribeEvent
 	public static void registerRenderers(final RegisterParticleProvidersEvent event) {

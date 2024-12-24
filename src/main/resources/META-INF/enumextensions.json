@@ -16,7 +16,7 @@
       "enum": "net/minecraft/world/entity/MobCategory",
       "name": "MONSTERPLUS_WRAITH",
       "constructor": "(Ljava/lang/String;IZZI)V",
-      "parameters": ["monsterplus:wraith", 2, false, false, 128 ]
+      "parameters": ["monsterplus:wraith", 1, false, false, 128 ]
     }
   ]
 }

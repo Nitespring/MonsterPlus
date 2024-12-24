@@ -143,6 +143,10 @@ public class EntityInit {
 			()-> EntityType.Builder.<SoulflameFireball>of(SoulflameFireball::new,MobCategory.MISC)
 					.sized(0.35F, 0.35F)
 					.build("soulflame_fireball"));
+	public static final DeferredHolder<EntityType<?>,EntityType<Flame>> FLAME = ENTITIES.register("flame",
+			()-> EntityType.Builder.<Flame>of(Flame::new, MobCategory.MISC)
+					.sized(0.2F, 0.2F)
+					.build("flame"));
 	
 	
 }

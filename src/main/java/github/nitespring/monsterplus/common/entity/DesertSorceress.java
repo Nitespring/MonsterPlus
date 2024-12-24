@@ -1,6 +1,6 @@
 package github.nitespring.monsterplus.common.entity;
 
-import github.nitespring.monsterplus.common.entity.projectiles.PurpleFireball;
+import github.nitespring.monsterplus.common.entity.projectiles.Flame;
 import github.nitespring.monsterplus.common.entity.projectiles.SpikeCountdown;
 import github.nitespring.monsterplus.config.CommonConfig;
 import github.nitespring.monsterplus.core.init.EntityInit;
@@ -31,8 +31,8 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.SpellcasterIllager;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Fireball;
 import net.minecraft.world.entity.projectile.LargeFireball;
+import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -80,8 +80,10 @@ public class DesertSorceress extends SpellcasterIllager{
 	      this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Mob.class, 8.0F, 0.6D, 1.0D, (p_28879_) -> {
 	          return p_28879_ == this.getTarget();
 	      }));
-	      this.goalSelector.addGoal(5, new FlameSpellGoal());
+	      this.goalSelector.addGoal(5, new DesertSorceress.FlameSpellGoal());
 	      this.goalSelector.addGoal(5, new DesertSorceress.FireballSpellGoal());
+		this.goalSelector.addGoal(5, new DesertSorceress.FireballBarrageSpellGoal());
+
 	      this.goalSelector.addGoal(8, new RandomStrollGoal(this, 0.6D));
 	      this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
 	      this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
@@ -102,6 +104,12 @@ public class DesertSorceress extends SpellcasterIllager{
 	    		  .add(Attributes.MAX_HEALTH, 30.0D)
 	              .add(Attributes.FOLLOW_RANGE, 24);
 	   }
+
+	@Override
+	public boolean fireImmune() {
+		return true;
+	}
+
 	@Override
 	public boolean isAlliedTo(Entity p_32665_) {
 	  if (p_32665_ == null) {
@@ -148,7 +156,7 @@ public class DesertSorceress extends SpellcasterIllager{
 	 
 
 	 
-	 class FlameSpellGoal extends SpellcasterUseSpellGoal {
+	 class FlameWallSpellGoal extends SpellcasterUseSpellGoal {
 
 
 		 @Override
@@ -306,11 +314,11 @@ public class DesertSorceress extends SpellcasterIllager{
 	 
 	 class FireballSpellGoal extends SpellcasterUseSpellGoal {
 	      protected int getCastingTime() {
-	         return 20;
+	         return 50;
 	      }
 
 	      protected int getCastingInterval() {
-	         return 25;
+	         return 120;
 	      }
 
 		@Override
@@ -343,7 +351,7 @@ public class DesertSorceress extends SpellcasterIllager{
 			 LargeFireball fireball = new LargeFireball(EntityType.FIREBALL,level());
 			 fireball.setPos(pos.x,pos.y,pos.z);
 			 fireball.setDeltaMovement(aim.x*0.5f,aim.y*0.5f,aim.z*0.5f);
-			 
+			 fireball.setOwner(DesertSorceress.this);
 			 DesertSorceress.this.level().addFreshEntity(fireball);
 			 
 			 DesertSorceress.this.playSound(SoundEvents.FIRE_AMBIENT, 0.5f, 0.75f);
@@ -363,7 +371,219 @@ public class DesertSorceress extends SpellcasterIllager{
 			return IllagerSpell.WOLOLO;
 		}
 	 }
-	 
+	class FlameSpellGoal extends SpellcasterUseSpellGoal {
+		protected int getCastingTime() {
+			return 35;
+		}
+		protected int getTotalCastingTime() {
+			return getCastWarmupTime()+getCastingTime();
+		}
+
+		protected int getCastingInterval() {
+			return 80;
+		}
+
+		@Override
+		protected int getCastWarmupTime() {
+			return 20;
+		}
+
+		@Override
+		public boolean canUse() {
+			LivingEntity livingentity = DesertSorceress.this.getTarget();
+			if (livingentity == null || !livingentity.isAlive()||livingentity.distanceTo(DesertSorceress.this)>=10) {
+				return false;
+			} else {
+				return DesertSorceress.this.isCastingSpell() ? false : DesertSorceress.this.tickCount >= this.nextAttackTickCount;
+			}
+		}
+
+		@Override
+		public boolean canContinueToUse() {
+			LivingEntity livingentity = DesertSorceress.this.getTarget();
+			return livingentity != null && livingentity.isAlive() && this.attackWarmupDelay > 0;
+		}
+
+		@Override
+		public void start() {
+			this.attackWarmupDelay = this.adjustedTickDelay(this.getTotalCastingTime());
+			DesertSorceress.this.spellCastingTickCount = this.getTotalCastingTime()-2;
+			this.nextAttackTickCount = DesertSorceress.this.tickCount + this.getCastingInterval();
+			SoundEvent soundevent = this.getSpellPrepareSound();
+			if (soundevent != null) {
+				DesertSorceress.this.playSound(soundevent, 1.0F, 1.0F);
+			}
+
+			DesertSorceress.this.setIsCastingSpell(this.getSpell());
+		}
+
+
+		@Override
+		public void tick() {
+			this.attackWarmupDelay--;
+			if (this.attackWarmupDelay == getCastingTime()) {
+				this.performSpellCasting();
+				DesertSorceress.this.playSound(DesertSorceress.this.getCastingSoundEvent(), 1.0F, 1.0F);
+			}
+			if (this.attackWarmupDelay <= getCastingTime()) {
+				if (attackWarmupDelay%3==0){
+					this.performSpellCasting();
+				}
+			}
+		}
+
+		@Override
+		protected void performSpellCasting() {
+
+			Vec3 pos = DesertSorceress.this.position();
+
+			Vec3 posO = new Vec3(pos.x, pos.y + 2.5, pos.z);
+
+			Vec3 pos1 = DesertSorceress.this.getTarget().position();
+
+			Vec3 posT = new Vec3(pos1.x, DesertSorceress.this.getTarget().getY(0.5)+0.5f, pos1.z);
+
+			double d0 = Math.sqrt((posT.x-posO.x)*(posT.x-posO.x) + (posT.y-posO.y)*(posT.y-posO.y) + (posT.z-posO.z)*(posT.z-posO.z));
+			for(int i = 0; i<3;i++) {
+
+				Vec3 aim = new Vec3((posT.x - posO.x) / d0, (posT.y - posO.y) / d0, (posT.z - posO.z) / d0);
+				throwFlame(posO, aim.add(randomFloat(0.1f),randomFloat(0.1f),randomFloat(0.1f)), 2);
+			}
+
+		}
+		float randomFloat(float peak){
+			Random r = new Random();
+			float f = r.nextFloat(-1,1)*peak;
+			return f;
+		}
+
+		private void throwFlame(Vec3 pos, Vec3 aim, float damage) {
+
+			Flame fireball = new Flame(EntityInit.FLAME.get(),level());
+			fireball.setPos(pos.x,pos.y,pos.z);
+			fireball.setDeltaMovement(aim.x*0.1f,aim.y*0.1f+0.0015f,aim.z*0.1f);
+			fireball.setAttackDamage(damage);
+			fireball.setFlyingTime(18);
+			fireball.setOwner(DesertSorceress.this);
+			DesertSorceress.this.level().addFreshEntity(fireball);
+
+			DesertSorceress.this.playSound(SoundEvents.FIRE_AMBIENT, 0.5f, 0.75f);
+		}
+
+
+
+		@Override
+		protected SoundEvent getSpellPrepareSound() {
+
+			return SoundEvents.EVOKER_PREPARE_ATTACK;
+		}
+
+		@Override
+		protected IllagerSpell getSpell() {
+
+			return IllagerSpell.WOLOLO;
+		}
+	}
+	class FireballBarrageSpellGoal extends SpellcasterUseSpellGoal {
+		protected int getCastingTime() {
+			return 20;
+		}
+		protected int getTotalCastingTime() {
+			return getCastWarmupTime()+getCastingTime();
+		}
+
+		protected int getCastingInterval() {
+			return 120;
+		}
+
+		@Override
+		protected int getCastWarmupTime() {
+			return 25;
+		}
+		@Override
+		public boolean canContinueToUse() {
+			LivingEntity livingentity = DesertSorceress.this.getTarget();
+			return livingentity != null && livingentity.isAlive() && this.attackWarmupDelay > 0;
+		}
+
+		@Override
+		public void start() {
+			this.attackWarmupDelay = this.adjustedTickDelay(this.getTotalCastingTime());
+			DesertSorceress.this.spellCastingTickCount = this.getTotalCastingTime()-2;
+			this.nextAttackTickCount = DesertSorceress.this.tickCount + this.getCastingInterval();
+			SoundEvent soundevent = this.getSpellPrepareSound();
+			if (soundevent != null) {
+				DesertSorceress.this.playSound(soundevent, 1.0F, 1.0F);
+			}
+
+			DesertSorceress.this.setIsCastingSpell(this.getSpell());
+		}
+
+
+		@Override
+		public void tick() {
+			this.attackWarmupDelay--;
+			if (this.attackWarmupDelay == getCastingTime()) {
+				this.performSpellCasting();
+				DesertSorceress.this.playSound(DesertSorceress.this.getCastingSoundEvent(), 1.0F, 1.0F);
+			}
+			if (this.attackWarmupDelay <= getCastingTime()) {
+				if (attackWarmupDelay%3==0){
+					this.performSpellCasting();
+				}
+			}
+		}
+
+		@Override
+		protected void performSpellCasting() {
+
+			Vec3 pos = DesertSorceress.this.position();
+
+			Vec3 posO = new Vec3(pos.x, pos.y + 2.5, pos.z);
+
+			Vec3 pos1 = DesertSorceress.this.getTarget().position();
+
+			Vec3 posT = new Vec3(pos1.x, DesertSorceress.this.getTarget().getY(0.5)+0.5f, pos1.z);
+
+			double d0 = Math.sqrt((posT.x-posO.x)*(posT.x-posO.x) + (posT.y-posO.y)*(posT.y-posO.y) + (posT.z-posO.z)*(posT.z-posO.z));
+			//for(int i = 0; i<3;i++) {
+
+				Vec3 aim = new Vec3((posT.x - posO.x) / d0, (posT.y - posO.y) / d0, (posT.z - posO.z) / d0);
+				throwFireball(posO, aim.add(randomFloat(0.15f),randomFloat(0.15f),randomFloat(0.15f)), 2);
+			//}
+
+		}
+		float randomFloat(float peak){
+			Random r = new Random();
+			float f = r.nextFloat(-1,1)*peak;
+			return f;
+		}
+
+		private void throwFireball(Vec3 pos, Vec3 aim, float damage) {
+
+			SmallFireball fireball = new SmallFireball(EntityType.SMALL_FIREBALL,level());
+			fireball.setPos(pos.x,pos.y,pos.z);
+			fireball.setDeltaMovement(aim.x*0.1f,aim.y*0.1f,aim.z*0.1f);
+			fireball.setOwner(DesertSorceress.this);
+			DesertSorceress.this.level().addFreshEntity(fireball);
+
+			DesertSorceress.this.playSound(SoundEvents.FIRE_AMBIENT, 0.5f, 0.75f);
+		}
+
+
+
+		@Override
+		protected SoundEvent getSpellPrepareSound() {
+
+			return SoundEvents.EVOKER_PREPARE_ATTACK;
+		}
+
+		@Override
+		protected IllagerSpell getSpell() {
+
+			return IllagerSpell.WOLOLO;
+		}
+	}
 
 
 }

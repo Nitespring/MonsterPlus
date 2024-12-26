@@ -37,10 +37,7 @@ import github.nitespring.monsterplus.client.render.entities.mobs.swampzombie.Swa
 import github.nitespring.monsterplus.client.render.entities.mobs.wisp.SoulRenderer;
 import github.nitespring.monsterplus.client.render.entities.mobs.wisp.WispModel;
 import github.nitespring.monsterplus.client.render.entities.mobs.wisp.WispRenderer;
-import github.nitespring.monsterplus.client.render.entities.projectiles.CrystalArrowRenderer;
-import github.nitespring.monsterplus.client.render.entities.projectiles.SkullProjectileModel;
-import github.nitespring.monsterplus.client.render.entities.projectiles.SkullProjectileRenderer;
-import github.nitespring.monsterplus.client.render.entities.projectiles.SmallThrownItemRenderer;
+import github.nitespring.monsterplus.client.render.entities.projectiles.*;
 import github.nitespring.monsterplus.client.render.entities.specialeffects.BloodySlashRenderer;
 import github.nitespring.monsterplus.client.render.equipment.armour.CrystalArmourModel;
 import github.nitespring.monsterplus.client.render.equipment.armour.DarkArmourModel;
@@ -149,6 +146,7 @@ public class ClientListener {
 		event.registerEntityRenderer(EntityInit.FLYING_SKULL.get(), FlyingSkullRenderer::new);
 		event.registerEntityRenderer(EntityInit.DESERT_ACOLYTE.get(), DesertAcolyteRenderer::new);
 		event.registerEntityRenderer(EntityInit.FLAME.get(), SmallThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityInit.FLAME_SUMMONER.get(), InvisibleProjectileRenderer::new);
 	}
 	@SubscribeEvent
 	public static void registerRenderers(final RegisterParticleProvidersEvent event) {

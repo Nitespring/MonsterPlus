@@ -1,10 +1,12 @@
 package github.nitespring.monsterplus.common.entity;
 
 import github.nitespring.monsterplus.common.entity.projectiles.Flame;
+import github.nitespring.monsterplus.common.entity.projectiles.SorceressFireSpawner;
 import github.nitespring.monsterplus.common.entity.projectiles.SpikeCountdown;
 import github.nitespring.monsterplus.config.CommonConfig;
 import github.nitespring.monsterplus.core.init.EntityInit;
 import github.nitespring.monsterplus.core.init.SoundInit;
+import github.nitespring.monsterplus.core.util.CustomBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -36,7 +38,9 @@ import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
@@ -80,9 +84,11 @@ public class DesertSorceress extends SpellcasterIllager{
 	      this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Mob.class, 8.0F, 0.6D, 1.0D, (p_28879_) -> {
 	          return p_28879_ == this.getTarget();
 	      }));
-	      this.goalSelector.addGoal(5, new DesertSorceress.FlameSpellGoal());
-	      this.goalSelector.addGoal(5, new DesertSorceress.FireballSpellGoal());
-		this.goalSelector.addGoal(5, new DesertSorceress.FireballBarrageSpellGoal());
+	      //this.goalSelector.addGoal(5, new DesertSorceress.FlameSpellGoal());
+	      //this.goalSelector.addGoal(5, new DesertSorceress.FireballSpellGoal());
+		  this.goalSelector.addGoal(5, new DesertSorceress.FlameWallSpellGoal());
+		  //this.goalSelector.addGoal(5, new DesertSorceress.FireballBarrageSpellGoal());
+
 
 	      this.goalSelector.addGoal(8, new RandomStrollGoal(this, 0.6D));
 	      this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
@@ -173,7 +179,7 @@ public class DesertSorceress extends SpellcasterIllager{
 	      }
 
 	      protected int getCastingInterval() {
-	         return 60;
+	         return 80;
 	      }
 
 	      protected void performSpellCasting() {
@@ -181,133 +187,73 @@ public class DesertSorceress extends SpellcasterIllager{
 	         double d0 = Math.min(livingentity.getY(), DesertSorceress.this.getY());
 	         double d1 = Math.max(livingentity.getY(), DesertSorceress.this.getY()) + 1.0D;
 	         float f = (float)Mth.atan2(livingentity.getZ() - DesertSorceress.this.getZ(), livingentity.getX() - DesertSorceress.this.getX());
-	         if (DesertSorceress.this.distanceToSqr(livingentity) < 16.0D || (DesertSorceress.this.distanceToSqr(livingentity) < 30.0D && DesertSorceress.this.getRandom().nextBoolean())) {
-	            for(int i = 0; i < 5; ++i) {
-	               float f1 = f + (float)i * (float)Math.PI * 0.4F;
-	               this.createSpellEntity(DesertSorceress.this.getX() + (double)Mth.cos(f1) * 1.5D, DesertSorceress.this.getZ() + (double)Mth.sin(f1) * 1.5D, d0, d1, f1, 1);
-	            }
-	            
-	            for(int j = 0; j < 10; ++j) {
-		               float f1 = f + (float)j * (float)Math.PI * 2.0F / 10.0F + 1.2566371F;
-		               this.createSpellEntity(DesertSorceress.this.getX() + (double)Mth.cos(f1) * 3.0D, DesertSorceress.this.getZ() + (double)Mth.sin(f1) * 3.0D, d0, d1, f1, 2);
-		            }
-
-	            for(int k = 0; k < 15; ++k) {
-	               float f2 = f + (float)k * (float)Math.PI * 2.0F / 15.0F + 2.2566371F;
-	               this.createSpellEntity(DesertSorceress.this.getX() + (double)Mth.cos(f2) * 4.5D, DesertSorceress.this.getZ() + (double)Mth.sin(f2) * 4.5D, d0, d1, f2, 3);
-	            }
+	         if (DesertSorceress.this.distanceToSqr(livingentity) < 32.0D || (DesertSorceress.this.distanceToSqr(livingentity) < 64.0D && DesertSorceress.this.getRandom().nextBoolean())) {
+				 for(int i = 0; i < 32; ++i) {
+					 float f1 = f + (float)i * (float)Math.PI * 2.0F / 4.0F;
+					 this.createSpellEntity(DesertSorceress.this.getX() + (double)Mth.cos(f1) * 5.5D, DesertSorceress.this.getZ() + (double)Mth.sin(f1) * 5.5D, d0, d1, f1, 1);
+				 }
 	         } else {
-	        	 
-	        	 int randomPattern = new Random().nextInt(4) +1 ;
-	        	 
-	       // if(Abyssologer.this.getRandom().nextBoolean()) {
-	        	 
-	        	 switch(randomPattern) {
-	        	 
-	        	 case 1:
-	        	 
-	        	 
-	            for(int l = 0; l < 16; ++l) {
-	               double d2 = 1.25D * (double)(l + 1);
-	               int j = 1 * l;
-	               this.createSpellEntity(DesertSorceress.this.getX() + (double)Mth.cos(f) * d2  + (new Random().nextFloat() - 0.5), DesertSorceress.this.getZ() + (double)Mth.sin(f) * d2 + (new Random().nextFloat() - 0.5), d0, d1, f, j);
-	            }
-	            break;
-	         //}else {
-	        	 case 2:
-	        	 this.createSpellEntity(DesertSorceress.this.getTarget().getX() , DesertSorceress.this.getTarget().getZ(), d0, d1, 0, 0);
-	        	 
-	        	 for(int i = 0; i < 5; ++i) {
-		               float f1 = f + (float)i * (float)Math.PI * 0.4F;
-		               this.createSpellEntity(DesertSorceress.this.getTarget().getX() + (double)Mth.cos(f1) * 1.0D, DesertSorceress.this.getTarget().getZ() + (double)Mth.sin(f1) * 1.0D, d0, d1, f1, 1);
-		            }
-		            
-		            for(int j = 0; j < 8; ++j) {
-			               float f1 = f + (float)j * (float)Math.PI * 2.0F / 8.0F + 1.2566371F;
-			               this.createSpellEntity(DesertSorceress.this.getTarget().getX() + (double)Mth.cos(f1) * 1.5D, DesertSorceress.this.getTarget().getZ() + (double)Mth.sin(f1) * 1.5D, d0, d1, f1, 2);
-			            }
-	        	 
-	        	 for(int k = 0; k < 25; ++k) {
-		               float f2 = f + (float)k * (float)Math.PI * 2.0F / 25.0F + 2.566371F;
-		               this.createSpellEntity(DesertSorceress.this.getTarget().getX() + (double)Mth.cos(f2) * 5.0D, DesertSorceress.this.getTarget().getZ() + (double)Mth.sin(f2) * 5.0D, d0, d1, f2, 3);
-		            }
-	        	 break;
-	        	 
-	        	 case 3:
-	        		 
-                     this.createSpellEntity(DesertSorceress.this.getTarget().getX() , DesertSorceress.this.getTarget().getZ(), d0, d1, 0, 0);
-		        	 
-		        	 for(int i = 0; i < 4; ++i) {
-			               float f1 = f + (float)i * (float)Math.PI * 2.0F / 4.0F;
-			               this.createSpellEntity(DesertSorceress.this.getTarget().getX() + (double)Mth.cos(f1) * 0.75D, DesertSorceress.this.getTarget().getZ() + (double)Mth.sin(f1) * 0.75D, d0, d1, f1, 1);
-			            }
-	        		 
-	        		 for(int k = 0; k < 20; ++k) {
-			               float f2 = f + (float)k * (float)Math.PI * 2.0F / 20.0F + 2.566371F;
-			               this.createSpellEntity(DesertSorceress.this.getTarget().getX() + (double)Mth.cos(f2) * 4.0D, DesertSorceress.this.getTarget().getZ() + (double)Mth.sin(f2) * 4.0D, d0, d1, f2, 3);
-			            } 
-	            break;
-	            
-	        	 case 4:
-	        		 
-		        	 this.createSpellEntity(DesertSorceress.this.getTarget().getX() , DesertSorceress.this.getTarget().getZ(), d0, d1, 0, 0);
-		        	 
-		        	 for(int i = 0; i < 4; ++i) {
-			               float f1 = f + (float)i * (float)Math.PI * 2.0F / 4.0F;
-			               this.createSpellEntity(DesertSorceress.this.getTarget().getX() + (double)Mth.cos(f1) * 0.75D, DesertSorceress.this.getTarget().getZ() + (double)Mth.sin(f1) * 0.75D, d0, d1, f1, 1);
-			            }
-			            
-			         for(int j = 0; j < 7; ++j) {
-				            float f1 = f + (float)j * (float)Math.PI * 2.0F / 7.0F + 1.2566371F;
-				            this.createSpellEntity(DesertSorceress.this.getTarget().getX() + (double)Mth.cos(f1) * 1.25D, DesertSorceress.this.getTarget().getZ() + (double)Mth.sin(f1) * 1.25D, d0, d1, f1, 2);
-				        }
-	        	 
-	        	 
-	             }
-	         }
-
+				//int randomPattern = new Random().nextInt(2) +1 ;
+				 int randomPattern = 2;
+				switch(randomPattern) {
+					case 1:
+						for (int l = 0; l < 16; ++l) {
+							double d2 = 1.25D * (double) (l + 1);
+							int j = 1 * l;
+							this.createSpellEntity(DesertSorceress.this.getX() + (double) Mth.cos(f) * d2 + (new Random().nextFloat() - 0.5), DesertSorceress.this.getZ() + (double) Mth.sin(f) * d2 + (new Random().nextFloat() - 0.5), d0, d1, f, j);
+						}
+						break;
+					case 2:
+						for(int i = 0; i < 16; ++i) {
+							float f1 = f + (float)i * (float)Math.PI * 2.0F / 4.0F;
+							this.createSpellEntity(DesertSorceress.this.getTarget().getX() + (double)Mth.cos(f1) * 4.5D, DesertSorceress.this.getTarget().getZ() + (double)Mth.sin(f1) * 4.5D, d0, d1, f1, 1);
+						}
+						break;
+				}
+			 }
 	      }
 
-	      private void createSpellEntity(double p_32673_, double p_32674_, double p_32675_, double p_32676_, float p_32677_, int p_32678_) {
-	         BlockPos blockpos = new BlockPos(new Vec3i((int)p_32673_, (int)p_32676_, (int)p_32674_));
-	         boolean flag = false;
-	         double d0 = 0.0D;
+		 private void createSpellEntity(double p_32673_, double p_32674_, double p_32675_, double p_32676_, float p_32677_, int p_32678_) {
+			 BlockPos blockpos = new BlockPos(new Vec3i((int)p_32673_, (int)p_32676_, (int)p_32674_));
+			 boolean flag = false;
+			 double d0 = 0.0D;
 
-	         do {
-	            BlockPos blockpos1 = blockpos.below();
-	            BlockState blockstate = DesertSorceress.this.level().getBlockState(blockpos1);
-	            if (blockstate.isFaceSturdy(DesertSorceress.this.level(), blockpos1, Direction.UP)) {
-	               if (!DesertSorceress.this.level().isEmptyBlock(blockpos)) {
-	                  BlockState blockstate1 = DesertSorceress.this.level().getBlockState(blockpos);
-	                  VoxelShape voxelshape = blockstate1.getCollisionShape(DesertSorceress.this.level(), blockpos);
-	                  if (!voxelshape.isEmpty()) {
-	                     d0 = voxelshape.max(Direction.Axis.Y);
-	                  }
-	               }
+			 do {
+				 BlockPos blockpos1 = blockpos.below();
+				 BlockState blockstate = DesertSorceress.this.level().getBlockState(blockpos1);
+				 if (blockstate.isFaceSturdy(DesertSorceress.this.level(), blockpos1, Direction.UP)) {
+					 if (!DesertSorceress.this.level().isEmptyBlock(blockpos)) {
+						 BlockState blockstate1 = DesertSorceress.this.level().getBlockState(blockpos);
+						 VoxelShape voxelshape = blockstate1.getCollisionShape(DesertSorceress.this.level(), blockpos);
+						 if (!voxelshape.isEmpty()) {
+							 d0 = voxelshape.max(Direction.Axis.Y);
+						 }
+					 }
 
-	               flag = true;
-	               break;
-	            }
+					 flag = true;
+					 break;
+				 }
 
-	            blockpos = blockpos.below();
-	         } while(blockpos.getY() >= Mth.floor(p_32675_) - 1);
+				 blockpos = blockpos.below();
+			 } while(blockpos.getY() >= Mth.floor(p_32675_) - 1);
 
-	         if (flag) {
-	        	 //Abyssologer.this.level.addFreshEntity(new CrystalSpikes(Abyssologer.this.level, 2.0f, p_32673_, (double)blockpos.getY() + d0, p_32674_, p_32677_, p_32678_, Abyssologer.this));
-	        	 
-	        	 DesertSorceress.this.level().addFreshEntity(new SpikeCountdown(DesertSorceress.this.level(), 4.0f, p_32673_, (double)blockpos.getY() + d0, p_32674_, p_32677_, p_32678_, DesertSorceress.this, 25));
-	        	 
-	        	 
-	         }
+			 if (flag) {
+				 //Abyssologer.this.level.addFreshEntity(new CrystalSpikes(Abyssologer.this.level, 2.0f, p_32673_, (double)blockpos.getY() + d0, p_32674_, p_32677_, p_32678_, Abyssologer.this));
 
-	      }
+				 DesertSorceress.this.level().addFreshEntity(new SorceressFireSpawner(DesertSorceress.this.level(), 4.0f, p_32673_, (double)blockpos.getY() + d0, p_32674_, p_32677_, p_32678_, DesertSorceress.this));
+
+
+			 }
+
+		 }
+
 
 		 protected SoundEvent getSpellPrepareSound() {
 	         return SoundEvents.EVOKER_PREPARE_ATTACK;
 	      }
 
 	      protected IllagerSpell getSpell() {
-	         return IllagerSpell.FANGS;
+	         return IllagerSpell.WOLOLO;
 	      }
 	   }
 	 
@@ -318,7 +264,7 @@ public class DesertSorceress extends SpellcasterIllager{
 	      }
 
 	      protected int getCastingInterval() {
-	         return 120;
+	         return 200;
 	      }
 
 		@Override
@@ -380,7 +326,7 @@ public class DesertSorceress extends SpellcasterIllager{
 		}
 
 		protected int getCastingInterval() {
-			return 80;
+			return 160;
 		}
 
 		@Override
@@ -493,7 +439,7 @@ public class DesertSorceress extends SpellcasterIllager{
 		}
 
 		protected int getCastingInterval() {
-			return 120;
+			return 180;
 		}
 
 		@Override
@@ -539,7 +485,7 @@ public class DesertSorceress extends SpellcasterIllager{
 
 			Vec3 pos = DesertSorceress.this.position();
 
-			Vec3 posO = new Vec3(pos.x, pos.y + 2.5, pos.z);
+			Vec3 posO = new Vec3(pos.x, pos.y + 3.5, pos.z);
 
 			Vec3 pos1 = DesertSorceress.this.getTarget().position();
 
@@ -549,7 +495,8 @@ public class DesertSorceress extends SpellcasterIllager{
 			//for(int i = 0; i<3;i++) {
 
 				Vec3 aim = new Vec3((posT.x - posO.x) / d0, (posT.y - posO.y) / d0, (posT.z - posO.z) / d0);
-				throwFireball(posO, aim.add(randomFloat(0.15f),randomFloat(0.15f),randomFloat(0.15f)), 2);
+				throwFireball(posO.add(randomFloat(1.5f),randomFloat(1.5f),randomFloat(1.5f)),
+						aim.add(randomFloat(0.15f),randomFloat(0.15f),randomFloat(0.15f)), 2);
 			//}
 
 		}

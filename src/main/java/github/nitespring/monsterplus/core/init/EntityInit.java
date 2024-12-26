@@ -147,6 +147,10 @@ public class EntityInit {
 			()-> EntityType.Builder.<Flame>of(Flame::new, MobCategory.MISC)
 					.sized(0.2F, 0.2F)
 					.build("flame"));
+	public static final DeferredHolder<EntityType<?>,EntityType<SorceressFireSpawner>> FLAME_SUMMONER = ENTITIES.register("flame_summoner",
+			()-> EntityType.Builder.<SorceressFireSpawner>of(SorceressFireSpawner::new, MobCategory.MISC)
+					.sized(1.0F, 1.2F)
+					.build("flame_summoner"));
 	
 	
 }

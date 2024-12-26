@@ -1,6 +1,7 @@
 {
   "replace" : false,
   "values" : [
+    "snow",
     "redstone_wire",
     "white_carpet",
     "light_gray_carpet",

@@ -84,10 +84,10 @@ public class DesertSorceress extends SpellcasterIllager{
 	      this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Mob.class, 8.0F, 0.6D, 1.0D, (p_28879_) -> {
 	          return p_28879_ == this.getTarget();
 	      }));
-	      //this.goalSelector.addGoal(5, new DesertSorceress.FlameSpellGoal());
-	      //this.goalSelector.addGoal(5, new DesertSorceress.FireballSpellGoal());
+	      this.goalSelector.addGoal(5, new DesertSorceress.FlameSpellGoal());
+	      this.goalSelector.addGoal(5, new DesertSorceress.FireballSpellGoal());
 		  this.goalSelector.addGoal(5, new DesertSorceress.FlameWallSpellGoal());
-		  //this.goalSelector.addGoal(5, new DesertSorceress.FireballBarrageSpellGoal());
+		  this.goalSelector.addGoal(5, new DesertSorceress.FireballBarrageSpellGoal());
 
 
 	      this.goalSelector.addGoal(8, new RandomStrollGoal(this, 0.6D));
@@ -188,13 +188,17 @@ public class DesertSorceress extends SpellcasterIllager{
 	         double d1 = Math.max(livingentity.getY(), DesertSorceress.this.getY()) + 1.0D;
 	         float f = (float)Mth.atan2(livingentity.getZ() - DesertSorceress.this.getZ(), livingentity.getX() - DesertSorceress.this.getX());
 	         if (DesertSorceress.this.distanceToSqr(livingentity) < 32.0D || (DesertSorceress.this.distanceToSqr(livingentity) < 64.0D && DesertSorceress.this.getRandom().nextBoolean())) {
+				 for(int i = 0; i < 8; ++i) {
+					 float f1 = f + (float)i * (float)Math.PI * 1/4;
+					 this.createSpellEntity(DesertSorceress.this.getX() + (double)Mth.cos(f1) * 2.5D, DesertSorceress.this.getZ() + (double)Mth.sin(f1) * 2.5D, d0, d1, f1, 1);
+				 }
 				 for(int i = 0; i < 32; ++i) {
-					 float f1 = f + (float)i * (float)Math.PI * 2.0F / 4.0F;
-					 this.createSpellEntity(DesertSorceress.this.getX() + (double)Mth.cos(f1) * 5.5D, DesertSorceress.this.getZ() + (double)Mth.sin(f1) * 5.5D, d0, d1, f1, 1);
+					 float f1 = f + (float)i * (float)Math.PI * 1/16;
+					 this.createSpellEntity(DesertSorceress.this.getX() + (double)Mth.cos(f1) * 6.5D, DesertSorceress.this.getZ() + (double)Mth.sin(f1) * 6.5D, d0, d1, f1, 1);
 				 }
 	         } else {
-				//int randomPattern = new Random().nextInt(2) +1 ;
-				 int randomPattern = 2;
+				int randomPattern = new Random().nextInt(2) +1 ;
+				//int randomPattern = 2;
 				switch(randomPattern) {
 					case 1:
 						for (int l = 0; l < 16; ++l) {
@@ -205,7 +209,7 @@ public class DesertSorceress extends SpellcasterIllager{
 						break;
 					case 2:
 						for(int i = 0; i < 16; ++i) {
-							float f1 = f + (float)i * (float)Math.PI * 2.0F / 4.0F;
+							float f1 = f + (float)i * (float)Math.PI * 1/8;
 							this.createSpellEntity(DesertSorceress.this.getTarget().getX() + (double)Mth.cos(f1) * 4.5D, DesertSorceress.this.getTarget().getZ() + (double)Mth.sin(f1) * 4.5D, d0, d1, f1, 1);
 						}
 						break;
@@ -249,7 +253,7 @@ public class DesertSorceress extends SpellcasterIllager{
 
 
 		 protected SoundEvent getSpellPrepareSound() {
-	         return SoundEvents.EVOKER_PREPARE_ATTACK;
+	         return SoundEvents.FIRECHARGE_USE;
 	      }
 
 	      protected IllagerSpell getSpell() {
@@ -308,7 +312,7 @@ public class DesertSorceress extends SpellcasterIllager{
 		@Override
 		protected SoundEvent getSpellPrepareSound() {
 			
-			return SoundEvents.EVOKER_PREPARE_ATTACK;
+			return SoundEvents.FIRECHARGE_USE;
 		}
 
 		@Override
@@ -421,7 +425,7 @@ public class DesertSorceress extends SpellcasterIllager{
 		@Override
 		protected SoundEvent getSpellPrepareSound() {
 
-			return SoundEvents.EVOKER_PREPARE_ATTACK;
+			return SoundEvents.FIRECHARGE_USE;
 		}
 
 		@Override
@@ -522,7 +526,7 @@ public class DesertSorceress extends SpellcasterIllager{
 		@Override
 		protected SoundEvent getSpellPrepareSound() {
 
-			return SoundEvents.EVOKER_PREPARE_ATTACK;
+			return SoundEvents.FIRECHARGE_USE;
 		}
 
 		@Override

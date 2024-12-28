@@ -6,6 +6,7 @@ import github.nitespring.monsterplus.common.entity.projectiles.SpikeCountdown;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.state.BlockState;
@@ -28,6 +29,7 @@ public class Darkstar extends SwordItem implements ILeftClickSpecialActionItem{
 
 	@Override
 	public void doLeftClickAction(Player playerIn, ItemStack item) {
+        item.hurtAndBreak(1, playerIn, EquipmentSlot.MAINHAND);
 		Vec3 posTarget = playerIn.position().add(playerIn.getLookAngle().scale(15.0));
 		 double d0 = Math.min(posTarget.y, playerIn.getY());
          double d1 = Math.max(posTarget.y, playerIn.getY()) + 1.0D;

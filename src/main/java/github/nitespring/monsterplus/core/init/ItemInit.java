@@ -117,6 +117,9 @@ public class ItemInit {
 			() -> new Darkstar(CustomItemTiers.CRYSTAL, new Item.Properties()));
 	public static final DeferredHolder<Item,Item> GNAWING_JAW = ITEMS.register("gnawing_jaw", 
 			() -> new GnawingJaw(CustomItemTiers.CRYSTAL, new Item.Properties()));
+
+	public static final DeferredHolder<Item,Item> SKULL_STAFF = ITEMS.register("skull_staff",
+			() -> new SkullStaff(new Item.Properties()));
 	
 	
 	public static final DeferredHolder<Item,Item> CRYSTAL_HELMET = ITEMS.register("crystal_helmet", 

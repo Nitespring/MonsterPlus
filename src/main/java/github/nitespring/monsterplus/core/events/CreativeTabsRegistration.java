@@ -57,6 +57,7 @@ public class CreativeTabsRegistration {
 			event.accept(ItemInit.DARK_GEM.get());
 			event.accept(ItemInit.ANCIENT_BROKEN_SWORD.get());
 			event.accept(ItemInit.ANCIENT_SCROLL.get());
+			event.accept(ItemInit.ENCHANTED_SCROLL.get());
 		}
 		if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS)
 		{

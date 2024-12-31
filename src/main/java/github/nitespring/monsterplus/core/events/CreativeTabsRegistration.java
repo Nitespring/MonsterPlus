@@ -37,6 +37,13 @@ public class CreativeTabsRegistration {
 			event.accept(ItemInit.DARK_CHESTPLATE.get());
 			event.accept(ItemInit.GNAWING_JAW.get());
 			event.accept(ItemInit.DARKSTAR.get());
+			event.accept(ItemInit.FIRE_SCROLL_FLAME.get());
+			event.accept(ItemInit.FIRE_SCROLL_FIREBALL_BARRAGE.get());
+			event.accept(ItemInit.FIRE_SCROLL_FIREBALL.get());
+			event.accept(ItemInit.CURSED_SCROLL_FLAME.get());
+			event.accept(ItemInit.SOUL_SCROLL_FLAME.get());
+			event.accept(ItemInit.DARK_SCROLL_CRYSTAL_LINE.get());
+			event.accept(ItemInit.DARK_SCROLL_CRYSTAL_CIRCLE.get());
 		}
 		if (event.getTabKey() == CreativeModeTabs.INGREDIENTS)
 		{
@@ -49,6 +56,7 @@ public class CreativeTabsRegistration {
 			event.accept(ItemInit.ANCIENT_CRYSTAL.get());
 			event.accept(ItemInit.DARK_GEM.get());
 			event.accept(ItemInit.ANCIENT_BROKEN_SWORD.get());
+			event.accept(ItemInit.ANCIENT_SCROLL.get());
 		}
 		if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS)
 		{

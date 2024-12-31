@@ -120,6 +120,23 @@ public class ItemInit {
 
 	public static final DeferredHolder<Item,Item> SKULL_STAFF = ITEMS.register("skull_staff",
 			() -> new SkullStaff(new Item.Properties()));
+	public static final DeferredHolder<Item,Item> ANCIENT_SCROLL = ITEMS.register("ancient_scroll",
+			() -> new Item(new Item.Properties()));
+	public static final DeferredHolder<Item,Item> FIRE_SCROLL_FLAME = ITEMS.register("fire_scroll_flame",
+			() -> new Item(new Item.Properties()));
+	public static final DeferredHolder<Item,Item> FIRE_SCROLL_FIREBALL = ITEMS.register("fire_scroll_fireball",
+			() -> new Item(new Item.Properties()));
+	public static final DeferredHolder<Item,Item> FIRE_SCROLL_FIREBALL_BARRAGE = ITEMS.register("fire_scroll_fireball_barrage",
+			() -> new Item(new Item.Properties()));
+	public static final DeferredHolder<Item,Item> CURSED_SCROLL_FLAME = ITEMS.register("cursed_scroll_flame",
+			() -> new Item(new Item.Properties()));
+	public static final DeferredHolder<Item,Item> SOUL_SCROLL_FLAME = ITEMS.register("soul_scroll_flame",
+			() -> new Item(new Item.Properties()));
+	public static final DeferredHolder<Item,Item> DARK_SCROLL_CRYSTAL_LINE = ITEMS.register("dark_scroll_crystal_line",
+			() -> new Item(new Item.Properties()));
+	public static final DeferredHolder<Item,Item> DARK_SCROLL_CRYSTAL_CIRCLE = ITEMS.register("dark_scroll_crystal_circle",
+			() -> new Item(new Item.Properties()));
+
 	
 	
 	public static final DeferredHolder<Item,Item> CRYSTAL_HELMET = ITEMS.register("crystal_helmet", 
@@ -139,6 +156,8 @@ public class ItemInit {
 	
 	public static final DeferredHolder<Item,Item> PURPLE_FIREBALL = ITEMS.register("purple_fireball", 
 			() -> new Item(new Item.Properties()));
+
+
 	
 
 }

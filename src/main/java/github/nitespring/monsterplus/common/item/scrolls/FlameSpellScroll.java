@@ -5,6 +5,7 @@ import github.nitespring.monsterplus.common.entity.projectiles.Flame;
 import github.nitespring.monsterplus.core.init.EntityInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -47,6 +48,7 @@ public class FlameSpellScroll extends EnchantedScroll{
         }
         playerIn.getCooldowns().addCooldown(this, 16);
         item.consume(1,playerIn);
+        playerIn.level().playSound(null, pos.x, pos.y, pos.z, SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 0.4f, 1.25f);
     }
 
     @Override
@@ -61,6 +63,7 @@ public class FlameSpellScroll extends EnchantedScroll{
         }
         playerIn.getCooldowns().addCooldown(item.getItem(), 4);
         item.consume(1, playerIn);
+        playerIn.level().playSound(null, pos.x, pos.y, pos.z, SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS, 0.2f, 1.5f);
     }
 
     float randomFloat(float peak){
@@ -79,7 +82,7 @@ public class FlameSpellScroll extends EnchantedScroll{
         fireball.setOwner(playerIn);
         playerIn.level().addFreshEntity(fireball);
 
-        playerIn.playSound(SoundEvents.FIRE_AMBIENT, 0.5f, 0.75f);
+        playerIn.level().playSound(null, pos.x, pos.y, pos.z, SoundEvents.FIRE_AMBIENT, SoundSource.PLAYERS, 0.5f, 0.75f);
     }
 
 }

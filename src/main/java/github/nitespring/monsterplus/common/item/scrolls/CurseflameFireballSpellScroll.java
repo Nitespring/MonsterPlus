@@ -1,6 +1,6 @@
 package github.nitespring.monsterplus.common.item.scrolls;
 
-import github.nitespring.monsterplus.common.entity.projectiles.Flame;
+import github.nitespring.monsterplus.common.entity.projectiles.CurseflameFireball;
 import github.nitespring.monsterplus.core.init.EntityInit;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -15,9 +15,9 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.Random;
 
-public class SmallFireballSpellScroll extends EnchantedScroll{
+public class CurseflameFireballSpellScroll extends EnchantedScroll{
 
-    public SmallFireballSpellScroll(Properties properties) {
+    public CurseflameFireballSpellScroll(Properties properties) {
         super(properties);
     }
 
@@ -43,14 +43,14 @@ public class SmallFireballSpellScroll extends EnchantedScroll{
 
         playerIn.getCooldowns().addCooldown(this, 16);
         item.consume(1,playerIn);
-        playerIn.level().playSound(null, posO.x, posO.y, posO.z, SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS,0.5f, 0.75f);
+        playerIn.level().playSound(null, pos.x, pos.y, pos.z, SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 0.5f, 0.75f);
     }
 
     @Override
     public void doSpellB(Player playerIn, ItemStack item) {
         Vec3 pos = playerIn.position();
         Vec3 aim0 = playerIn.getLookAngle().normalize();
-        for(int i = 0; i<2;i++) {
+        for(int i = 0; i<3;i++) {
             float a = (float) (Math.PI / 6);
             Vec3 aim = aim0.add(randomFloat(a),randomFloat(a),randomFloat(a));
             Vec3 posO = new Vec3(pos.x + 0.5 * aim0.x, pos.y + 2.5 + 0.5 * aim0.y, pos.z + 0.5 * aim0.z);
@@ -58,7 +58,7 @@ public class SmallFireballSpellScroll extends EnchantedScroll{
         }
         playerIn.getCooldowns().addCooldown(item.getItem(), 3);
         item.consume(1, playerIn);
-        playerIn.level().playSound(null, pos.x, pos.y, pos.z, SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS,0.35f, 0.75f);
+        playerIn.level().playSound(null, pos.x, pos.y, pos.z, SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 0.3f, 0.75f);
     }
 
     float randomFloat(float peak){
@@ -69,10 +69,11 @@ public class SmallFireballSpellScroll extends EnchantedScroll{
 
     private void throwFireball(int flyingTime, Vec3 pos, Vec3 aim, float damage, Player playerIn) {
 
-        SmallFireball fireball = new SmallFireball(EntityType.SMALL_FIREBALL,playerIn.level());
+        CurseflameFireball fireball = new CurseflameFireball(EntityInit.CURSEFLAME_FIREBALL.get(), playerIn.level());
         fireball.setPos(pos.x,pos.y,pos.z);
         fireball.setDeltaMovement(aim.x,aim.y,aim.z);
         fireball.setOwner(playerIn);
+        fireball.setDamage(damage);
         playerIn.level().addFreshEntity(fireball);
 
         playerIn.level().playSound(null, pos.x, pos.y, pos.z, SoundEvents.FIRE_AMBIENT, SoundSource.PLAYERS, 0.5f, 0.75f);

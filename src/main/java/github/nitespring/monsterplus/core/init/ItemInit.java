@@ -4,6 +4,8 @@ package github.nitespring.monsterplus.core.init;
 import github.nitespring.monsterplus.MonsterPlus;
 import github.nitespring.monsterplus.common.item.*;
 import github.nitespring.monsterplus.common.item.scrolls.FlameSpellScroll;
+import github.nitespring.monsterplus.common.item.scrolls.LargeFireballSpellScroll;
+import github.nitespring.monsterplus.common.item.scrolls.SmallFireballSpellScroll;
 import github.nitespring.monsterplus.core.enums.CustomArmourMaterials;
 import github.nitespring.monsterplus.core.enums.CustomItemTiers;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -128,9 +130,9 @@ public class ItemInit {
 	public static final DeferredHolder<Item,Item> FIRE_SCROLL_FLAME = ITEMS.register("fire_scroll_flame",
 			() -> new FlameSpellScroll(new Item.Properties().stacksTo(24)));
 	public static final DeferredHolder<Item,Item> FIRE_SCROLL_FIREBALL = ITEMS.register("fire_scroll_fireball",
-			() -> new Item(new Item.Properties().stacksTo(12)));
+			() -> new LargeFireballSpellScroll(new Item.Properties().stacksTo(12)));
 	public static final DeferredHolder<Item,Item> FIRE_SCROLL_FIREBALL_BARRAGE = ITEMS.register("fire_scroll_fireball_barrage",
-			() -> new Item(new Item.Properties().stacksTo(16)));
+			() -> new SmallFireballSpellScroll(new Item.Properties().stacksTo(16)));
 	public static final DeferredHolder<Item,Item> CURSED_SCROLL_FLAME = ITEMS.register("cursed_scroll_flame",
 			() -> new Item(new Item.Properties().stacksTo(16)));
 	public static final DeferredHolder<Item,Item> SOUL_SCROLL_FLAME = ITEMS.register("soul_scroll_flame",

@@ -68,7 +68,7 @@ public class Darkstar extends SwordItem implements ILeftClickSpecialActionItem{
 
          if (flag) {
         	
-        	 playerIn.level().addFreshEntity(new SpikeCountdown(playerIn.level(), 4.0f, p_32673_, (double)blockpos.getY() + d0, p_32674_, p_32677_, p_32678_, playerIn, 0));
+        	 playerIn.level().addFreshEntity(new SpikeCountdown(playerIn.level(), 6.0f, p_32673_, (double)blockpos.getY() + d0, p_32674_, p_32677_, p_32678_, playerIn, 0));
         	 
         	 
          }

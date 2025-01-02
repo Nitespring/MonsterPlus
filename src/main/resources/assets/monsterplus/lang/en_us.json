@@ -14,12 +14,15 @@
   "entity.monsterplus.ancient_hero_skull" : "Corrupted Ancient Hero",
   "entity.monsterplus.wisp" : "Wisp",
   "entity.monsterplus.soul" : "Soul",
+  "entity.monsterplus.desert_sorceress" : "Desert Sorceress",
+  "entity.monsterplus.desert_acolyte" : "Desert Acolyte",
+  "entity.monsterplus.spectral_skull" : "Spectral Skull",
 
   "entity.monsterplus.crystal_spikes" : "Crystal Spikes",
   "entity.monsterplus.purple_fireball" : "Abyssal Fireball",
   "entity.monsterplus.crystal_arrow" : "Crystal Arrow",
   "entity.monsterplus.spectral_skull_projectile" : "Spectral Skull",
-
+  "entity.monsterplus.flame" : "Flame",
 
   "item.monsterplus.crystal_shard" : "Ancient Crystal Fragment",
   "item.monsterplus.ancient_crystal" : "Ancient Crystal",
@@ -43,6 +46,16 @@
   "item.monsterplus.crystal_clump" : "Crystal Clump",
   "item.monsterplus.dark_helmet" : "Dark Helmet",
   "item.monsterplus.dark_chestplate" : "Dark Chestplate",
+  "item.monsterplus.skull_staff" : "Skull Staff",
+  "item.monsterplus.ancient_scroll" : "Ancient Scroll",
+  "item.monsterplus.enchanted_scroll" : "Enchanted Scroll",
+  "item.monsterplus.fire_scroll_flame" : "Fire Scroll (Flaming Breath)",
+  "item.monsterplus.fire_scroll_fireball_barrage" : "Fire Scroll (Fireball)",
+  "item.monsterplus.fire_scroll_fireball" : "Fire Scroll (Greater Fireball)",
+  "item.monsterplus.cursed_scroll_flame" : "Cursed Scroll (Curseflame Fireball)",
+  "item.monsterplus.soul_scroll_flame" : "Soulflame Scroll (Soulflame Fireball)",
+  "item.monsterplus.dark_scroll_crystal_line" : "Dark Scroll (Crystal Serpent)",
+  "item.monsterplus.dark_scroll_crystal_circle" : "Dark Scroll (Crystal Wall)",
 
   "item.monsterplus.abyssologer_spawn_egg" : "Abyssologer Spawn Egg",
   "item.monsterplus.glow_skeleton_spawn_egg" : "Glow Skeleton Spawn Egg",
@@ -59,6 +72,9 @@
   "item.monsterplus.ancient_hero_skull_spawn_egg" : "Corrupted Ancient Hero Skull Spawn Egg",
   "item.monsterplus.wisp_spawn_egg" : "Wisp Spawn Egg",
   "item.monsterplus.soul_spawn_egg" : "Soul Spawn Egg",
+  "item.monsterplus.desert_sorceress_spawn_egg" : "Desert Sorceress Spawn Egg",
+  "item.monsterplus.desert_acolyte_spawn_egg" : "Desert Acolyte Spawn Egg",
+  "item.monsterplus.spectral_skull_spawn_egg" : "Spectral Skull Spawn Egg",
 
   "subtitles.monsterplus.wisp" : "Wisp"
 

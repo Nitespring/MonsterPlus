@@ -122,23 +122,23 @@ public class ItemInit {
 	public static final DeferredHolder<Item,Item> SKULL_STAFF = ITEMS.register("skull_staff",
 			() -> new SkullStaff(new Item.Properties()));
 	public static final DeferredHolder<Item,Item> ANCIENT_SCROLL = ITEMS.register("ancient_scroll",
-			() -> new Item(new Item.Properties()));
+			() -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
 	public static final DeferredHolder<Item,Item> ENCHANTED_SCROLL = ITEMS.register("enchanted_scroll",
-			() -> new Item(new Item.Properties()));
+			() -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 	public static final DeferredHolder<Item,Item> FIRE_SCROLL_FLAME = ITEMS.register("fire_scroll_flame",
-			() -> new FlameSpellScroll(new Item.Properties().stacksTo(24)));
+			() -> new FlameSpellScroll(new Item.Properties().rarity(Rarity.RARE).stacksTo(24)));
 	public static final DeferredHolder<Item,Item> FIRE_SCROLL_FIREBALL = ITEMS.register("fire_scroll_fireball",
-			() -> new LargeFireballSpellScroll(new Item.Properties().stacksTo(12)));
+			() -> new LargeFireballSpellScroll(new Item.Properties().rarity(Rarity.RARE).stacksTo(12)));
 	public static final DeferredHolder<Item,Item> FIRE_SCROLL_FIREBALL_BARRAGE = ITEMS.register("fire_scroll_fireball_barrage",
-			() -> new SmallFireballSpellScroll(new Item.Properties().stacksTo(16)));
+			() -> new SmallFireballSpellScroll(new Item.Properties().rarity(Rarity.RARE).stacksTo(16)));
 	public static final DeferredHolder<Item,Item> CURSED_SCROLL_FLAME = ITEMS.register("cursed_scroll_flame",
-			() -> new CurseflameFireballSpellScroll(new Item.Properties().stacksTo(16)));
+			() -> new CurseflameFireballSpellScroll(new Item.Properties().rarity(Rarity.RARE).stacksTo(16)));
 	public static final DeferredHolder<Item,Item> SOUL_SCROLL_FLAME = ITEMS.register("soul_scroll_flame",
-			() -> new SoulflameFireballSpellScroll(new Item.Properties().stacksTo(16)));
+			() -> new SoulflameFireballSpellScroll(new Item.Properties().rarity(Rarity.RARE).stacksTo(16)));
 	public static final DeferredHolder<Item,Item> DARK_SCROLL_CRYSTAL_LINE = ITEMS.register("dark_scroll_crystal_line",
-			() -> new Item(new Item.Properties().stacksTo(12)));
+			() -> new CrystalLineSpellScroll(new Item.Properties().rarity(Rarity.RARE).stacksTo(12)));
 	public static final DeferredHolder<Item,Item> DARK_SCROLL_CRYSTAL_CIRCLE = ITEMS.register("dark_scroll_crystal_circle",
-			() -> new Item(new Item.Properties().stacksTo(12)));
+			() -> new CrystalCircleSpellScroll(new Item.Properties().rarity(Rarity.RARE).stacksTo(12)));
 
 	
 	

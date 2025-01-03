@@ -50,19 +50,13 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class Abyssologer extends SpellcasterIllager{
+public class Abyssologer extends CustomSpellcaster{
 
 	public Abyssologer(EntityType<? extends SpellcasterIllager> p_33724_, Level p_33725_) {
 		super(p_33724_, p_33725_);
 		this.xpReward = 10;
 	}
 
-	@Nullable
-	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficultyInstance, MobSpawnType spawnType, @Nullable SpawnGroupData groupData) {
-		this.setCanJoinRaid(spawnType != MobSpawnType.NATURAL);
-		return super.finalizeSpawn(level, difficultyInstance, spawnType, groupData);
-	}
 
 	@Override
 	public boolean canJoinRaid() {

@@ -1,6 +1,8 @@
 {
 "replace" : false,
 "values" : [
-	"monsterplus:abyssologer"
+	"monsterplus:abyssologer",
+	"monsterplus:desert_sorceress",
+	"monsterplus:desert_acolyte"
 	]
 }

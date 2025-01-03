@@ -1,5 +1,6 @@
 {
-    "parent": "minecraft:item/generated",
+    "parent": "monsterplus:item/scroll",
+    "loader": "neoforge:item_layers",
     "textures": {
         "layer0": "monsterplus:item/scroll/ancient_scroll"
     }

@@ -1,5 +1,5 @@
 {
-    "parent": "neoforge:item/default",
+    "parent": "monsterplus:item/scroll",
     "neoforge_data": {
         "layers": {
             "0": {

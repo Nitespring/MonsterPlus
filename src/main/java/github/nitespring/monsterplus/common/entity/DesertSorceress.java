@@ -2,11 +2,9 @@ package github.nitespring.monsterplus.common.entity;
 
 import github.nitespring.monsterplus.common.entity.projectiles.Flame;
 import github.nitespring.monsterplus.common.entity.projectiles.SorceressFireSpawner;
-import github.nitespring.monsterplus.common.entity.projectiles.SpikeCountdown;
 import github.nitespring.monsterplus.config.CommonConfig;
 import github.nitespring.monsterplus.core.init.EntityInit;
 import github.nitespring.monsterplus.core.init.SoundInit;
-import github.nitespring.monsterplus.core.util.CustomBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -17,7 +15,6 @@ import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
-import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -38,28 +35,19 @@ import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public class DesertSorceress extends SpellcasterIllager{
+public class DesertSorceress extends CustomSpellcaster {
 
 	public DesertSorceress(EntityType<? extends SpellcasterIllager> p_33724_, Level p_33725_) {
 		super(p_33724_, p_33725_);
 		this.xpReward = 15;
 	}
 
-	@Nullable
-	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficultyInstance, MobSpawnType spawnType, @Nullable SpawnGroupData groupData) {
-		this.setCanJoinRaid(spawnType != MobSpawnType.NATURAL);
-		return super.finalizeSpawn(level, difficultyInstance, spawnType, groupData);
-	}
 
 	@Override
 	public boolean canJoinRaid() {

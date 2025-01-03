@@ -2,6 +2,7 @@ package github.nitespring.monsterplus.common.item;
 
 import github.nitespring.monsterplus.common.entity.projectiles.SkullProjectile;
 import github.nitespring.monsterplus.common.entity.projectiles.SpikeCountdown;
+import github.nitespring.monsterplus.core.enums.CustomItemTiers;
 import github.nitespring.monsterplus.core.init.EntityInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -25,7 +26,10 @@ import java.util.Random;
 public class SkullStaff extends Item implements ILeftClickSpecialActionItem{
 
 	public SkullStaff(Properties p) {
-		super(p.attributes(SwordItem.createAttributes(Tiers.STONE, 1, -2.8F)).durability(128).stacksTo(1).rarity(Rarity.EPIC));
+		super(p.attributes(SwordItem.createAttributes(CustomItemTiers.BONE, 1, -2.8F))
+                .durability(128)
+                .stacksTo(1)
+                .rarity(Rarity.EPIC));
 		
 	}
 
@@ -60,4 +64,5 @@ public class SkullStaff extends Item implements ILeftClickSpecialActionItem{
     public boolean onEntitySwing(ItemStack stack, LivingEntity entity, InteractionHand hand) {
         return true;
     }
+
 }

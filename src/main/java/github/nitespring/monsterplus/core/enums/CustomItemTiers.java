@@ -9,6 +9,7 @@ import github.nitespring.monsterplus.core.init.ItemInit;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -16,11 +17,12 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
 public enum CustomItemTiers implements Tier{
-	/*CRYSTAL(3, 1561, 0.0F, 0.0F, 20, () -> {
-	      return Ingredient.of(ItemInit.CRYSTAL_SHARD.get());
-	   });*/
+
 	CRYSTAL(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1561, 9.0F, 5.0F, 20, () -> {
 		return Ingredient.of(new ItemLike[]{ItemInit.CRYSTAL_SHARD.get()});
+	}),
+	BONE(BlockTags.INCORRECT_FOR_IRON_TOOL, 131, 4.0F, 1.0F, 5, () -> {
+		return Ingredient.of(new ItemLike[]{Items.BONE});
 	});
 
 	private final TagKey<Block> incorrectBlocksForDrops;

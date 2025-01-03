@@ -57,6 +57,7 @@ public class DesertSorceress extends SpellcasterIllager{
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficultyInstance, MobSpawnType spawnType, @Nullable SpawnGroupData groupData) {
+		this.setCanJoinRaid(spawnType != MobSpawnType.NATURAL);
 		return super.finalizeSpawn(level, difficultyInstance, spawnType, groupData);
 	}
 
@@ -107,7 +108,7 @@ public class DesertSorceress extends SpellcasterIllager{
 	public static AttributeSupplier.Builder createAttributes() {
 	      return Monster.createMonsterAttributes()
 	    		  .add(Attributes.MOVEMENT_SPEED, 0.5D)
-	    		  .add(Attributes.MAX_HEALTH, 30.0D)
+	    		  .add(Attributes.MAX_HEALTH, 36.0D)
 	              .add(Attributes.FOLLOW_RANGE, 24);
 	   }
 

@@ -60,6 +60,7 @@ public class Abyssologer extends SpellcasterIllager{
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficultyInstance, MobSpawnType spawnType, @Nullable SpawnGroupData groupData) {
+		this.setCanJoinRaid(spawnType != MobSpawnType.NATURAL);
 		return super.finalizeSpawn(level, difficultyInstance, spawnType, groupData);
 	}
 
